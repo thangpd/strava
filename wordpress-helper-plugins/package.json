@@ -1,0 +1,25 @@
+{
+  "name": "wordpress-helper-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@wpackio/scripts": "^5.0.0",
+    "less": "^3.12.2",
+    "sass": "^1.30.0"
+  },
+  "scripts": {
+    "bootstrap": "wpackio-scripts bootstrap",
+    "build": "wpackio-scripts build",
+    "start": "wpackio-scripts start",
+    "archive": "wpackio-scripts pack"
+  },
+  "dependencies": {
+    "@wpackio/entrypoint": "^5.0.0",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.5.1",
+    "jquery-validation": "^1.19.3",
+    "popper.js": "^1.16.1",
+    "slick-carousel": "^1.8.1",
+    "slim-select": "^1.27.0"
+  }
+}

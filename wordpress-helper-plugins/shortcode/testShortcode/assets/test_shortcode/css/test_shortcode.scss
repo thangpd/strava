@@ -1,0 +1,46 @@
+@import "~slick-carousel/slick/slick";
+
+pre {
+  color: green !important;
+}
+
+.r-carousel {
+  position: relative;
+
+  &__button {
+    width: 25%;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+
+  &__img {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &__button--right {
+    right: 0;
+  }
+
+  &__button--left {
+    left: 0;
+  }
+
+  &__arrow-image {
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+  }
+
+  &__arrow-image--left {
+    left: 0;
+  }
+
+  &__arrow-image--right {
+    right: 0;
+  }
+}
+

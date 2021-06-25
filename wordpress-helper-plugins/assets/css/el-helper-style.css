@@ -1,0 +1,32 @@
+@media only screen and (max-width: 480px) {
+    .title-elhelper-header::before {
+        content: none !important;
+    }
+
+    .dropdown-footer .elementor-widget-heading .elementor-widget-container {
+        display: inline-block;
+    }
+
+    .dropdown-footer .elementor-widget-heading::after {
+        content: "►";
+        color: white;
+
+    }
+
+    .dropdown-footer .elementor-widget-heading.active::after {
+        content: "▼";
+        color: white;
+    }
+
+    .dropdown-footer .elementor-widget-heading.active, .dropdown-footer .elementor-widget-heading:hover {
+        /*background-color: #ccc;*/
+    }
+
+    .dropdown-footer .elementor-widget-icon-list {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+    }
+}
+
+
