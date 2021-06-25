@@ -24,6 +24,7 @@ use Elhelper\shortcode\testShortcode\TestShortcode;
 use Elhelper\shortcode\stravaApi\StravaApiShortcode;
 use Elhelper\shortcode\stravaGetAccessToken\StravaGetATShortcode;
 use Elhelper\shortcode\stravaWebhook\StravaWebhookShortcode;
+use Elhelper\widgets\bhhs\Bhhs_Search;
 use Elhelper\widgets\connectStravaBtn\ConnectStravaBtn;
 
 /**
@@ -347,6 +348,7 @@ class Elhelper_Plugin {
 	 */
 	public function init_widgets() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new ConnectStravaBtn() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Bhhs_Search() );
 
 
 	}

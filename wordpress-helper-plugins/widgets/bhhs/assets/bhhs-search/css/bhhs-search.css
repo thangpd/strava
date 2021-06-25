@@ -1,0 +1,16 @@
+
+.dev-test{
+    color:red;
+}
+
+@media only screen and (max-width: 426px) {
+    .post-mansonry .slick-arrow {
+        display: none !important;
+    }
+    .post-mansonry .mansonry-post__thumbnail{
+        text-align: center;
+    }
+    .post-mansonry .mansonry-post__thumbnail .slick-slide img{
+        display:inline-block !important;
+    }
+}
