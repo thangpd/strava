@@ -20,10 +20,10 @@ $(document).ready(function () {
         dots: false,
     });
 
-    $('.popup-strava-challenges').on('click', function(e) {
+    $('.more-challenge').on('click', function(e) {
         e.preventDefault();
+
         var parent = $(this).parents('.wrap-modal-user-profile');
-    
         parent.addClass('active');
     });
 
@@ -33,5 +33,4 @@ $(document).ready(function () {
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.removeClass('active');
     })
-
 });

@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="right-challenge">
-                        <div class="button">THÊM THỬ THÁCH MỚI</div>
+                        <div class="button more-challenge">THÊM THỬ THÁCH MỚI</div>
                     </div>
                 </div>
             </div>
