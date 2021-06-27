@@ -32,7 +32,8 @@ module.exports = {
                 stravaChat: ['./admin/modules/pages/stravaApiSettingPages/stravaChat/assets/index.js'],
                 stravaChatBotManager: ['./admin/modules/pages/stravaApiSettingPages/stravaChatBotManager/assets/index.js'],
                 stravaApiWebhookShortcode: ['./shortcode/stravaWebhook/assets'],
-                connectStravaBtn:['./widgets/connectStravaBtn/assets/index.js']
+                connectStravaBtn:['./widgets/connectStravaBtn/assets/index.js'],
+                userprofile:['./widgets/userProfile/assets/index.js']
             },
             webpackConfig: {}
         }
