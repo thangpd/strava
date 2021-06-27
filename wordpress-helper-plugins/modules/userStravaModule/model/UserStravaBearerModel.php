@@ -126,5 +126,13 @@ class UserStravaBearerModel extends Model {
 		return get_user_meta( $this->getUserId(), self::EXPIRES_IN, true );
 	}
 
+	public function issetBearer() {
+		if ( ! empty( $this->getAccessToken() ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }
