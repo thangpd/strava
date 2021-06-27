@@ -85,8 +85,8 @@ class UserStravaModel extends Model {
 		if ( isset( $_GET['code'] ) && isset( $_GET['scope'] ) ) {
 			$code          = $_GET['code'];
 			$url           = 'https://www.strava.com/api/v3/oauth/token';
-			$client_id     = 67628;
-			$client_secret = '37923ec215f0f5120ef372bbce3cc9b6073e58d0';
+			$client_id     = CLIENT_ID;
+			$client_secret = CLIENT_SECRET;
 			$grant_type    = 'authorization_code';
 			$post          = [
 				'client_id'     => $client_id,
@@ -112,6 +112,7 @@ class UserStravaModel extends Model {
 
 	}
 
+	//Strava code means first time customer allow permission
 	public function saveStravaCode( $value, $user_id = null ) {
 		if ( $user_id == null ) {
 			$user_id = $this->getModelUserId();
