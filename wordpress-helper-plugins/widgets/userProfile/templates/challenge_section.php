@@ -137,94 +137,45 @@
             <div class="popup-modal__challenges">
                 <div class="popup-modal__challenges-item">
                     <div class="row justify-content-around">
-                        <div class="col-md-12 col-lg-5">
-                            <div class="thumb-item">
-                                <div class="thumb-item__image">
-                                    <img class="img-responsive" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . '/assets/images/mountain2.png' ); ?>" alt="mountain2">
-                                </div>
-                                <div class="thumb-item__content">
-                                    <div class="thumb-item__heading">
-                                        CHINH PHỤC
-                                        <br>EVEREST
+                    <?php 
+                        $count = 0;
+                        if( $products->have_posts() ){
+                            while ( $products->have_posts() ) {
+                                $products->the_post(); 
+                                ?>
+                                    <div class="col-md-12 col-lg-5">
+                                        <div class="thumb-item">
+                                            <a href="<?php the_permalink(); ?>">
+                                                <div class="thumb-item__image">
+                                                    <?php  the_post_thumbnail( 'shop_catelog', ['class' => 'img-responsive', 'title' =>  get_the_title()] ); ?>
+                                                </div>
+                                                <div class="thumb-item__content">
+                                                    <div class="thumb-item__heading">
+                                                        <?php echo wp_kses( get_the_title(), array( 'br' => array()) ) ?>
+                                                    </div>
+                                                    <div class="thumb-item__distance-date">
+                                                        <?php echo the_excerpt(); ?>
+                                                    </div>
+                                                    <div class="thumb-item__description">
+                                                        <?php echo the_content(); ?>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="thumb-item__distance-date">
-                                        85KM/25 NGÀY
-                                    </div>
-                                    <div class="thumb-item__description">
-                                        Khát khao của những nhà leo núi đích thực - thử thách không dành cho những người dễ bỏ cuộc
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-5">
-                            <div class="thumb-item">
-                                <div class="thumb-item__image">
-                                    <img class="img-responsive" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . '/assets/images/mountain3.png' ); ?>" alt="mountain2">
-                                </div>
-                                <div class="thumb-item__content">
-                                    <div class="thumb-item__heading">
-                                        CHINH PHỤC
-                                        <br>FANSIPAN
-                                    </div>
-                                    <div class="thumb-item__distance-date">
-                                        85KM/25 NGÀY
-                                    </div>
-                                    <div class="thumb-item__description">
-                                        Khát khao của những nhà leo núi đích thực - thử thách không dành cho những người dễ bỏ cuộc
-                                    </div>
-                                    <div class="thumb-item__button-wrap">
-                                        <div class="thumb-item__button button">Tìm Hiểu Thêm</div>
-                                        <span class="thumb-item__button-icon button"><i class="fas fa-share"></i></span>
+                                <?php 
+                                $count++;
+                                if ( $count % 2 == 0 && $count < $products->post_count ) {
+                                ?>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="popup-modal__challenges-item">
-                    <div class="row justify-content-around">
-                        <div class="col-md-12 col-lg-5">
-                            <div class="thumb-item">
-                                <div class="thumb-item__image">
-                                    <img class="img-responsive" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . '/assets/images/mountain2.png' ); ?>" alt="mountain2">
-                                </div>
-                                <div class="thumb-item__content">
-                                    <div class="thumb-item__heading">
-                                        CHINH PHỤC
-                                        <br>EVEREST
-                                    </div>
-                                    <div class="thumb-item__distance-date">
-                                        85KM/25 NGÀY
-                                    </div>
-                                    <div class="thumb-item__description">
-                                        Khát khao của những nhà leo núi đích thực - thử thách không dành cho những người dễ bỏ cuộc
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-lg-5">
-                            <div class="thumb-item">
-                                <div class="thumb-item__image">
-                                    <img class="img-responsive" src="<?php echo esc_url( plugin_dir_url( dirname( __FILE__ ) ) . '/assets/images/mountain3.png' ); ?>" alt="mountain2">
-                                </div>
-                                <div class="thumb-item__content">
-                                    <div class="thumb-item__heading">
-                                        CHINH PHỤC
-                                        <br>FANSIPAN
-                                    </div>
-                                    <div class="thumb-item__distance-date">
-                                        85KM/25 NGÀY
-                                    </div>
-                                    <div class="thumb-item__description">
-                                        Khát khao của những nhà leo núi đích thực - thử thách không dành cho những người dễ bỏ cuộc
-                                    </div>
-                                    <div class="thumb-item__button-wrap">
-                                        <div class="thumb-item__button button">Tìm Hiểu Thêm</div>
-                                        <span class="thumb-item__button-icon button"><i class="fas fa-share"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <div class="popup-modal__challenges-item">
+                                    <div class="row justify-content-around">
+                                <?php } 
+                            }
+                        }
+                        wp_reset_postdata();
+                    ?>
                     </div>
                 </div>
             </div>
