@@ -65,12 +65,13 @@ class UserProfile extends \Elementor\Widget_Base {
 		
 		if ( class_exists('WooCommerce') ) {
 			$args = array(
-				'post_type'				=> 'product'
-				,'post_status' 			=> 'publish'
+				'post_type'				=> 'shop_order'
+				,'post_status'       	=>  array( 'wc-processing', 'wc-completed' )
 				,'ignore_sticky_posts'	=> 1
 				,'posts_per_page' 		=> 4
 				,'orderby' 				=> 'date'
 				,'order' 				=> 'desc'
+				,''
 			);
 
 			$products = new \WP_Query( $args );
