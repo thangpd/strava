@@ -25,8 +25,6 @@ class UserProfile extends \Elementor\Widget_Base {
 				'bootstrap'
 			],
 		] );
-
-
 	}
 
 	/**
