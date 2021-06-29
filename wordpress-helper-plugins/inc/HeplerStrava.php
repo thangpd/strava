@@ -33,6 +33,7 @@ class HeplerStrava {
 
 	public static function callStravaAPI( $url, $bearerToken, $post = [], $method = 'GET' ) {
 
+
 		$curl = curl_init();
 
 		$headers = array(
@@ -59,8 +60,7 @@ class HeplerStrava {
 
 	}
 
-	public
-	static function callGetInfoApi(
+	public static function callGetInfoApi(
 		$url, $code, $post = [], $method = 'POST'
 	) {
 		$result = [];
@@ -100,8 +100,10 @@ class HeplerStrava {
 			];
 
 			$objectTokenExchange = HeplerStrava::callApiTokenExchange( $url, $post );
-			$userBearer          = new UserStravaBearerModel( $user_id );
-			$userBearer->saveObjectBearer( $objectTokenExchange );
+			if ( ! isset( $objectTokenExchange->errors ) ) {
+				$userBearer = new UserStravaBearerModel( $user_id );
+				$userBearer->saveObjectBearer( $objectTokenExchange );
+			}
 		}
 	}
 
@@ -126,7 +128,6 @@ class HeplerStrava {
 		}
 
 		return json_decode( $result );
-
-
 	}
+
 }

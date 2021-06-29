@@ -46,23 +46,24 @@ class StravaApiController extends SingleController {
 		//we can't use query arg because can't coverage multiple dimension like : test/test/test
 		//add_query_arg( [] ) return request uri when empty array is pass as parameter.
 		//if ( str_replace( '/', '', add_query_arg( [] ) ) == 'test' ) {
-		//domain.tm/strava_api_url/receive-webhook
+		//domain.tm/el_strava_api/receive-webhook
 		if ( get_query_var( StravaApiModel::EL_STRAVA_SLUG ) == StravaWebHookModel::EL_STRAVA_WEBHOOK_URL_VAL ) {
-			write_log( 'Error verify Webhook Strava' );
-
+//			write_log( 'Error verify Webhook Strava' );
+//			write_log( 'get'.json_encode( $_GET ) );
+//			write_log( 'post'.json_encode( $_POST ) );
 			//method POST
 			/*set_transient( 'receive_webhook_header', json_encode( getallheaders() ) );
 			set_transient( 'receive_webhook_body', json_encode( file_get_contents( 'php://input' ) ) );*/
 			$controllerHandle = StravaApiWebhookHandle::instance();
 			if ( $controllerHandle->verifyWebhookStrava() ) {
-
+//
 			} else {
 				write_log( 'Error verify Webhook Strava' );
 			}
 
 			$template = $this->render( 'index.php' );
 		}
-		//domain.tm/strava_api_url/access-token
+		//domain.tm/el_strava_api/access-token
 		if ( get_query_var( StravaApiModel::EL_STRAVA_SLUG ) == StravaAccessToken::EL_STRAVA_CALLBACK_URL_VAL ) {
 
 //			$plugin_dir_path = plugin_dir_path( __FILE__ ) . 'views/index.php';

@@ -110,7 +110,7 @@ class StravaApiSettingPage extends Controller {
 			],
 			'opt_webhook'       => [
 				'key'   => StravaWebHookModel::EL_STRAVA_WEBHOOK_URL,
-				'value' => StravaWebHookModel::getReceiveWebhook()
+				'value' => StravaWebHookModel::getReceiveWebhookUrl()
 			],
 			'opt_oath_webhook'  => [
 				'key'   => StravaWebHookModel::EL_STRAVA_OATH_WEBHOOK,

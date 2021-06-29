@@ -20,6 +20,10 @@ class UserStravaRenderModel extends Model {
 
 	public static function renderUserProfile( $user_id ) {
 		$userAthlete = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
+//		echo '<pre>';
+//		print_r($userAthlete->getAthleteObject());
+//		echo '</pre>';
+
 //		$userBearer  = new \Elhelper\modules\userStravaModule\model\UserStravaBearerModel( $user_id );
 //	$ath_obj    = $userAthlete->getAthleteObject();
 //	echo '<pre>';
@@ -68,6 +72,7 @@ HTML;
 		HeplerStrava::refreshToken( $user_id );
 
 		$userStravaController = new \Elhelper\modules\userStravaModule\controller\UserStravaController( $user_id );
+
 		$getinfoAthlete       = $userStravaController->getListActivities();
 		$html                 = '';
 		$container_item       = '<table class="table">

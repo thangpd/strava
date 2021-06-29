@@ -42,18 +42,24 @@ class UserStravaController extends Controller {
 
 	public function getListActivities() {
 		$userBearer = new UserStravaBearerModel( $this->user_id );
-		$post       = array(
+//		echo '<pre>';
+//		print_r( $userBearer->getAccessToken() );
+//		echo '</pre>';
+		$post = array(
 //			'before'   => 0,
 //			'after'    => 0,
 			'page'     => 1,
 			'per_page' => 5,
 		);
 
-		return HeplerStrava::callStravaAPI( 'https://www.strava.com/api/v3/athlete/activities', $userBearer->getAccessToken(), $post, 'GET' );
+		$callStravaAPI = HeplerStrava::callStravaAPI( 'https://www.strava.com/api/v3/athlete/activities', $userBearer->getAccessToken(), $post, 'GET' );
+
+		if ( ! isset( $callStravaAPI->errors ) ) {
+			return $callStravaAPI;
+		} else {
+			return false;
+		}
 	}
-
-
-
 
 
 }

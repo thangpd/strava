@@ -99,7 +99,9 @@ class UserStravaModel extends Model {
 			$userBearer          = new UserStravaBearerModel( $user_id );
 			$userBearer->saveObjectBearer( $objectTokenExchange );
 			$userAthlete = new UserStravaAthleteModel( $user_id );
-			$userAthlete->saveAthleteObject( $objectTokenExchange->athlete );
+			if ( isset( $objectTokenExchange->athlete ) ) {
+				$userAthlete->saveAthleteObject( $objectTokenExchange->athlete );
+			}
 
 
 //			write_log( $objectTokenExchange );
@@ -131,7 +133,7 @@ class UserStravaModel extends Model {
 	public function saveScope( $value, $user_id = null ) {
 		if ( $user_id == null ) {
 			$user_id = $this->getModelUserId();
-			write_log( 'User_id is null' . __FILE__ . __LINE__ . 'this user is' . $this->getModelUserId() );
+//			write_log( 'User_id is null' . __FILE__ . __LINE__ . 'this user is' . $this->getModelUserId() );
 		}
 		$current_meta = get_user_meta( $user_id, self::STRAVA_SCOPE );
 		if ( empty( $current_meta ) ) {

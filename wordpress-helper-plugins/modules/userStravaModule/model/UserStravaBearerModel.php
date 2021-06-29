@@ -10,6 +10,7 @@ namespace Elhelper\modules\userStravaModule\model;
 
 
 use Elhelper\common\Model;
+use Elhelper\inc\HeplerStrava;
 
 class UserStravaBearerModel extends Model {
 	const TOKEN_TYPE = 'token_type';
@@ -43,7 +44,8 @@ class UserStravaBearerModel extends Model {
 	}
 
 	public function saveObjectBearer( $object ) {
-		if ( ! empty( $object ) ) {
+
+		if ( ! empty( $object ) && ! isset( $object->errors ) ) {
 			$this->setAccessToken( $object->access_token );
 			$this->setExpiresAt( $object->expires_at );
 			$this->setExpiresIn( $object->expires_in );
@@ -105,8 +107,9 @@ class UserStravaBearerModel extends Model {
 	}
 
 	public function getAccessToken() {
-		return get_user_meta( $this->getUserId(), self::ACCESS_TOKEN, true );
+		HeplerStrava::refreshToken( $this->user_id );
 
+		return get_user_meta( $this->getUserId(), self::ACCESS_TOKEN, true );
 	}
 
 	public function getRefreshToken() {
