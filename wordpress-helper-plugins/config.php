@@ -6,7 +6,11 @@
 define( 'EL_HELPER', 'EL_HELPER' );
 define( 'WP_HELPER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_HELPER_INC_URI', plugins_url( '', __FILE__ ) );
-define( 'EL_HELPER_DEBUG', 'PROD' );
+define( 'URL_DOMAIN', 'http://449b39c11484.ngrok.io/' );
+define( 'CLIENT_ID', 67628 );
+define( 'CLIENT_SECRET', '37923ec215f0f5120ef372bbce3cc9b6073e58d0' );
+define( 'SECRET_TOKEN', 'inspire_strava_password' );
+define( 'EL_HELPER_DEBUG', 'DEV' );
 
 return [
 	'enqueue_scripts' => [

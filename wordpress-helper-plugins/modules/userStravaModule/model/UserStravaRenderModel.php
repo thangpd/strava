@@ -10,6 +10,7 @@ namespace Elhelper\modules\userStravaModule\model;
 
 
 use Elhelper\common\Model;
+use Elhelper\inc\HeplerStrava;
 
 class UserStravaRenderModel extends Model {
 
@@ -17,9 +18,22 @@ class UserStravaRenderModel extends Model {
 
 	}
 
-	public static function renderUserProfile( UserStravaAthleteModel $userAthlete ) {
+	public static function renderUserProfile( $user_id ) {
+		$userAthlete = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
+//		echo '<pre>';
+//		print_r($userAthlete->getAthleteObject());
+//		echo '</pre>';
 
+//		$userBearer  = new \Elhelper\modules\userStravaModule\model\UserStravaBearerModel( $user_id );
+//	$ath_obj    = $userAthlete->getAthleteObject();
+//	echo '<pre>';
+//	print_r( $ath_obj );
+//	echo '</pre>';
 
+//	$bearer_obj = $userBearer->getAllInfo();
+//	echo '<pre>';
+//	print_r( $bearer_obj );
+//	echo '</pre>';
 		$html           = <<<HTML
 		
 
@@ -50,11 +64,15 @@ HTML;
 			$items .= sprintf( $item_template, 1, $userObject->id, $userObject->username, $userObject->profile_medium );
 			$html  = sprintf( $container_item, $items );
 		}
+
 		return $html;
 	}
 
 	public static function renderUserActivities( $user_id ) {
+		HeplerStrava::refreshToken( $user_id );
+
 		$userStravaController = new \Elhelper\modules\userStravaModule\controller\UserStravaController( $user_id );
+
 		$getinfoAthlete       = $userStravaController->getListActivities();
 		$html                 = '';
 		$container_item       = '<table class="table">
@@ -80,7 +98,15 @@ HTML;
 		$items = '';
 		if ( ! empty( $getinfoAthlete ) ) {
 			foreach ( $getinfoAthlete as $index => $value ) {
-				$items .= sprintf( $item_template, $index, $value->name, $value->distance, $value->type );
+				if ( ! empty( $value ) ) {
+					$name     = isset( $value->name ) ? $value->name : '';
+					$distance = isset( $value->distance ) ? $value->distance : '';
+					$type     = isset( $value->type ) ? $value->type : '';
+					if ( empty( $name ) && empty( $distance ) && empty( $type ) ) {
+						continue;
+					}
+					$items .= sprintf( $item_template, $index, $name, $distance, $type );
+				}
 			}
 			$html = sprintf( $container_item, $items );
 		}

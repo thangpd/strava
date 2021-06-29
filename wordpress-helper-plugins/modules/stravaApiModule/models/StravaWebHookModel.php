@@ -21,7 +21,7 @@ class StravaWebHookModel extends StravaApiModel {
 	}
 
 
-	public static function getReceiveWebhook() {
+	public static function getReceiveWebhookUrl() {
 		if ( EL_HELPER_DEBUG == 'DEV' ) {
 			return DIRECTORY_SEPARATOR . self::EL_API_CAT_RULE . DIRECTORY_SEPARATOR . self::EL_STRAVA_WEBHOOK_URL_VAL;
 		} else {

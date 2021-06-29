@@ -17,6 +17,7 @@ class UserStravaModel extends Model {
 	const STRAVA_STATE = 'strava_state';
 	const STRAVA_BEARER = 'strava_bearer';
 
+
 	private $scope, $strava_code, $state, $user_id;
 
 	public function __construct( $user_id ) {
@@ -85,8 +86,8 @@ class UserStravaModel extends Model {
 		if ( isset( $_GET['code'] ) && isset( $_GET['scope'] ) ) {
 			$code          = $_GET['code'];
 			$url           = 'https://www.strava.com/api/v3/oauth/token';
-			$client_id     = 67628;
-			$client_secret = '37923ec215f0f5120ef372bbce3cc9b6073e58d0';
+			$client_id     = CLIENT_ID;
+			$client_secret = CLIENT_SECRET;
 			$grant_type    = 'authorization_code';
 			$post          = [
 				'client_id'     => $client_id,
@@ -99,7 +100,9 @@ class UserStravaModel extends Model {
 			$userBearer          = new UserStravaBearerModel( $user_id );
 			$userBearer->saveObjectBearer( $objectTokenExchange );
 			$userAthlete = new UserStravaAthleteModel( $user_id );
-			$userAthlete->saveAthleteObject( $objectTokenExchange->athlete );
+			if ( isset( $objectTokenExchange->athlete ) ) {
+				$userAthlete->saveAthleteObject( $objectTokenExchange->athlete );
+			}
 
 
 //			write_log( $objectTokenExchange );
@@ -112,6 +115,7 @@ class UserStravaModel extends Model {
 
 	}
 
+	//Strava code means first time customer allow permission
 	public function saveStravaCode( $value, $user_id = null ) {
 		if ( $user_id == null ) {
 			$user_id = $this->getModelUserId();
@@ -130,7 +134,7 @@ class UserStravaModel extends Model {
 	public function saveScope( $value, $user_id = null ) {
 		if ( $user_id == null ) {
 			$user_id = $this->getModelUserId();
-			write_log( 'User_id is null' . __FILE__ . __LINE__ . 'this user is' . $this->getModelUserId() );
+//			write_log( 'User_id is null' . __FILE__ . __LINE__ . 'this user is' . $this->getModelUserId() );
 		}
 		$current_meta = get_user_meta( $user_id, self::STRAVA_SCOPE );
 		if ( empty( $current_meta ) ) {

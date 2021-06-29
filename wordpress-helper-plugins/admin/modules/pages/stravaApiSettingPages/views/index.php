@@ -12,67 +12,55 @@
 
         <div class="form-group row">
             <label class="col-sm-4 col-form-label"
-                   for="<?php echo $context->opt_appid['key']; ?>"><?php _e( "App ID:", 'el-helper' ); ?></label>
+                   for="client_id"><?php _e( "CLIENT ID:", 'el-helper' ); ?></label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="<?php echo $context->opt_appid['key']; ?>"
-                       id="<?php echo $context->opt_appid['key']; ?>"
-                       value="<?php echo $context->opt_appid['value']; ?>"/>
+                <input class="form-control" type="text" name="client_id"
+                       id="client_id"
+                       value="<?php echo CLIENT_ID ?>"/>
                 <small id="" class="form-text text-muted">Description</small>
             </div>
         </div>
-
-
         <div class="form-group row">
             <label class="col-sm-4 col-form-label"
-                   for="<?php echo $context->opt_callback['key'] ?>"><?php _e( "Callback Url:", 'el-helper' ); ?></label>
+                   for="client_secret"><?php _e( "CLIENT SECRET:", 'el-helper' ); ?></label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" name="<?php echo $context->opt_callback['key'] ?>"
-                       id="<?php echo $context->opt_callback['key'] ?>"
-                       value="<?php echo $context->opt_callback['value']; ?>"/>
+                <input class="form-control" type="text" name="client_secret"
+                       id="client_secret"
+                       value="<?php echo CLIENT_SECRET ?>"/>
                 <small id="" class="form-text text-muted">Description</small>
             </div>
         </div>
         <div class="form-group row">
-            <label for="<?php echo $context->opt_accesstoken['key']; ?>" class="col-sm-4 col-form-label">
-				<?php _e( "Access Token", 'el-helper' ); ?>
+            <label class="col-sm-4 col-form-label"
+                   for="callback_url"><?php _e( "CALLBACK URL:", 'el-helper' ); ?></label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="callback_url"
+                       id="callback_url"
+                       value="<?php $receiveWebhookUrl = home_url() . \Elhelper\modules\stravaApiModule\models\StravaWebHookModel::getReceiveWebhookUrl();
+				       echo $receiveWebhookUrl ?>"/>
+                <small id="" class="form-text text-muted">Description</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="verify_token" class="col-sm-4 col-form-label">
+				<?php _e( "Verify Token", 'el-helper' ); ?>
             </label>
             <div class="col-sm-3">
                 <input type="password" class="form-control-plaintext"
-                       name="<?php echo $context->opt_accesstoken['key']; ?>"
-                       id="<?php echo $context->opt_accesstoken['key']; ?>"
+                       name="verify_token"
+                       id="verify_token"
                        readonly="readonly"
-                       value="<?php echo $context->opt_accesstoken['value']; ?>"
+                       value="inspire_verify_token<?php //echo $context->opt_accesstoken['value']; ?>"
                 />
             </div>
             <div class="col-sm-3">
-				<?php if ( empty( $context->opt_accesstoken['value'] ) && ! empty( $context->opt_appid['value'] ) ) {
-					?>
-                    <a href="#"
-                       class="btn btn-primary get-access-token"><?php esc_attr_e( 'Get Access Token' ) ?></a>
-					<?php
-				} ?>
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label"
-                   for="<?php echo $context->opt_webhook['key']; ?>"><?php _e( "Webhook URL:", 'el-helper' ); ?></label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="<?php echo $context->opt_webhook['key']; ?>"
-                       id="<?php echo $context->opt_webhook['key']; ?>"
-                       value="<?php echo $context->opt_webhook['value']; ?>"/>
-                <small id="" class="form-text text-muted">Description</small>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label"
-                   for="<?php echo $context->opt_oath_webhook['key']; ?>"><?php _e( "OA Webhook Secret Key:", 'el-helper' ); ?></label>
-            <div class="col-sm-8">
-                <input class="form-control" type="password" name="<?php echo $context->opt_oath_webhook['key']; ?>"
-                       id="<?php echo $context->opt_oath_webhook['key']; ?>"
-                       value="<?php echo $context->opt_oath_webhook['value']; ?>"/>
-                <small id="" class="form-text text-muted">Description</small>
+                <!--				--><?php //if ( empty( $context->opt_accesstoken['value'] ) && ! empty( $context->opt_appid['value'] ) ) {
+				//					?>
+                <a href="#"
+                   class="btn btn-primary get-subsciption-token"><?php esc_attr_e( 'Subscription' ) ?></a>
+				<?php
+				//				} ?>
             </div>
         </div>
 

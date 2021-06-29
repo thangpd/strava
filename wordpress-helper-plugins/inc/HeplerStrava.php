@@ -7,6 +7,8 @@
 namespace Elhelper\inc;
 
 
+use Elhelper\modules\userStravaModule\model\UserStravaBearerModel;
+
 class HeplerStrava {
 
 
@@ -30,6 +32,7 @@ class HeplerStrava {
 	}
 
 	public static function callStravaAPI( $url, $bearerToken, $post = [], $method = 'GET' ) {
+
 
 		$curl = curl_init();
 
@@ -57,33 +60,7 @@ class HeplerStrava {
 
 	}
 
-	public static function callApiTokenExchange( $url, $post = [], $method = 'POST' ) {
-
-		$result = [];
-		if ( ! empty( $url ) ) {
-			$ch      = curl_init( $url ); // Initialise cURL
-			$options = array(
-				CURLOPT_POSTFIELDS     => $post,
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING       => '',
-				CURLOPT_MAXREDIRS      => 10,
-				CURLOPT_TIMEOUT        => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST  => $method,
-			);
-			curl_setopt_array( $ch, $options );
-			$result = curl_exec( $ch );
-			curl_close( $ch );
-		}
-
-		return json_decode( $result );
-
-
-	}
-
-	public
-	static function callGetInfoApi(
+	public static function callGetInfoApi(
 		$url, $code, $post = [], $method = 'POST'
 	) {
 		$result = [];
@@ -109,5 +86,48 @@ class HeplerStrava {
 
 	}
 
+	public static function refreshToken( $user_id ) {
+		$userBearer = new UserStravaBearerModel( $user_id );
+		if ( $userBearer->getExpiresAt() < time() ) {
+			$url           = 'https://www.strava.com/api/v3/oauth/token';
+			$client_id     = CLIENT_ID;
+			$client_secret = CLIENT_SECRET;
+			$post          = [
+				'client_id'     => $client_id,
+				'client_secret' => $client_secret,
+				'grant_type'    => 'refresh_token',
+				'refresh_token' => $userBearer->getRefreshToken(),
+			];
+
+			$objectTokenExchange = HeplerStrava::callApiTokenExchange( $url, $post );
+			if ( ! isset( $objectTokenExchange->errors ) ) {
+				$userBearer = new UserStravaBearerModel( $user_id );
+				$userBearer->saveObjectBearer( $objectTokenExchange );
+			}
+		}
+	}
+
+	public static function callApiTokenExchange( $url, $post = [], $method = 'POST' ) {
+
+		$result = [];
+		if ( ! empty( $url ) ) {
+			$ch      = curl_init( $url ); // Initialise cURL
+			$options = array(
+				CURLOPT_POSTFIELDS     => $post,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING       => '',
+				CURLOPT_MAXREDIRS      => 10,
+				CURLOPT_TIMEOUT        => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST  => $method,
+			);
+			curl_setopt_array( $ch, $options );
+			$result = curl_exec( $ch );
+			curl_close( $ch );
+		}
+
+		return json_decode( $result );
+	}
 
 }
