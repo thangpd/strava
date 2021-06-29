@@ -9,7 +9,6 @@
 namespace Elhelper\modules\stravaApiModule\Controllers;
 
 use Elhelper\common\Singleton;
-use Elhelper\modules\productStravaModule\model\ProductUserModel;
 use Elhelper\modules\userStravaModule\model\UserStravaAthleteModel;
 
 class StravaApiWebhookHandle extends Singleton {
