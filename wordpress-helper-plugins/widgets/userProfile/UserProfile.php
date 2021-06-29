@@ -62,8 +62,7 @@ class UserProfile extends \Elementor\Widget_Base {
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
-<<<<<<< HEAD:wordpress-helper-plugins/widgets/userProfile/userProfile.php
-		
+
 		if ( class_exists('WooCommerce') ) {
 			$args = array(
 				'post_type'				=> 'shop_order'
@@ -74,9 +73,7 @@ class UserProfile extends \Elementor\Widget_Base {
 				,'order' 				=> 'desc'
 				,''
 			);
-=======
->>>>>>> a4b439ebfc90bbf91fe31dcbc0c2f3824fe2c0b9:wordpress-helper-plugins/widgets/userProfile/UserProfile.php
-
+		}
 
 		include __DIR__ . '/templates/challenge_section.php';
 	}
