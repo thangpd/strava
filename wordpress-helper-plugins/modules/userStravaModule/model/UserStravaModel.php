@@ -17,6 +17,7 @@ class UserStravaModel extends Model {
 	const STRAVA_STATE = 'strava_state';
 	const STRAVA_BEARER = 'strava_bearer';
 
+
 	private $scope, $strava_code, $state, $user_id;
 
 	public function __construct( $user_id ) {

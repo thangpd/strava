@@ -13,6 +13,9 @@ class UserStravaAthleteModel {
 
 	const ATHLETE_STRAVA = 'athlete_strava';
 	const ATHLETE_ID = 'athlete_id';
+	//this is total distance only for this site
+	const ATHLETE_TOTAL_DISTANCE = 'athlete_total_distance';
+	const ATHLETE_DISTANCE_OF_PRODUCT = 'athlete_distance_of_product';
 	private $user_id;
 
 	public function __construct( $user_id ) {
@@ -55,8 +58,41 @@ class UserStravaAthleteModel {
 		$this->user_id = $user_id;
 	}
 
+	public function getAthleteTotalDistance() {
+		return get_user_meta( $this->user_id, self::ATHLETE_TOTAL_DISTANCE, true );
+	}
+
+	public function addAthleteTotalDistance( $meters ) {
+		$currentDistance = get_user_meta( $this->user_id, self::ATHLETE_TOTAL_DISTANCE, true );
+		$total           = (float) $currentDistance + (float) $meters;
+		update_user_meta( $this->user_id, self::ATHLETE_TOTAL_DISTANCE, $total );
+	}
+
 	public function getAthleteObject() {
 		return get_user_meta( $this->getUserId(), self::ATHLETE_STRAVA, true );
 	}
+
+	public function getDistanceOfProduct( $product_id ) {
+		$get_user_meta         = get_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT );
+		$list_product_distance = array_shift( $get_user_meta );
+		if ( isset( $list_product_distance[ $product_id ] ) ) {
+			return $list_product_distance[ $product_id ];
+		} else {
+			return [];
+		}
+	}
+
+	public function addDistanceOfUserOfProduct( $product_id, $meters ) {
+		$array              = get_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT );
+		$currentListProduct = array_shift( $array );
+		if ( ! empty( $currentListProduct ) ) {
+			$total                             = (float) $currentListProduct[ $product_id ] + (float) $meters;
+			$currentListProduct[ $product_id ] = $total;
+			update_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT, $currentListProduct );
+		} else {
+			add_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT, [ $product_id => $meters ] );
+		}
+	}
+
 
 }

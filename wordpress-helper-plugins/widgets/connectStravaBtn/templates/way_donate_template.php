@@ -90,7 +90,9 @@ HTML;
 		echo '</pre>';
 	}
 	*/
-
+	/*Athlete User ID*/
+	$userAthlete = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( 2 );
+	$userAthlete->addDistanceOfUserOfProduct( 887, 42 );
 
 //----------------------------
 	echo \Elhelper\modules\userStravaModule\model\UserStravaRenderModel::renderUserProfile( $user_id );

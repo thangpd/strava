@@ -48,16 +48,19 @@ class StravaApiWebhookHandle extends Singleton {
 
 		//aspect_type ['update','create');
 //		if ( $json['aspect_type'] == 'update' && $json['object_type'] == 'activity' ) {
-		if ( $json['aspect_type'] == 'create' && $json['object_type'] == 'activity' ) {
+		if ( $json['aspect_type'] == 'update' && $json['object_type'] == 'activity' ) {
 			$user_objs = UserStravaAthleteModel::getUserIdByAthlete( $json['owner_id'] );
 			if ( ! empty( $user_objs ) ) {
-				$products = inspire_get_list_purchased_product_by_user_object( $user_objs );
+				$userAthlete = new UserStravaAthleteModel( $user_objs->ID );
+				$products    = inspire_get_list_purchased_product_by_user_object( $user_objs );
+				$activity    = new \Elhelper\modules\activityModule\model\ActivityStravaModel();
+				$res         = $activity->getActivityInfo( $user_objs->ID, $json['object_id'] );
+				$userAthlete->addAthleteTotalDistance( $res->distance );
 				if ( ! empty( $products ) ) {
 					foreach ( $products as $product_id ) {
-						$activity = new \Elhelper\modules\activityModule\model\ActivityStravaModel();
-						$res      = $activity->getActivityInfo( 2, 5544776569 );
 						if ( ! empty( $res ) ) {
-							ProductUserModel::addDistanceToProduct( $product_id, $res->distance );
+							$userAthlete->addDistanceOfUserOfProduct( $product_id, $res->distance );
+//							ProductUserModel::addDistanceToProduct( $product_id, $res->distance );
 							write_log( 'added distance to productid' . __FILE__ . __LINE__ );
 						} else {
 							write_log( 'Empty activity distance' . __FILE__ . __LINE__ );
