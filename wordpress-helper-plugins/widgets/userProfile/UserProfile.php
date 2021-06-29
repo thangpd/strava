@@ -63,6 +63,19 @@ class UserProfile extends \Elementor\Widget_Base {
 	public function render() {
 		$settings = $this->get_settings_for_display();
 		
+		if ( class_exists('WooCommerce') ) {
+			$args = array(
+				'post_type'				=> 'product'
+				,'post_status' 			=> 'publish'
+				,'ignore_sticky_posts'	=> 1
+				,'posts_per_page' 		=> 4
+				,'orderby' 				=> 'date'
+				,'order' 				=> 'desc'
+			);
+
+			$products = new \WP_Query( $args );
+		}
+
 		include __DIR__ . '/templates/challenge_section.php';
 	}
 
