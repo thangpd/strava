@@ -1,5 +1,7 @@
 import $ from "jquery";
 import "slick-carousel";
+import templateHtml
+    from "../../../../admin/modules/pages/stravaApiSettingPages/stravaChatBotManager/assets/template_html";
 
 $(document).ready(function () {
     $('.table-tab').slick({
@@ -9,7 +11,7 @@ $(document).ready(function () {
         dots: true,
         dotsClass: 'table-paging',
         customPaging: function (slider, i) {
-            return  (i + 1) + '/' + slider.slideCount;
+            return (i + 1) + '/' + slider.slideCount;
         }
     });
 
@@ -20,21 +22,20 @@ $(document).ready(function () {
         dots: false,
     });
 
-    $('.more-challenge').on('click', function(e) {
+    $('.more-challenge').on('click', function (e) {
         e.preventDefault();
 
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.addClass('active');
     });
 
-    $('.overlay').on('click', function(e) {
+    $('.overlay').on('click', function (e) {
         e.preventDefault();
 
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.removeClass('active');
     })
 });
-
 
 
 // button connect strava
@@ -61,5 +62,25 @@ $(document).ready(function () {
             }
         }, 500);
 
+    })
+    $('.deauthorize_strava').on('click', function (e) {
+        console.log('ok')
+        let user_id = $(this).data('user_id')
+        var data = {
+            'action': 'deauthorizeStrava',
+            'user_id': user_id
+        }
+        $.ajax({
+            'method': 'POST',
+            'data': data,
+            'url': ajax_object.ajax_url,
+        }).done(function (res) {
+            if(res.code==200){
+                location.reload(true)
+            }else{
+                console.log(res)
+                location.reload(true)
+            }
+        })
     })
 });

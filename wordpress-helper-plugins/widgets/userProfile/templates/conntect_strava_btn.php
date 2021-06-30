@@ -21,7 +21,7 @@ if ( is_user_logged_in() ):
 	} else {
 		$button_connected = <<<HTML
         <div class="button popup-strava-challenges">Đã Kết Nối</div>
-        <a href="#" class="deauthorize_strava">Ngắt kết nối</a>
+        <a href="#" data-user_id="{$user_id}" class="deauthorize_strava">Ngắt kết nối</a>
 HTML;
 		echo $button_connected;
 	}

@@ -22,7 +22,7 @@ use Elhelper\modules\stravaApiModule\models\StravaWebHookModel;
  *      + check if == post_name
  *      + Include template
  */
-class StravaApiController extends SingleController {
+class StravaApiRoute extends SingleController {
 	//Override $_instance. If not. It'll have the last object instance is initialized before this class.
 	protected static $_instance;
 
