@@ -49,22 +49,23 @@ class UserProfile extends \Elementor\Widget_Base {
 		$end_date         = get_field( 'end_date', $product_id );
 		$now              = new \DateTime( 'now' );
 
-
-		if ( ! empty( $start_date ) ) {
+		$date_range        = 0;
+		$date_left         = 0;
+		$date_left_percent = 0;
+		if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 			$start_date = \DateTime::createFromFormat( 'd/m/Y', $start_date );
-		}
-		if ( ! empty( $end_date ) ) {
 			//end date
-			$end_date = \DateTime::createFromFormat( 'd/m/Y', $end_date );
-//			$end_datetime = $end_date->modify( 'tomorrow' );
-//			$end_date      = $end_date->setTimestamp( $end_datetime->getTimestamp() - 1 );
+			$end_date          = \DateTime::createFromFormat( 'd/m/Y', $end_date );
+			$datediff          = $end_date->diff( $start_date );
+			$date_range        = $datediff->days;
+			$datediff_left     = $now->diff( $end_date );
+			$date_left         = $datediff_left->days;
+			$f                 = $date_left / $date_range;
+			$date_left_percent = round( $f * 100, 0 );
+		} else {
+			$start_date = new \DateTime('now');
+			$end_date   = new \DateTime('now');
 		}
-		$datediff          = $end_date->diff( $start_date );
-		$date_range        = $datediff->days;
-		$datediff_left     = $now->diff( $end_date );
-		$date_left         = $datediff_left->days;
-		$f                 = $date_left / $date_range;
-		$date_left_percent = round( $f * 100, 0 );
 
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
