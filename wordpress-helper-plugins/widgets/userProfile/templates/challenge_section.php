@@ -13,9 +13,10 @@ if ( is_user_logged_in() ) {
 	$num_of_challenge       = 0;
 	$num_challenge_finished = 0;
 
-	$products = inspire_get_list_purchased_product_by_user_object( $WP_User );
+	$products                = inspire_get_list_purchased_product_by_user_object( $WP_User );
+	$products_challenge_html = '';
+
 	if ( ! empty( $products ) ) {
-		$products_challenge_html = '';
 
 		$num_of_challenge = count( $products );
 		foreach ( $products as $product_id ) {
@@ -37,16 +38,17 @@ $button_conntect_strava = require $str;
 
         <!-- Informations section -->
         <div class="strava-information mx-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-lg-2">
+            <div class="container-fluid">
+                <div class="row justify-content-md-between">
+                    <div class="order-md-1 col-md-3 col-lg-2">
                         <div class="call-to-action">
-                            <div class="image"></div>
+                            <img class="image"
+                                 src="<?php echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); ?>"
+                                 alt="avartar">
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-7">
-                        <h2><?php
-							?></h2>
+                    <div class="order-md-3 col-md-12 col-lg-7">
+                        <h2> Trần Nguyễn Thế Duy </h2>
                         <h3>Tổng km</h3>
                         <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
                         <div class="row mt-2">
@@ -60,7 +62,7 @@ $button_conntect_strava = require $str;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-3">
+                    <div class="order-md-2 col-md-5 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
@@ -75,31 +77,20 @@ $button_conntect_strava = require $str;
 
         <!-- Challenges Section -->
         <div class="strava-challenges mx-3">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="heading">Các thử thách</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 col-lg-6">
-                        <div class="left-challenge">
-							<?php if ( ! empty( $products ) ):
-								echo $products_challenge_html;
-							endif; ?>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-6">
-                        <div class="right-challenge">
-                            <div class="button more-challenge">THÊM THỬ THÁCH MỚI</div>
-                        </div>
-                    </div>
+                <div class="row strava-challenges__list strava-challenges__list-slick">
+					<?php echo $products_challenge_html; ?>
                 </div>
             </div>
         </div>
         <!-- End Challenges Section -->
         <div class="popup-modal">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="popup-modal__challenges">
                     <div class="popup-modal__challenges-item">
                         <div class="row justify-content-around">
@@ -173,7 +164,7 @@ $button_conntect_strava = require $str;
 
     <!-- List Challenges -->
     <div class="list-challenges">
-        <div class="container">
+        <div class="container-fluid">
             <div class="list-challenges__wrap mx-3">
                 <div class="row">
                     <div class="col-md-12">

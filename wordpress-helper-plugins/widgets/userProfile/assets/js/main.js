@@ -1,7 +1,5 @@
 import $ from "jquery";
 import "slick-carousel";
-import templateHtml
-    from "../../../../admin/modules/pages/stravaApiSettingPages/stravaChatBotManager/assets/template_html";
 
 $(document).ready(function () {
     $('.table-tab').slick({
@@ -34,13 +32,30 @@ $(document).ready(function () {
 
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.removeClass('active');
-    })
+    });
+
+    $('.strava-challenges__list.strava-challenges__list-slick').slick({
+        arrows: false,
+        dots: true,
+        slidesToShow: 2,
+        customPaging: function(slider, i) {
+            return '<i class="fas fa-circle"></i>';
+        },
+        responsive: [
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            }
+        ]
+    });
 });
 
-
 // button connect strava
-
-
 $(document).ready(function () {
     console.log('button connect strava');
 

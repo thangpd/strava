@@ -26,8 +26,6 @@ class UserProfile extends \Elementor\Widget_Base {
 				'bootstrap'
 			],
 		] );
-
-
 	}
 
 	public static function renderProductChallenge( $product_id, $user_id ) {
@@ -70,22 +68,31 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
-
 		$distance_already_OfProduct = isset( $distance_already ) && ! empty( $distance_already ) ? $distance_already . 'km' : '0 km';
 
 		$distance_left         = $distnace_product - $distance_already;
 		$percent_distance_left = round( $distance_already / $distance_left * 100, 0 );
 
-
 		$html = <<<HTML
+		<div class="col-md-12">
+                        <div class="strava-challenges__inner">
                                 <div class="row">
-                                    <div class="col-md-4 col-lg-3">
-                                        <div class="banner"></div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <!-- banner -->
+                                    <div class="strava-challenges__head">
+                                        <div class="strava-challenges__banner">
+                                            <img src="{$thumbail_challenge['url']}" alt="banner">
+                                        </div>
+                                        <div class="strava-challenges__head-info">
+                                            <h2 class="d-block d-lg-none">Chinh phục Everest</h2>
+                                            <span class="distance-date d-block d-lg-none">{$distnace_product} km - {$date_range} ngày</span>
+                                        </div>
                                     </div>
-                                    <div class="col-md-8 col-lg-9">
-                                        <div class="content">
-                                            <h2>Chinh phục Everest</h2>
-                                            <span class="distance-date">{$distnace_product} km - {$date_range} ngày</span>
+                                    </div>
+                                    <div class="col-md-12 col-lg-9">
+                                        <div class="strava-challenges__content">
+                                            <h2 class="d-none d-lg-block">Chinh phục Everest</h2>
+                                            <span class="distance-date d-none d-lg-block">{$distnace_product} km - {$date_range} ngày</span>
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -98,12 +105,12 @@ class UserProfile extends \Elementor\Widget_Base {
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-3 pr-0">
+                                            <div class="row align-items-end align-items-lg-center">
+                                                <div class="col-3 pr-0">
                                                     <h3 class="label">Độ dài</h3>
                                                     <span class="percent">{$percent_distance_left}%</span>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-9">
                                                     <div class="line" data-active="0">
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
@@ -116,19 +123,19 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                     </div>
-                                                    <div class="distance-left">
+                                                    <div class="d-none d-lg-block distance-left">
                                                         <b>{$distance_already_OfProduct}</b>
                                                         <span>Còn lại <b>{$distance_left}km</b></span>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-3 pr-0">
+                                            <div class="row  align-items-end align-items-lg-center">
+                                                <div class="col-3 pr-0">
                                                     <h3 class="label">Thời gian</h3>
                                                     <span class="percent">{$date_left_percent}%</span>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-9">
                                                     <div class="line" data-active="7">
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
@@ -141,7 +148,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                     </div>
-                                                    <div class="distance-left">
+                                                    <div class="d-none d-lg-block distance-left">
                                                         <b>{$date_range} ngày</b>
                                                         <span>Còn lại <b>{$date_left} ngày</b></span>
                                                     </div>
@@ -151,11 +158,16 @@ class UserProfile extends \Elementor\Widget_Base {
                                         </div>
                                     </div>
                                 </div>
+                                </div>
+                           </div>
 
 HTML;
 
 
-		return $html;
+		$add_new_challenge = include __DIR__ . '/templates/add_more_challenge_template.php';
+
+
+		return $html . $add_new_challenge;
 
 	}
 
@@ -193,6 +205,23 @@ HTML;
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
+		if ( class_exists( 'WooCommerce' ) ) {
+			$args = array(
+				'post_type'           => 'shop_order'
+			,
+				'post_status'         => array( 'wc-processing', 'wc-completed' )
+			,
+				'ignore_sticky_posts' => 1
+			,
+				'posts_per_page'      => 4
+			,
+				'orderby'             => 'date'
+			,
+				'order'               => 'desc'
+			,
+				''
+			);
+		}
 
 		include __DIR__ . '/templates/challenge_section.php';
 	}
