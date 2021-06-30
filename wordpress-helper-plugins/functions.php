@@ -85,7 +85,6 @@ function inspire_get_list_purchased_product_by_user_object( WP_User $user_obj ) 
 
 
 // Custom field
-
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
@@ -146,6 +145,27 @@ if( function_exists('acf_add_local_field_group') ):
 				'display_format' => 'd/m/Y',
 				'return_format' => 'd/m/Y',
 				'first_day' => 1,
+			),
+			array(
+				'key' => 'field_60dc7a1ed31af',
+				'label' => 'Thời gian chạy (ngày)',
+				'name' => 'amount_day',
+				'type' => 'number',
+				'instructions' => 'Nhập thời gian của thử thách trong bao lâu. Đơn vị ngày.',
+				'required' => 1,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'min' => '',
+				'max' => '',
+				'step' => '',
 			),
 			array(
 				'key' => 'field_60dc4123a90eb',
