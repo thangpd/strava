@@ -1,21 +1,21 @@
 <?php
-if ( is_user_logged_in() ) {
-	$user_id                   = get_current_user_id();
-	$WP_User                   = get_userdata( $user_id );
-	$username                  = $WP_User->user_login;
-	$userAthlete               = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
-	$athleteTotalDistance      = $userAthlete->getAthleteTotalDistance();
-	$athleteTotalDistance      *= 0.001;
-	$user_total_distance       = ! empty( $athleteTotalDistance ) ? $athleteTotalDistance . ' km' : '0 km';
-	$products                  = inspire_get_list_purchased_product_by_user_object( $WP_User );
-	$num_of_challenge          = ! empty( $products ) ? count( $products ) : 0;
-	$num_challenge_finished    = 0;
-	$list_athlete_of_challenge = [];
-	if ( ! empty( $products ) ) {
-		$distanceOfProduct = $userAthlete->getDistanceOfProduct( $products[0] );
-		$distanceOfProduct *= 0.001;
-	}
-}
+// if ( is_user_logged_in() ) {
+// 	$user_id                   = get_current_user_id();
+// 	$WP_User                   = get_userdata( $user_id );
+// 	$username                  = $WP_User->user_login;
+// 	$userAthlete               = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
+// 	$athleteTotalDistance      = $userAthlete->getAthleteTotalDistance();
+// 	$athleteTotalDistance      *= 0.001;
+// 	$user_total_distance       = ! empty( $athleteTotalDistance ) ? $athleteTotalDistance . ' km' : '0 km';
+// 	$products                  = inspire_get_list_purchased_product_by_user_object( $WP_User );
+// 	$num_of_challenge          = ! empty( $products ) ? count( $products ) : 0;
+// 	$num_challenge_finished    = 0;
+// 	$list_athlete_of_challenge = [];
+// 	if ( ! empty( $products ) ) {
+// 		$distanceOfProduct = $userAthlete->getDistanceOfProduct( $products[0] );
+// 		$distanceOfProduct *= 0.001;
+// 	}
+// }
 $str                    = __DIR__ . '/conntect_strava_btn.php';
 $button_conntect_strava = require $str;
 
@@ -26,16 +26,15 @@ $button_conntect_strava = require $str;
 
         <!-- Informations section -->
         <div class="strava-information mx-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-lg-2">
+            <div class="container-fluid">
+                <div class="row justify-content-md-between">
+                    <div class="order-md-1 col-md-3 col-lg-2">
                         <div class="call-to-action">
-                            <div class="image"></div>
+                            <img class="image" src="<?php echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ )  ) . ''); ?>" alt="avartar">
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-7">
-                        <h2><?php
-							?></h2>
+                    <div class="order-md-3 col-md-12 col-lg-7">
+                        <h2> Trần Nguyễn Thế Duy </h2>
                         <h3>Tổng km</h3>
                         <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
                         <div class="row mt-2">
@@ -49,7 +48,7 @@ $button_conntect_strava = require $str;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-3">
+                    <div class="order-md-2 col-md-5 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
@@ -64,95 +63,265 @@ $button_conntect_strava = require $str;
 
         <!-- Challenges Section -->
         <div class="strava-challenges mx-3">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="heading">Các thử thách</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 col-lg-6">
-                        <div class="left-challenge">
-							<?php if ( ! empty( $products ) ): ?>
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-3">
-                                        <div class="banner"></div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-9">
-                                        <div class="content">
-                                            <h2>Chinh phục Everest</h2>
-                                            <span class="distance-date">85 km - 25 ngày</span>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <h3>Ngày bắt đầu</h3>
-                                                    <span class="date">01/07/2021</span>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h3>Ngày kết thúc</h3>
-                                                    <span class="date">25/07/2021</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3 pr-0">
-                                                    <h3 class="label">Độ dài</h3>
-                                                    <span class="percent">0%</span>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="line" data-active="0">
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                    </div>
-                                                    <div class="distance-left">
-                                                        <b><?php echo isset( $distanceOfProduct ) && ! empty( $distanceOfProduct ) ? $distanceOfProduct . 'km' : '0 km' ?></b>
-                                                        <span>Còn lại <b>51km</b></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3 pr-0">
-                                                    <h3 class="label">Thời gian</h3>
-                                                    <span class="percent">70%</span>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="line" data-active="7">
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                        <div class="rectangle"></div>
-                                                    </div>
-                                                    <div class="distance-left">
-                                                        <b>34 ngày</b>
-                                                        <span>Còn lại <b>51 ngày</b></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                <div class="row strava-challenges__list strava-challenges__list-slick">
+                    <div class="col-md-12">
+                        <div class="strava-challenges__inner">
+                            <?php // if ( ! empty( $products ) ): ?>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3">
+                                    <!-- banner -->
+                                    <div class="strava-challenges__head">
+                                        <div class="strava-challenges__banner">
+                                            <img src="<?php echo esc_url( plugins_url( 'assets/images/mountain.png', dirname( __FILE__ ) ) ); ?>" alt="banner">
+                                        </div>
+                                        <div class="strava-challenges__head-info">
+                                            <h2 class="d-block d-lg-none">Chinh phục Everest</h2>
+                                            <span class="distance-date d-block d-lg-none">85 km - 25 ngày</span>
                                         </div>
                                     </div>
                                 </div>
-							<?php endif; ?>
+                                <div class="col-md-12 col-lg-9">
+                                    <div class="strava-challenges__content">
+                                        <h2 class="d-none d-lg-block">Chinh phục Everest</h2>
+                                        <span class="distance-date d-none d-lg-block">85 km - 25 ngày</span>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h3>Ngày bắt đầu</h3>
+                                                <span class="date">01/07/2021</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <h3>Ngày kết thúc</h3>
+                                                <span class="date">25/07/2021</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row align-items-end align-items-lg-center">
+                                            <div class="col-3 pr-0">
+                                                <h3 class="label">Độ dài</h3>
+                                                <span class="percent">0%</span>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="line" data-active="0">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="d-none d-lg-block distance-left">
+                                                    <b><?php echo isset( $distanceOfProduct ) && ! empty( $distanceOfProduct ) ? $distanceOfProduct . 'km' : '0 km' ?></b>
+                                                    <span>Còn lại <b>51km</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-end align-items-lg-center">
+                                            <div class="col-3 pr-0">
+                                                <h3 class="label">Thời gian</h3>
+                                                <span class="percent">70%</span>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="line" data-active="7">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="d-none d-lg-block distance-left">
+                                                    <b>34 ngày</b>
+                                                    <span>Còn lại <b>51 ngày</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php // endif; ?>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-6">
-                        <div class="right-challenge">
-                            <div class="button more-challenge">THÊM THỬ THÁCH MỚI</div>
+                    <div class="col-md-12">
+                        <div class="strava-challenges__inner">
+                            <div class="strava-challenges__wrap-image">
+                                <div class="button more-challenge">THÊM THỬ THÁCH MỚI</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="strava-challenges__inner">
+                            <?php // if ( ! empty( $products ) ): ?>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3">
+                                    <!-- banner -->
+                                    <div class="strava-challenges__banner"></div>
+                                </div>
+                                <div class="col-md-8 col-lg-9">
+                                    <div class="strava-challenges__content">
+                                        <h2>Chinh phục Everest</h2>
+                                        <span class="distance-date">85 km - 25 ngày</span>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h3>Ngày bắt đầu</h3>
+                                                <span class="date">01/07/2021</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3>Ngày kết thúc</h3>
+                                                <span class="date">25/07/2021</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 pr-0">
+                                                <h3 class="label">Độ dài</h3>
+                                                <span class="percent">0%</span>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="line" data-active="0">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="distance-left">
+                                                    <b><?php echo isset( $distanceOfProduct ) && ! empty( $distanceOfProduct ) ? $distanceOfProduct . 'km' : '0 km' ?></b>
+                                                    <span>Còn lại <b>51km</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 pr-0">
+                                                <h3 class="label">Thời gian</h3>
+                                                <span class="percent">70%</span>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="line" data-active="7">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="distance-left">
+                                                    <b>34 ngày</b>
+                                                    <span>Còn lại <b>51 ngày</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php // endif; ?>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="strava-challenges__inner">
+                            <?php // if ( ! empty( $products ) ): ?>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3">
+                                    <!-- banner -->
+                                    <div class="strava-challenges__banner"></div>
+                                </div>
+                                <div class="col-md-8 col-lg-9">
+                                    <div class="strava-challenges__content">
+                                        <h2>Chinh phục Everest</h2>
+                                        <span class="distance-date">85 km - 25 ngày</span>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h3>Ngày bắt đầu</h3>
+                                                <span class="date">01/07/2021</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3>Ngày kết thúc</h3>
+                                                <span class="date">25/07/2021</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 pr-0">
+                                                <h3 class="label">Độ dài</h3>
+                                                <span class="percent">0%</span>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="line" data-active="0">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="distance-left">
+                                                    <b><?php echo isset( $distanceOfProduct ) && ! empty( $distanceOfProduct ) ? $distanceOfProduct . 'km' : '0 km' ?></b>
+                                                    <span>Còn lại <b>51km</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 pr-0">
+                                                <h3 class="label">Thời gian</h3>
+                                                <span class="percent">70%</span>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="line" data-active="7">
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                    <div class="rectangle"></div>
+                                                </div>
+                                                <div class="distance-left">
+                                                    <b>34 ngày</b>
+                                                    <span>Còn lại <b>51 ngày</b></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php // endif; ?>
                         </div>
                     </div>
                 </div>
@@ -160,7 +329,7 @@ $button_conntect_strava = require $str;
         </div>
         <!-- End Challenges Section -->
         <div class="popup-modal">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="popup-modal__challenges">
                     <div class="popup-modal__challenges-item">
                         <div class="row justify-content-around">
@@ -234,7 +403,7 @@ $button_conntect_strava = require $str;
 
     <!-- List Challenges -->
     <div class="list-challenges">
-        <div class="container">
+        <div class="container-fluid">
             <div class="list-challenges__wrap mx-3">
                 <div class="row">
                     <div class="col-md-12">
