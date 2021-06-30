@@ -84,26 +84,6 @@ class StravaApiWebhookHandle extends Singleton {
 
 	}
 
-
-	/*public function verifyWebhookStrava() {
-		$json    = file_get_contents( "php://input" );
-		$headers = getallheaders();
-		$data    = json_decode( $json, false, 512, JSON_BIGINT_AS_STRING );
-		if ( 0 < strlen( $json ) && isset( $headers["X-Zevent-Signature"] ) ) :
-			if ( $data ) :
-				// Calculate the MAC value from received data
-				$mac_1 = "mac=" . hash( "sha256", $data->app_id . $json . $data->timestamp . OA_SECRET_KEY );
-				$mac_2 = $headers["X-Zevent-Signature"];
-
-				if ( 0 === strcmp( $mac_1, $mac_2 ) ) :
-					return true;
-				endif;
-			endif;
-		endif;
-
-		return false;
-	}*/
-
 	public function verifyAccessTokenStrava() {
 
 		return true;

@@ -63,8 +63,8 @@ class UserProfile extends \Elementor\Widget_Base {
 			$f                 = $date_left / $date_range;
 			$date_left_percent = round( $f * 100, 0 );
 		} else {
-			$start_date = new \DateTime('now');
-			$end_date   = new \DateTime('now');
+			$start_date = new \DateTime( 'now' );
+			$end_date   = new \DateTime( 'now' );
 		}
 
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
@@ -165,12 +165,16 @@ class UserProfile extends \Elementor\Widget_Base {
 HTML;
 
 
-		$add_new_challenge = include __DIR__ . '/templates/add_more_challenge_template.php';
-
-
-		return $html . $add_new_challenge;
+		return $html;
 
 	}
+
+	public static function renderAddNewChallenge() {
+		$add_new_challenge = include __DIR__ . '/templates/add_more_challenge_template.php';
+
+		return $add_new_challenge;
+	}
+
 
 	/**
 	 * @return [type]

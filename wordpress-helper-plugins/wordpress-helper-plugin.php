@@ -15,6 +15,8 @@ $config = require __DIR__ . '/config.php';
 require_once __DIR__ . '/Elhelper_Plugin.php';
 $instance = Elhelper_Plugin::instance( $config );
 
+register_activation_hook( __FILE__, 'inspire_rewrite_activation' );
+//register_uninstall_hook( __FILE__, 'inspire_uninstall_hook' );
 
 //Function rewrite when activation
 register_activation_hook( __FILE__, [ $instance, 'elhelper_rewrite_activation' ] );

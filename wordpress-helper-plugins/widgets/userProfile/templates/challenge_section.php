@@ -85,6 +85,7 @@ $button_conntect_strava = require $str;
                 </div>
                 <div class="row strava-challenges__list strava-challenges__list-slick">
 					<?php echo $products_challenge_html; ?>
+                    <?php echo \Elhelper\widgets\userProfile\UserProfile::renderAddNewChallenge() ?>
                 </div>
             </div>
         </div>
