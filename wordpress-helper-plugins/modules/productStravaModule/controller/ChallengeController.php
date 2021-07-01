@@ -19,15 +19,20 @@ class ChallengeController extends Singleton {
 
 	public static function getDistanceAlreadyOfProduct( $challenge_id, $user_id ) {
 		global $wpdb;
-		$sql           = 'SELECT round(sum(a.distance),2) as distance FROM  %1$s WHERE %2$s';
-		$history_table = HistoryChallengeAthleteDb::get_table() . ' as h, ' . ActivityDb::get_table() . ' as a ';
-		$where         = ' a.activity_id = h.activity_id and h.challenge_id=' . $challenge_id . ' ';
+		$sql           = 'SELECT DISTINCT h.id ,a.distance FROM  %1$s WHERE %2$s';
+		$history_table = HistoryChallengeAthleteDb::get_table() . ' as h, ' . ActivityDb::get_table() . ' as a, ' . ChallengeDb::get_table() . ' as c ';
+		$where         = ' a.activity_id = h.activity_id and h.challenge_id=' . $challenge_id . ' and c.id=h.challenge_id and c.user_id=' . $user_id;
 		$sql           = $wpdb->prepare( $sql, $history_table, $where );
 
 		$results = $wpdb->get_results( $sql );
 
+		$total = 0;
+
 		if ( ! empty( $results ) ) {
-			$results = array_shift( $results );
+			foreach ( $results as $item ) {
+				$total += $item->distance;
+			}
+			$results = (object) array( 'distance' => $total );
 		} else {
 			$results = [];
 		}
@@ -41,8 +46,6 @@ class ChallengeController extends Singleton {
 		add_action( 'woocommerce_order_status_completed', [ $this, 'call_pos_management_call_api' ], 10, 1 );
 
 	}
-
-
 
 
 	function call_pos_management_call_api( $order_id ) {

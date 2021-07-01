@@ -2,6 +2,7 @@
 $products_challenge_html       = '';
 $render_list_challenges_report = '';
 
+
 if ( is_user_logged_in() ) {
 	$user_id              = get_current_user_id();
 	$WP_User              = get_userdata( $user_id );
@@ -18,12 +19,17 @@ if ( is_user_logged_in() ) {
 //	$products                = inspire_get_list_purchased_product_by_user_object( $WP_User );
 	$challenges = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallengeOfUser( $user_id );
 
+
 	if ( ! empty( $challenges ) ) {
 		//num of challenge
 		$num_of_challenge = count( $challenges );
 		foreach ( $challenges as $challenge ) {
+//			$challengeModel          = new \Elhelper\modules\productStravaModule\model\ChallengeModel( $challenge );
+//			echo '<pre>';
+//			print_r($challengeModel->checkIfCanFinishChallenge());
+//			echo '</pre>';
+//			die;
 			$products_challenge_html .= \Elhelper\widgets\userProfile\UserProfile::renderProductChallenge( $challenge );
-
 		}
 		$num_challenge_finished = 0;
 

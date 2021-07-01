@@ -10,6 +10,7 @@ namespace Elhelper\modules\stravaApiModule\Controllers;
 
 use Elhelper\common\Singleton;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
+use Elhelper\modules\productStravaModule\model\ChallengeModel;
 use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
 use Elhelper\modules\userStravaModule\db\ActivityDb;
 use Elhelper\modules\userStravaModule\model\UserStravaAthleteModel;
@@ -89,11 +90,18 @@ class StravaApiWebhookHandleController extends Singleton {
 							}*/
 						//add activity to history challenge run
 						foreach ( $challenges as $challenge ) {
-							$history_chal_ath = new HistoryChallengeAthleteDb();
-							$history_chal_ath->insert( [
-								'challenge_id' => $challenge->id,
-								'activity_id'  => $res->id
-							] );
+							$challengeModel = new ChallengeModel( $challenge );
+							if ( $challengeModel->canInsertDistanceToChallenge() ) {
+								$history_chal_ath = new HistoryChallengeAthleteDb();
+								$history_chal_ath->insert( [
+									'challenge_id' => $challenge->id,
+									'activity_id'  => $res->id
+								] );
+								if ( $challengeModel->checkIfCanFinishChallenge() ) {
+									$challengeModel->activeFinishedEventChallenge();
+								}
+
+							}
 						}
 					}
 				}
