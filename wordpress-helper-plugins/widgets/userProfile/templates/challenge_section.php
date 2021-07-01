@@ -174,10 +174,14 @@ $button_conntect_strava = require $str;
 												<?php echo wp_kses( get_the_title(), array( 'br' => array() ) ) ?>
                                             </div>
                                             <div class="thumb-item__distance-date">
-												<?php echo the_excerpt(); ?>
+												<?php $amount_distance = get_field( 'distance', get_the_ID() );
+												$amount_date           = get_field( 'amount_date', get_the_ID() );
+												echo $amount_distance . 'KM/' . $amount_date . ' NGÀY';
+												?>
                                             </div>
                                             <div class="thumb-item__description">
-												<?php echo the_content(); ?>
+												<?php echo the_excerpt(); ?>
+												<?php //echo the_content(); ?>
                                             </div>
                                             <div class="thumb-item__button-wrap">
                                                 <div class="thumb-item__button">
