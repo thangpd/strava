@@ -108,9 +108,9 @@ $button_conntect_strava = require $str;
 						</div>-->
 						<?php echo $button_conntect_strava ?>
 
-						<?php if ( is_user_logged_in() ) {
-							echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
-						} ?>
+	                    <?php if ( is_user_logged_in() ) {
+		                    echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
+	                    } ?>
 
                     </div>
                 </div>
