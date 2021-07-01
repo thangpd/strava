@@ -11,8 +11,8 @@ $lg: 991px;
 $md: 768px;
 $sm: 576px;
 
-body {
-    font-family: 'Livvic', sans-serif;
+html, body {
+    font-family: 'Livvic', sans-serif !important;
     font-size: 14px;
     line-height: 1.25;
     color: #000;
