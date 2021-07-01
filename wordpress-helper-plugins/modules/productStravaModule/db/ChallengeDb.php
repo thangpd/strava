@@ -24,6 +24,13 @@ class ChallengeDb extends DB {
 		return $wpdb->get_results( $sql );
 	}
 
+	public static function getAllChallengeOfUser( $user_id ) {
+		global $wpdb;
+		$sql = sprintf( 'SELECT * FROM %s WHERE %s', self::get_table(), 'user_id=' . $user_id );
+
+		return $wpdb->get_results( $sql );
+	}
+
 
 	/**
 	 * Singletons should not be restorable from strings.

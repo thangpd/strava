@@ -44,25 +44,7 @@ class UserStravaAthleteModel {
 		return $users;
 	}
 
-	public static function getDistanceAlreadyOfProduct( $challenge_id ) {
-		global $wpdb;
 
-
-		$sql           = 'SELECT round(sum(a.distance),2) as distance FROM  %1$s WHERE %2$s';
-		$history_table = HistoryChallengeAthleteDb::get_table() . ' as h, ' . ActivityDb::get_table() . ' as a ';
-		$where         = ' a.activity_id = h.activity_id and h.challenge_id=' . $challenge_id . ' ';
-		$sql           = $wpdb->prepare( $sql, $history_table, $where );
-
-		$results = $wpdb->get_results( $sql );
-
-		if ( ! empty( $results ) ) {
-			$results = array_shift( $results );
-		} else {
-			$results = [];
-		}
-
-		return $results;
-	}
 
 	public function saveAthleteObject( $object ) {
 		if ( ! empty( $object ) ) {

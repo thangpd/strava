@@ -3,6 +3,7 @@
 namespace Elhelper\widgets\userProfile;
 
 use Elhelper\Elhelper_Plugin;
+use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use MailPoet\WP\DateTime;
 
 class UserProfile extends \Elementor\Widget_Base {
@@ -29,25 +30,25 @@ class UserProfile extends \Elementor\Widget_Base {
 	}
 
 	public static function renderProductChallenge( $challenge ) {
-		$user_id     = $challenge->user_id;
-		$product_id  = $challenge->product_id;
-		$userAthlete = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
+		$user_id    = $challenge->user_id;
+		$product_id = $challenge->product_id;
+		$product    = wc_get_product( $product_id );
 
-		$distance_already = $userAthlete::getDistanceAlreadyOfProduct( $challenge->id );
+		$product_title = $product->get_title();
+
+
+		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $challenge->id, $user_id );
 
 		if ( ! empty( $distance_already ) ) {
 			$distance_already = round( $distance_already->distance * 0.001, 3 );
 		} else {
 			$distance_already = 0;
 		}
+//		$amount_distance = get_field( 'distance', $product_id );
+		$amount_distance = $challenge->amount_distance;
 
-
-		$distance_already_OfProduct = isset( $distance_already ) && ! empty( $distance_already ) ? $distance_already . 'km' : '0 km';
-//		$distnace_product = get_field( 'distance', $product_id );
-		$distnace_product = $challenge->amount_distance;
-
-		$distance_left         = $distnace_product - $distance_already;
-		$percent_distance_left = round( $distance_already / $distnace_product * 100, 0 );
+		$distance_left         = $amount_distance - $distance_already;
+		$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
 
 		$distance_active = round( $percent_distance_left / 10, 0 );
 
@@ -84,6 +85,9 @@ class UserProfile extends \Elementor\Widget_Base {
 			$end_date   = new \DateTime( 'now' );
 		}
 
+
+		//Thumbnail challenge
+
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
 
@@ -98,15 +102,15 @@ class UserProfile extends \Elementor\Widget_Base {
                                             <img src="{$thumbail_challenge['url']}" alt="banner">
                                         </div>
                                         <div class="strava-challenges__head-info">
-                                            <h2 class="d-block d-lg-none">Chinh phục Everest</h2>
-                                            <span class="distance-date d-block d-lg-none">{$distnace_product} km - {$amount_date} ngày</span>
+                                            <h2 class="d-block d-lg-none">{$product_title}</h2>
+                                            <span class="distance-date d-block d-lg-none">{$amount_distance} km - {$amount_date} ngày</span>
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-12 col-lg-9">
                                         <div class="strava-challenges__content">
-                                            <h2 class="d-none d-lg-block">Chinh phục Everest</h2>
-                                            <span class="distance-date d-none d-lg-block">{$distnace_product} km - {$amount_date} ngày</span>
+                                            <h2 class="d-none d-lg-block">{$product_title}</h2>
+                                            <span class="distance-date d-none d-lg-block">{$amount_distance} km - {$amount_date} ngày</span>
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -138,7 +142,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                     </div>
                                                     <div class="d-none d-lg-block distance-left">
-                                                        <b>{$distance_already_OfProduct}</b>
+                                                        <b>{$distance_already} km</b>
                                                         <span>Còn lại <b>{$distance_left}km</b></span>
                                                     </div>
                                                 </div>
@@ -184,6 +188,16 @@ HTML;
 
 	public static function renderAddNewChallenge() {
 		$add_new_challenge = include __DIR__ . '/templates/add_more_challenge_template.php';
+
+		return $add_new_challenge;
+	}
+
+	public static function renderListChallengeReport( $challenges ) {
+		$add_new_challenge = '';
+		if ( ! empty( $challenges ) ) {
+
+			$add_new_challenge = include __DIR__ . '/templates/list_challenge_report_template.php';
+		}
 
 		return $add_new_challenge;
 	}
