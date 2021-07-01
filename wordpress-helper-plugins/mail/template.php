@@ -47,7 +47,7 @@ class Template {
 
         $send = wp_mail($to, $subject, $message, $headers);
        
-        return true;
+        return $send;
     }
 
     public function action_send_mail( $template, $product_id, $email = '') {
@@ -66,10 +66,14 @@ class Template {
         }
 
         wp_reset_postdata();
-
-        $email_template = self::get_template_dir($template);
-        $message = require $email_template;
         
-        self::send_mail( $email, 'test subject', $message  );
+        $email_template = self::get_template_dir($template);
+        ob_start();
+            require $email_template;
+        $message = ob_get_clean();
+
+        $result = self::send_mail( $email, 'test subject', $message  );
+
+        return $result;
     }
 }

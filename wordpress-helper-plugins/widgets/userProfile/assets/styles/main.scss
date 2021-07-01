@@ -19,6 +19,10 @@ body {
     background-color: #EBECED;
 }
 
+a {  
+    text-decoration: none;
+}
+
 .strava-information,
 .strava-challenges,
 .list-challenges,
@@ -144,6 +148,7 @@ body {
         color: #000;
         font-style: italic;
         font-size: 14px;
+        line-height: 1.5;
         font-weight: 400;
         text-decoration-line: underline;
         letter-spacing: 0;
@@ -490,13 +495,12 @@ body {
                         font-style: normal;
                         font-weight: normal;
                         letter-spacing: 0.1em;
-                        p {
-                            display: -webkit-box;
-                            -webkit-line-clamp: 3;
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        line-height: 22px;
                     }
                     &__button {
                         background-color: $primary;

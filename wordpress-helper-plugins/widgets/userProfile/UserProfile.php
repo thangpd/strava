@@ -356,7 +356,7 @@ HTML;
 		require WP_HELPER_PATH . 'mail/template.php';
 		$get_dir_mail_template = new Template();
 
-		// $get_dir_mail_template->action_send_mail('begin', 46, 'nguyenhuutien.it.3895@gmail.com');
+		// var_dump( $get_dir_mail_template->action_send_mail( 'begin', 46, 'nguyenhuutien.it.3895@gmail.com' ) );
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$args = array(
