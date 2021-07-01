@@ -323,7 +323,7 @@ $button_conntect_strava = require $str;
                                             </div>
                                             <div class="thumb-item__button-wrap">
                                                 <div class="thumb-item__button">
-                                                    <?php echo esc_html_e('Tìm Hiểu Thêm', 'domain'); ?>
+                                                    <?php echo esc_html_e('Tìm Hiểu Thêm', 'elhelper'); ?>
                                                 </div>
                                             </div>
                                         </div>
