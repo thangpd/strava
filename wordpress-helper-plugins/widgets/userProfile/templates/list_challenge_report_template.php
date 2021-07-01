@@ -14,17 +14,16 @@ $html = <<<HTML
                     <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Chinh Phục Everest</h2>
-                </div>
-            </div>
-
+           
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-tab">
                         <div class="table-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Chinh Phục Everest</h2>
+                                </div>
+                            </div>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -103,6 +102,11 @@ $html = <<<HTML
                             </table>
                         </div>
                         <div class="table-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Chinh Phục Everest</h2>
+                                </div>
+                            </div>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>

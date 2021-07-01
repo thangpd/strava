@@ -5,6 +5,7 @@ namespace Elhelper\widgets\userProfile;
 use Elhelper\Elhelper_Plugin;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use MailPoet\WP\DateTime;
+use Elhelper\mail\Template;
 
 class UserProfile extends \Elementor\Widget_Base {
 
@@ -35,8 +36,6 @@ class UserProfile extends \Elementor\Widget_Base {
 		$product    = wc_get_product( $product_id );
 
 		$product_title = $product->get_title();
-
-		print_r( $product_title );
 
 		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $challenge->id, $user_id );
 
@@ -88,7 +87,6 @@ class UserProfile extends \Elementor\Widget_Base {
 
 
 		//Thumbnail challenge
-
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
 
@@ -246,6 +244,26 @@ HTML;
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
+
+
+		// Demo send mail
+		$args = array(
+			'post_type' 		=> 'product',
+			'posts_per_page' 	=> 1,
+			'post__in'			=> array(46)
+		);
+
+		$product = new \WP_Query( $args );
+
+		print_r( $product );
+
+		require WP_HELPER_PATH . 'mail/template.php';
+		$get_dir_mail_template = new Template();
+
+		$get_dir_mail_template->action_send_mail('begin', $product);
+
+
+
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$args = array(
