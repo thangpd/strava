@@ -7,6 +7,7 @@ use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
 use Elhelper\modules\productStravaModule\model\ChallengeModel;
 use MailPoet\WP\DateTime;
+use Elhelper\mail\Template;
 
 class UserProfile extends \Elementor\Widget_Base {
 
@@ -41,6 +42,7 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$challengeModel   = new ChallengeModel( $challenge );
 		$distance_already = $challengeModel->getDistanceAlreadyRun();
+
 //		$amount_distance = get_field( 'distance', $product_id );
 		$amount_distance = $challenge->amount_distance;
 		if ( $distance_already < $amount_distance ) {
@@ -99,12 +101,11 @@ class UserProfile extends \Elementor\Widget_Base {
 		$end_date_html   = $end_date->format( 'd/m/Y' );
 
 		//Thumbnail challenge
-
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
 
 		$html = <<<HTML
-		<div class="col-md-12">
+		<div class="strava-challenges__item">
                         <div class="strava-challenges__inner">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-3">
@@ -121,7 +122,11 @@ class UserProfile extends \Elementor\Widget_Base {
                                     </div>
                                     <div class="col-md-12 col-lg-9">
                                         <div class="strava-challenges__content">
-                                            <h2 class="d-none d-lg-block">{$product_title}</h2>
+                                            <h2 class="d-none d-lg-block">
+												<a href="#">
+													{$product_title}
+												</a>
+											</h2>
                                             <span class="distance-date d-none d-lg-block">{$amount_distance} km - {$amount_date} ngày</span>
 
                                             <div class="row">
@@ -188,8 +193,13 @@ class UserProfile extends \Elementor\Widget_Base {
                                         </div>
                                     </div>
                                 </div>
+								<div class="strava-challenges__status">
+                                <div class="strava-challenges__status-image">
+                                    <span>Đã hoàn thành</span>
                                 </div>
-                           </div>
+                            	</div>
+                            </div>
+                        </div>
 
 HTML;
 
@@ -245,8 +255,16 @@ HTML;
 	}
 
 	public static function renderTableItemChallenge( $challenge ) {
+		$product_id = $challenge->product_id;
+		$product    = wc_get_product( $product_id );
 
+		$product_title        = $product->get_title();
 		$item_table_template  = '<div class="table-item">
+<div class="row">
+                                <div class="col-md-12">
+                                    <h2>%2$s</h2>
+                                </div>
+                            </div>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -267,7 +285,7 @@ HTML;
 		if ( ! empty( $listsFinisher ) ) {
 			$renderedFinisherHtml = self::renderListFinisherRowHtml( $listsFinisher );
 		}
-		$tables = sprintf( $item_table_template, $renderedFinisherHtml );
+		$tables = sprintf( $item_table_template, $renderedFinisherHtml, $product_title );
 
 		return $tables;
 
@@ -334,6 +352,23 @@ HTML;
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
+
+
+		// Demo send mail
+		$args = array(
+			'post_type'      => 'product',
+			'posts_per_page' => 1,
+			'post__in'       => array( 46 )
+		);
+
+		$product = new \WP_Query( $args );
+
+
+		require WP_HELPER_PATH . 'mail/template.php';
+		$get_dir_mail_template = new Template();
+
+		$get_dir_mail_template->action_send_mail( 'begin', $product );
+
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$args = array(

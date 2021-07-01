@@ -45,14 +45,10 @@ if ( is_user_logged_in() ) {
 		$render_list_challenges_report = \Elhelper\widgets\userProfile\UserProfile::renderListChallengeReport( $challenges );
 
 	}
-
-
 }
-
 
 $str                    = __DIR__ . '/conntect_strava_btn.php';
 $button_conntect_strava = require $str;
-
 
 ?>
 <div class="conatiner">
@@ -63,30 +59,33 @@ $button_conntect_strava = require $str;
         <div class="strava-information mx-3">
             <div class="container-fluid">
                 <div class="row justify-content-md-between">
-                    <div class="order-md-1 col-md-3 col-lg-2">
+                    <div class="order-md-1 col-sm-12 col-md-3 order-lg-1 col-lg-2">
                         <div class="call-to-action">
-                            <!-- <img class="image"
-                                 src="<?php /*echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); */ ?>"
-                                 alt="avartar">-->
 							<?php echo $user_avatar ?>
                         </div>
                     </div>
-                    <div class="order-md-3 col-md-12 col-lg-7">
+                    <div class="order-md-3 col-sm-12 col-md-12 order-lg-2 col-lg-7">
                         <h2><?php echo $WP_User->user_nicename ?></h2>
-                        <h3>Tổng km</h3>
-                        <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
+                        <div class="d-flex align-items-end d-lg-block">
+                            <h3>TỔNG TÍCH LŨY</h3>
+                            <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
+                        </div>
                         <div class="row mt-2">
                             <div class="col-md-4">
-                                <h3>Số thử thách</h3>
-                                <span class="number"><?php echo isset( $num_of_challenge ) ? $num_of_challenge : 0 ?></span>
+                                <div class="d-flex align-items-end d-lg-block">
+                                    <h3>SỐ THỬ THÁCH</h3>
+                                    <span class="number"><?php echo isset( $num_of_challenge ) ? $num_of_challenge : 0 ?></span>
+                                </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>Đã Hoàn Thành</h3>
-                                <span class="number"><?php echo isset( $num_challenge_finished ) ? $num_challenge_finished : 0 ?></span>
+                                <div class="d-flex align-items-end d-lg-block">
+                                    <h3>ĐÃ HOÀN THÀNH</h3>
+                                    <span class="number"><?php echo isset( $num_challenge_finished ) ? $num_challenge_finished : 0 ?></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="order-md-2 col-md-5 col-lg-3">
+                    <div class="order-md-2 col-sm-12 col-md-5 order-lg-3 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
@@ -107,42 +106,41 @@ $button_conntect_strava = require $str;
                         <h2 class="heading">Các thử thách</h2>
                     </div>
                 </div>
-                <div class="row strava-challenges__list strava-challenges__list-slick">
+                <div class="strava-challenges__list strava-challenges__list-slick">
 					<?php echo $products_challenge_html; ?>
 					<?php echo \Elhelper\widgets\userProfile\UserProfile::renderAddNewChallenge() ?>
                 </div>
             </div>
         </div>
         <!-- End Challenges Section -->
+
         <div class="popup-modal">
             <div class="container-fluid">
-                <div class="popup-modal__challenges">
-                    <div class="popup-modal__challenges-item">
-                        <div class="row justify-content-around">
-							<?php
-							if ( class_exists( 'WooCommerce' ) ) {
-								$args = array(
-									'post_type'           => 'product'
-								,
-									'post_status'         => 'publish'
-								,
-									'ignore_sticky_posts' => 1
-								,
-									'posts_per_page'      => 4
-								,
-									'orderby'             => 'date'
-								,
-									'order'               => 'desc'
-								);
+                <div class="popup-modal__challenges" id="popup-modal-challenges">
+                    <div class="popup-modal__challenges-list">
+						<?php
+						if ( class_exists( 'WooCommerce' ) ) {
+							$args = array(
+								'post_type'           => 'product'
+							,
+								'post_status'         => 'publish'
+							,
+								'ignore_sticky_posts' => 1
+							,
+								'posts_per_page'      => 4
+							,
+								'orderby'             => 'date'
+							,
+								'order'               => 'desc'
+							);
 
-								$products = new \WP_Query( $args );
-							}
-							$count = 0;
-							if ( $products->have_posts() ){
+							$products = new \WP_Query( $args );
+						}
+						$count = 0;
+						if ( $products->have_posts() ) {
 							while ( $products->have_posts() ) {
-							$products->the_post();
-							?>
-                            <div class="col-md-12 col-lg-5">
+								$products->the_post();
+								?>
                                 <div class="thumb-item">
                                     <a href="<?php the_permalink(); ?>">
                                         <div class="thumb-item__image">
@@ -161,24 +159,20 @@ $button_conntect_strava = require $str;
                                             <div class="thumb-item__description">
 												<?php echo the_content(); ?>
                                             </div>
+                                            <div class="thumb-item__button-wrap">
+                                                <div class="thumb-item__button">
+													<?php echo esc_html_e( 'Tìm Hiểu Thêm', 'elhelper' ); ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </a>
                                 </div>
-                            </div>
-							<?php
-							$count ++;
-							if ( $count % 2 == 0 && $count < $products->post_count ) {
-							?>
-                        </div>
-                    </div>
-                    <div class="popup-modal__challenges-item">
-                        <div class="row justify-content-around">
-							<?php }
+								<?php
+								$count ++;
 							}
-							}
-							wp_reset_postdata();
-							?>
-                        </div>
+						}
+						wp_reset_postdata();
+						?>
                     </div>
                 </div>
             </div>

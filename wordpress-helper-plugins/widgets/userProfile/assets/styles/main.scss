@@ -153,17 +153,8 @@ body {
             text-transform: uppercase;
         }
     }
-    &__head,
     &__banner {
-        height: 100%;
-    }
-
-    &__banner,
-    &__content {
-        min-height: 340px;
-    }
-
-    &__banner {
+        height: 343px;
         img {
             object-fit: cover;
             width: 100%;
@@ -173,11 +164,16 @@ body {
     }
     &__inner {
         background-color: white;
-        min-height: 340px;
         position: relative;
+        margin: 15px 15px 0 15px;
+        height: 343px;
     }
     &__content {
         padding: 25px 25px 25px 0;
+        a {
+            text-decoration: none;
+            color: #000;
+        }
     }
     span {
         &.distance-date {
@@ -235,30 +231,38 @@ body {
         background-image: url('../images/man-runner-wearing-sports-shoes-trail-running-forest.png');
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: bottom center;
-        position: absolute;
+        background-position: center center;
         width: 100%;
         height: 100%;
+        position: absolute;
         .button {
             background-color: $primary;
-            margin: 0 auto;
             display: block;
-            top: 65%;
             width: 45%;
+            left: 50%;
+            top: 50%;
             color: #000;
             font-size: 16px;
             border: none;
+            margin: 0;
+            transform: translate(-50%, 50%);
+            position: absolute;
             cursor: pointer;
         }
     }
 
     &__list {
+        margin-right: -15px;
+        margin-left: -15px;
         &-slick {
             .slick-dots {
-                margin: 0 auto;
                 display: flex;
                 list-style: none;
-                padding: 25px 0 0 0;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, 50%);
+                margin: 0;
+                padding: 0;
 
                 li {
                     padding: 4px;
@@ -274,15 +278,42 @@ body {
                     }
                 }
             } 
+            .slick-track { 	
+                display: flex !important; 
+            }  
+            .slick-slide { 	
+                height: inherit !important; 
+            }
         }
+    }
+
+    &__status {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 145px;
+        height: 50px;
+        &-image {
+            background-image:  url('../images/status.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            span {
+                font-weight: bold;
+                text-align: center;
+                display: block;
+                color: black;
+                line-height: 45px;
+            }
+        }
+        
     }
 }
 
 .list-challenges {
     background-color: #fff;
-    // &__wrap {
-       
-    // }
+
     h2 {
         font-weight: bold;
 
@@ -332,6 +363,15 @@ body {
             }
         }
     }
+
+    .slick-prev,
+    .slick-next {
+        top: 0 !important;
+    }
+
+    .table-paging {
+        top: 7px !important;
+    }
 }
 
 .wrap-modal-user-profile {
@@ -359,86 +399,100 @@ body {
         z-index: 99991;
         visibility: hidden;
         opacity: 0;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,-47%);
         width: 100%;
         height: auto;
         transition: opacity 0.2s ease, visibility 0.2s ease;
         backface-visibility: hidden;
 
         &__challenges {
-            &-item {
+            margin: 0 90px;
+            &-list {
                 .thumb-item {
-                    background-color: #fff;
+                    cursor: pointer;
                     height: 100%;
                     width: 100%;
+                    a {
+                        text-decoration: none;
+                    }
                     &__image {
                         img {
                             object-fit: cover;
                         }
                     }
                     &__content {
-                        padding: 15px;
+                        padding: 25px;
+                        position: relative;
+                        overflow: hidden;
                     }
                     &__heading {
                         font-weight: 900;
-                        font-size: 24px;
+                        font-size: 34px;
                         letter-spacing: 0.1em;
                         color: #000;
                     }
                     &__distance-date {
-                        font-size: 14px;
+                        font-size: 20px;
                         font-style: normal;
                         font-weight: 900;
                         letter-spacing: 0.1em;
                         color: #3A3A3A;
                         line-height: 35px;
+                        margin-bottom: 10px;
+                        p {
+                            margin-bottom: 0;
+                        }
                     }
                     &__description {
-                        color:#3A3A3A;
-                        font-size: 15px;
+                        color: #3A3A3A;
+                        font-size: 17px;
                         font-style: normal;
                         font-weight: normal;
+                        letter-spacing: 0.1em;
                     }
                     &__button {
                         background-color: $primary;
                         color: #000;
-                        flex: 0 0 75%;
                         padding: 10px 0;
+                        width: 100%;
                         border-radius: 3px;
+                        font-weight: bold;
                         font-size: 16px;
                         margin-bottom: 0;
                         min-height: 45px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-
                         &-wrap {
-                            display: flex;
-                            margin-top: 20px;
-                            justify-content: space-between;
-                            align-items: center;
+                            position: absolute;
+                            width: 345px;
+                            display: block;
+                            bottom: -50px;
+                            transition: bottom 0.5s 0s ease;
                         }
-                       
-                        &-icon {
-                            flex: 0 0 20%;
-                            min-height: 45px;
-                            margin-bottom: 0;
-                            padding: 10px 0;
-                            border-radius: 3px;
-                            background-color: $primary;
-                            color: #000;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
+                    } 
+
+                    &:hover {
+                        .thumb-item__button {
+                            &-wrap {
+                                bottom: 15px;
+                            }
                         }
                     }
                 }
             }
-        
+            .slick-track {
+                display: flex;
+            }
+            .slick-slide {
+                margin: 0 30px;
+                // height: 545px;
+                background-color: #fff;
+            }
             .slick-prev,
             .slick-next {
                 color: #fff;
-                top: -55px;
+                top: -50px;
             }
             .slick-prev {
                 right: 100px;
@@ -455,6 +509,7 @@ body {
             opacity: 0.8;
             // transition: all 3s;
             visibility: visible;
+            cursor: pointer;
         }
         .popup-modal {
             visibility: visible;
@@ -472,6 +527,13 @@ body {
         .button.popup-strava-challenges {
             margin-top: 25px;
         }
+
+        span.distance,
+        span.number {
+            font-size: 26px;
+            line-height: 23px;
+            margin-left: 20px;
+        }
     }
 }
 
@@ -482,6 +544,7 @@ body {
         }
         &__inner {
             margin-top: 25px;
+            height: 430px;
         }
         &__head {
             display: flex;
@@ -494,12 +557,12 @@ body {
             min-height: unset;
         }
         &__banner {
-            flex: 0 0 35%;
-            max-height: unset;
+            flex: 0 0 200px;
+            height: unset;
             width: 100%;
             img {
-                width: 165px;
-                height: 165px;
+                width: 100%;
+                height: 200px;
             }
         }
         &__content {
@@ -509,13 +572,44 @@ body {
             }
         }
         &__head-info {
-            flex: 0 0 65%;
+            flex: 1;
+        }
+
+        &__status {
+            left: 0;
+            &-image {
+                transform: scaleX(-1);
+                span {
+                    transform: scaleX(-1);
+                }
+            }
         }
     }
 
     @media (max-width: $md) {
         &__content {
             padding: 15px;
+        }
+        &__banner {
+            flex: 0 0 150px;
+            img {
+                height: 150px;
+            }
+        }
+        &__inner {
+            height: 400px;
+        }
+    }
+
+    @media (max-width: $sm) {
+        &__banner {
+            flex: 0 0 130px;
+            img {
+                height: 130px;
+            }
+        }
+        &__inner {
+            height: 390px;
         }
     }
 }
@@ -526,15 +620,10 @@ body {
             table {
                 font-size: 16px;
             }
-
             .slick-prev,
             .slick-next {
                 font-size: 24px;
-                top: -40px;
-            }
-
-            .table-paging{
-                top: -36px;
+                top: 4px !important;
             }
         }
     }
@@ -544,16 +633,6 @@ body {
             table {
                 font-size: 14px;
             }
-
-            .slick-prev,
-            .slick-next {
-                font-size: 24px;
-                top: -40px;
-            }
-
-            .table-paging{
-                top: -36px;
-            }
         }
     }
 }
@@ -561,26 +640,19 @@ body {
 .wrap-modal-user-profile {
     @media (max-width: $lg) {
         .popup-modal {
-            top: 40%;
-            &__challenges-item{
+            &__challenges-list{
                 .thumb-item{
-                    margin-top: 35px;
                     height: auto;
                 }
-            }
-            .slick-prev,
-            .slick-next {
-                top: -15px;
             }
         }
     }
 
     @media (max-width: $md) {
         .popup-modal {
-            top: 30%;
-            &__challenges-item{
+            top: 40%;
+            &__challenges-list{
                 .thumb-item{
-                    margin-top: 35px;
                     height: auto;
                 }
             }
