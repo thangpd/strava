@@ -80,17 +80,26 @@ class UserProfile extends \Elementor\Widget_Base {
 			$end_date->modify( '+' . $amount_date . 'days' );
 			//end date
 
-			$datediff_left     = $now->diff( $end_date );
-			$date_left         = $datediff_left->days;
-			$f                 = $date_left / $amount_date;
-			$date_left_percent = round( $f * 100, 0 );
-			$date_active       = round( $date_left_percent / 10, 0 );
+			$datediff_left = $now->diff( $end_date );
+			if ( $datediff_left->days > 0 ) {
+				$date_left         = $datediff_left->days;
+				$f                 = $date_left / $amount_date;
+				$date_left_percent = round( $f * 100, 0 );
+				$date_active       = round( $date_left_percent / 10, 0 );
+			} else {
+				$date_left         = 0;
+				$date_left_percent = 100;
+				$date_active       = 10;
+			}
 
 		} else {
 			$start_date = new \DateTime( 'now' );
 			$end_date   = new \DateTime( 'now' );
 		}
 
+
+		$start_date_html = $start_date->format( 'd/m/Y' );
+		$end_date_html   = $end_date->format( 'd/m/Y' );
 
 		//Thumbnail challenge
 
@@ -121,11 +130,11 @@ class UserProfile extends \Elementor\Widget_Base {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h3>Ngày bắt đầu</h3>
-                                                    <span class="date">{$start_date->format( 'd/m/Y' )}</span>
+                                                    <span class="date">{$start_date_html}</span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h3>Ngày kết thúc</h3>
-                                                    <span class="date">{$end_date->format( 'd/m/Y' )}</span>
+                                                    <span class="date">{$end_date_html}</span>
                                                 </div>
                                             </div>
 
@@ -199,13 +208,14 @@ HTML;
 	}
 
 	public static function renderListChallengeReport( $challenges ) {
-		$add_new_challenge = '';
+		$list_challenge_report = '';
 		if ( ! empty( $challenges ) ) {
 
-			$add_new_challenge = include __DIR__ . '/templates/list_challenge_report_template.php';
+			$list_challenge_report = include __DIR__ . '/templates/list_challenge_report_template.php';
+
 		}
 
-		return $add_new_challenge;
+		return $list_challenge_report;
 	}
 
 

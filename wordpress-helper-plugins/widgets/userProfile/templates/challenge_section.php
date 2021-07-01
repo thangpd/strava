@@ -4,8 +4,12 @@ $render_list_challenges_report = '';
 
 
 if ( is_user_logged_in() ) {
-	$user_id              = get_current_user_id();
-	$WP_User              = get_userdata( $user_id );
+	$user_id     = get_current_user_id();
+	$WP_User     = get_userdata( $user_id );
+	$user_avatar = get_avatar( $user_id );
+
+	
+
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
 	$athleteTotalDistance = $userAthlete->getAthleteTotalDistance();
@@ -22,7 +26,9 @@ if ( is_user_logged_in() ) {
 
 	if ( ! empty( $challenges ) ) {
 		//num of challenge
-		$num_of_challenge = count( $challenges );
+		$num_of_challenge       = count( $challenges );
+		$num_challenge_finished = 0;
+
 		foreach ( $challenges as $challenge ) {
 //			$challengeModel          = new \Elhelper\modules\productStravaModule\model\ChallengeModel( $challenge );
 //			echo '<pre>';
@@ -30,8 +36,10 @@ if ( is_user_logged_in() ) {
 //			echo '</pre>';
 //			die;
 			$products_challenge_html .= \Elhelper\widgets\userProfile\UserProfile::renderProductChallenge( $challenge );
+			if ( $challenge->status == 1 ) {
+				$num_challenge_finished ++;
+			}
 		}
-		$num_challenge_finished = 0;
 
 		//render list challenge report
 		$render_list_challenges_report = \Elhelper\widgets\userProfile\UserProfile::renderListChallengeReport( $challenge );
@@ -57,13 +65,14 @@ $button_conntect_strava = require $str;
                 <div class="row justify-content-md-between">
                     <div class="order-md-1 col-md-3 col-lg-2">
                         <div class="call-to-action">
-                            <img class="image"
-                                 src="<?php echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); ?>"
-                                 alt="avartar">
+                           <!-- <img class="image"
+                                 src="<?php /*echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); */?>"
+                                 alt="avartar">-->
+                            <?php echo $user_avatar ?>
                         </div>
                     </div>
                     <div class="order-md-3 col-md-12 col-lg-7">
-                        <h2> Trần Nguyễn Thế Duy </h2>
+                        <h2><?php echo $WP_User->user_nicename ?></h2>
                         <h3>Tổng km</h3>
                         <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
                         <div class="row mt-2">

@@ -63,7 +63,7 @@ class StravaApiWebhookHandleController extends Singleton {
 				write_log( 'has user_object' );
 				$userAthlete = new UserStravaAthleteModel( $user_objs->ID );
 //				$products    = inspire_get_list_purchased_product_by_user_object( $user_objs );
-				$challenges = ChallengeDb::getAllChallenge();
+				$challenges = ChallengeDb::getAllChallengeOfUser( $user_objs->ID );
 				$activity   = new \Elhelper\modules\activityModule\model\ActivityStravaModel();
 				$res        = $activity->getActivityInfo( $user_objs->ID, $json['object_id'] );
 				//Type of activity. For example - Run, Ride etc.
@@ -97,7 +97,7 @@ class StravaApiWebhookHandleController extends Singleton {
 									'challenge_id' => $challenge->id,
 									'activity_id'  => $res->id
 								] );
-								if ( $challengeModel->checkIfCanFinishChallenge() ) {
+								if ( $challengeModel->checkIfCanFinishChallenge() && $challengeModel->checkIfChallengeExpired() ) {
 									$challengeModel->activeFinishedEventChallenge();
 								}
 
