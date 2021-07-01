@@ -11,6 +11,7 @@ define( 'CLIENT_ID', 67628 );
 define( 'CLIENT_SECRET', '37923ec215f0f5120ef372bbce3cc9b6073e58d0' );
 define( 'SECRET_TOKEN', 'inspire_strava_password' );
 define( 'EL_HELPER_DEBUG', 'DEV' );
+define('EVENT_TYPE','create');
 
 return [
 	'enqueue_scripts' => [

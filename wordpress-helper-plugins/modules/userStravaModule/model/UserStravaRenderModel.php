@@ -11,6 +11,7 @@ namespace Elhelper\modules\userStravaModule\model;
 
 use Elhelper\common\Model;
 use Elhelper\inc\HeplerStrava;
+use Elhelper\modules\userStravaModule\controller\UserStravaController;
 
 class UserStravaRenderModel extends Model {
 
@@ -71,11 +72,11 @@ HTML;
 	public static function renderUserActivities( $user_id ) {
 		HeplerStrava::refreshToken( $user_id );
 
-		$userStravaController = new \Elhelper\modules\userStravaModule\controller\UserStravaController( $user_id );
+		$userStravaController = UserStravaController::instance();
 
-		$getinfoAthlete       = $userStravaController->getListActivities();
-		$html                 = '';
-		$container_item       = '<table class="table">
+		$getinfoAthlete = $userStravaController->getListActivities( $user_id );
+		$html           = '';
+		$container_item = '<table class="table">
 								  <thead>
 								    <tr>
 								      <th scope="col">#</th>
@@ -86,7 +87,7 @@ HTML;
 								  </thead>
 								  %1$s
 								</table>';
-		$item_template        = '<tbody>
+		$item_template  = '<tbody>
 								    <tr>
 								      <th scope="row">%1$s</th>
 								      <td>%2$s meters</td>
