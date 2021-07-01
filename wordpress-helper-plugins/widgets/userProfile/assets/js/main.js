@@ -13,14 +13,26 @@ $(document).ready(function () {
         }
     });
 
-    $('.popup-modal__challenges').slick({
+    $('.popup-modal__challenges-list').slick({
         arrows: true,
+        slidesToShow: 2,
         prevArrow: "<div class='slick-prev arrow-left'><i class='fal fa-chevron-left'></i></div>",
         nextArrow: "<div class='slick-next arrow-right'><i class='fal fa-chevron-right'></i></div>",
         dots: false,
+        responsive: [
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: false
+              }
+            }
+        ]
     });
 
-    $('.more-challenge').on('click', function(e) {
+    $(document).on('click', '.more-challenge', function(e) {
         e.preventDefault();
 
         var parent = $(this).parents('.wrap-modal-user-profile');
@@ -29,7 +41,6 @@ $(document).ready(function () {
 
     $('.overlay').on('click', function(e) {
         e.preventDefault();
-
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.removeClass('active');
     });
