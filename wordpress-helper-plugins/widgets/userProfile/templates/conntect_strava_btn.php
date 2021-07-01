@@ -16,7 +16,6 @@ if ( is_user_logged_in() ):
                 data-state="<?php echo $state ?>" data-url="<?php echo $url ?>">
             KẾT NỐI STRAVA
         </button>
-		<div class="button">ĐĂNG XUẤT</div>
 		<?php
 	} else {
 		$button_connected = <<<HTML
