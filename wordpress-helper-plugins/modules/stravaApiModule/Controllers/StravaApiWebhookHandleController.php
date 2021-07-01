@@ -10,6 +10,7 @@ namespace Elhelper\modules\stravaApiModule\Controllers;
 
 use Elhelper\common\Singleton;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
+use Elhelper\modules\productStravaModule\model\ChallengeModel;
 use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
 use Elhelper\modules\userStravaModule\db\ActivityDb;
 use Elhelper\modules\userStravaModule\model\UserStravaAthleteModel;
@@ -62,7 +63,7 @@ class StravaApiWebhookHandleController extends Singleton {
 				write_log( 'has user_object' );
 				$userAthlete = new UserStravaAthleteModel( $user_objs->ID );
 //				$products    = inspire_get_list_purchased_product_by_user_object( $user_objs );
-				$challenges = ChallengeDb::getAllChallenge();
+				$challenges = ChallengeDb::getAllChallengeOfUser( $user_objs->ID );
 				$activity   = new \Elhelper\modules\activityModule\model\ActivityStravaModel();
 				$res        = $activity->getActivityInfo( $user_objs->ID, $json['object_id'] );
 				//Type of activity. For example - Run, Ride etc.
@@ -76,7 +77,7 @@ class StravaApiWebhookHandleController extends Singleton {
 							'type'        => $res->type,
 							'activity_id' => $res->id,
 							'distance'    => $res->distance,
-							'moving_time' => $res->distance
+							'moving_time' => $res->moving_time
 						] );
 
 						/*	foreach ( $products as $product_id ) {
@@ -89,11 +90,18 @@ class StravaApiWebhookHandleController extends Singleton {
 							}*/
 						//add activity to history challenge run
 						foreach ( $challenges as $challenge ) {
-							$history_chal_ath = new HistoryChallengeAthleteDb();
-							$history_chal_ath->insert( [
-								'challenge_id' => $challenge->id,
-								'activity_id'  => $res->id
-							] );
+							$challengeModel = new ChallengeModel( $challenge );
+							if ( $challengeModel->canInsertDistanceToChallenge() ) {
+								$history_chal_ath = new HistoryChallengeAthleteDb();
+								$history_chal_ath->insert( [
+									'challenge_id' => $challenge->id,
+									'activity_id'  => $res->id
+								] );
+								if ( $challengeModel->checkIfCanFinishChallenge() && $challengeModel->checkIfChallengeExpired() ) {
+									$challengeModel->activeFinishedEventChallenge();
+								}
+
+							}
 						}
 					}
 				}

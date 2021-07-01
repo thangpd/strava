@@ -98,9 +98,12 @@ function inspire_inspire_challenge() {
             product_id int(11),
             user_id tinyint(1),
             status tinyint,
+            email_phase tinyint,
             amount_date int(10),
             amount_distance int(10),
             created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+            finished_at TIMESTAMP NULL,
+            failed_at TIMESTAMP NULL,
             PRIMARY KEY (id)
             ) $charset_collate;";
 

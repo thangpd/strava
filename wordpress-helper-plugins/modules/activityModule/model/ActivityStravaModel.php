@@ -185,12 +185,12 @@ class ActivityStravaModel {
 
 		$callStravaAPI = HeplerStrava::callStravaAPI( 'https://www.strava.com/api/v3/activities/' . $activity_id, $userBearer->getAccessToken() );
 		if ( isset( $callStravaAPI->errors ) ) {
-			write_log( 'error activity_id' . $activity_id . ' || user_id' . $user_id . __FILE__ . __LINE__ );
-			write_log( json_encode( (array) $callStravaAPI ) . __FILE__ . __LINE__ );
+//			write_log( 'error activity_id' . $activity_id . ' || user_id' . $user_id . __FILE__ . __LINE__ );
+//			write_log( json_encode( (array) $callStravaAPI ) . __FILE__ . __LINE__ );
 
 			return false;
 		} else {
-			write_log( 'getAcitivityInfo||' . json_encode( $callStravaAPI ) . __FILE__ . __LINE__ );
+//			write_log( 'getAcitivityInfo||' . json_encode( $callStravaAPI ) . __FILE__ . __LINE__ );
 
 			return $callStravaAPI;
 		}

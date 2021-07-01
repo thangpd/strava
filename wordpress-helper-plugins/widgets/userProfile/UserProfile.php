@@ -4,6 +4,8 @@ namespace Elhelper\widgets\userProfile;
 
 use Elhelper\Elhelper_Plugin;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
+use Elhelper\modules\productStravaModule\db\ChallengeDb;
+use Elhelper\modules\productStravaModule\model\ChallengeModel;
 use MailPoet\WP\DateTime;
 use Elhelper\mail\Template;
 
@@ -37,20 +39,23 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$product_title = $product->get_title();
 
-		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $challenge->id, $user_id );
 
-		if ( ! empty( $distance_already ) ) {
-			$distance_already = round( $distance_already->distance * 0.001, 3 );
-		} else {
-			$distance_already = 0;
-		}
+		$challengeModel   = new ChallengeModel( $challenge );
+		$distance_already = $challengeModel->getDistanceAlreadyRun();
+
 //		$amount_distance = get_field( 'distance', $product_id );
 		$amount_distance = $challenge->amount_distance;
+		if ( $distance_already < $amount_distance ) {
+			$distance_left         = $amount_distance - $distance_already;
+			$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
+			$distance_active       = round( $percent_distance_left / 10, 0 );
 
-		$distance_left         = $amount_distance - $distance_already;
-		$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
+		} else {
+			$distance_left         = 0;
+			$percent_distance_left = 100;
+			$distance_active       = 10;
+		}
 
-		$distance_active = round( $percent_distance_left / 10, 0 );
 
 // get_field products:
 		/*
@@ -74,17 +79,26 @@ class UserProfile extends \Elementor\Widget_Base {
 			$end_date->modify( '+' . $amount_date . 'days' );
 			//end date
 
-			$datediff_left     = $now->diff( $end_date );
-			$date_left         = $datediff_left->days;
-			$f                 = $date_left / $amount_date;
-			$date_left_percent = round( $f * 100, 0 );
-			$date_active       = round( $date_left_percent / 10, 0 );
+			$datediff_left = $now->diff( $end_date );
+			if ( $datediff_left->days > 0 ) {
+				$date_left         = $datediff_left->days;
+				$f                 = $date_left / $amount_date;
+				$date_left_percent = round( $f * 100, 0 );
+				$date_active       = round( $date_left_percent / 10, 0 );
+			} else {
+				$date_left         = 0;
+				$date_left_percent = 100;
+				$date_active       = 10;
+			}
 
 		} else {
 			$start_date = new \DateTime( 'now' );
 			$end_date   = new \DateTime( 'now' );
 		}
 
+
+		$start_date_html = $start_date->format( 'd/m/Y' );
+		$end_date_html   = $end_date->format( 'd/m/Y' );
 
 		//Thumbnail challenge
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
@@ -118,11 +132,11 @@ class UserProfile extends \Elementor\Widget_Base {
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <h3>Ngày bắt đầu</h3>
-                                                    <span class="date">{$start_date->format( 'd/m/Y' )}</span>
+                                                    <span class="date">{$start_date_html}</span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h3>Ngày kết thúc</h3>
-                                                    <span class="date">{$end_date->format( 'd/m/Y' )}</span>
+                                                    <span class="date">{$end_date_html}</span>
                                                 </div>
                                             </div>
 
@@ -200,16 +214,110 @@ HTML;
 		return $add_new_challenge;
 	}
 
-	public static function renderListChallengeReport( $challenges ) {
-		$add_new_challenge = '';
-		if ( ! empty( $challenges ) ) {
 
-			$add_new_challenge = include __DIR__ . '/templates/list_challenge_report_template.php';
+	public static function renderListChallengeReport( $challenges ) {
+		$html_template = '
+						<div class="list-challenges">
+						    <div class="container-fluid">
+						        <div class="list-challenges__wrap mx-3">
+						            <div class="row">
+						                <div class="col-md-12">
+						                    <h2 class="heading">Danh sách nhà chinh phục</h2>
+						                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+						                </div>
+						            </div>
+						
+						            <div class="row">
+						                <div class="col-md-12">
+						                    <h2>Chinh Phục Everest</h2>
+						                </div>
+						            </div>
+						
+						            <div class="row">
+						                <div class="col-md-12">
+						<div class="table-tab">
+						                        %1$s
+						                    </div>
+						                    </div>
+						            </div>
+						        </div>
+						    </div>
+						</div>';
+		$html          = '';
+		if ( ! empty( $challenges ) ) {
+			foreach ( $challenges as $challenge ) {
+				$html .= sprintf( $html_template, self::renderTableItemChallenge( $challenge ) );
+			}
+
 		}
 
-		return $add_new_challenge;
+		return $html;
 	}
 
+	public static function renderTableItemChallenge( $challenge ) {
+		$product_id = $challenge->product_id;
+		$product    = wc_get_product( $product_id );
+
+		$product_title        = $product->get_title();
+		$item_table_template  = '<div class="table-item">
+<div class="row">
+                                <div class="col-md-12">
+                                    <h2>%2$s</h2>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">HẠNG</th>
+                                    <th scope="col">TÊN NHÀ CHINH PHỤC</th>
+                                    <th scope="col">TỐC ĐỘ <br>(avg Pace)</th>
+                                    <th scope="col">TỔNG KM</th>
+                                    <th scope="col">THỜI GIAN <br>CHINH PHỤC</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                %1$s
+                                </tbody>
+                            </table>
+                        </div>';
+		$renderedFinisherHtml = '';
+		$listsFinisher        = ChallengeModel::getListFinisherInfo( $challenge->product_id );
+		if ( ! empty( $listsFinisher ) ) {
+			$renderedFinisherHtml = self::renderListFinisherRowHtml( $listsFinisher );
+		}
+		$tables = sprintf( $item_table_template, $renderedFinisherHtml, $product_title );
+
+		return $tables;
+
+	}
+
+	public static function renderListFinisherRowHtml( $listsFinisher ) {
+		$html = '';
+		foreach ( $listsFinisher as $index => $item ) {
+			$html .= self::renderFinisherRow( $index + 1, $item );
+		}
+
+		return $html;
+	}
+
+	/**
+	 * [user_name] => dinhthang
+	 * [total_km] => 228.998
+	 * [amount_time_finished] => 2
+	 * [pace] => 27.068965517241
+	 */
+	public static function renderFinisherRow( $index, $item ) {
+		$html = ' <tr>
+                                    <th scope="row">%1$s</th>
+                                    <td>%2$s</td>
+                                    <td>%3$s</td>
+                                    <td>%4$s km</td>
+                                    <td>%5$s</td>
+                                </tr>';
+		$html = sprintf( $html, $index, $item['user_name'], $item['pace'], $item['total_km'], $item['amount_time_finished'] );
+
+		return $html;
+	}
 
 	/**
 	 * @return [type]

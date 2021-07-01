@@ -4,10 +4,10 @@
 
 
 //$url = home_url() . '/' . \Elhelper\modules\stravaApiModule\models\StravaAccessToken::getCallBackUrlVal();
-$products          = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallengeId();
-echo '<pre>';
-print_r($products);
-echo '</pre>';
+$products = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallengeId();
+//echo '<pre>';
+//print_r($products);
+//echo '</pre>';
 
 $domain = EL_HELPER_DEBUG == 'DEV' ? URL_DOMAIN : '';
 
