@@ -10,6 +10,7 @@ namespace Elhelper\modules\productStravaModule\model;
 
 
 use Elhelper\common\Model;
+use Elhelper\inc\HeplerStrava;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
 
@@ -35,6 +36,86 @@ class ChallengeModel extends Model {
 	//status=0 not yet
 	// status=1 finised
 	// status=2 failed.
+	/** (
+	 * [id] => 2
+	 * [product_id] => 485
+	 * [user_id] => 2
+	 * [status] => 1
+	 * [amount_date] => 4
+	 * [amount_distance] => 200
+	 * [created_at] => 2021-06-28 23:46:59
+	 * [order_id] => 0
+	 * [finished_at] => 2021-07-01 09:47:42
+	 * [failed_at] =>
+	 * [email_phase] =>
+	 * )*/
+	public static function getListFinisherInfo( $product_id ) {
+		$challenges = ChallengeDb::getAllChallengeByProduct( $product_id, 1 );
+
+		$list_finisher = array();
+		foreach ( $challenges as $challenge ) {
+			$user           = get_user_by( 'id', $challenge->user_id );
+			$challengeModel = new ChallengeModel( $challenge );
+			//pace
+			$paceOfChallenge = $challengeModel->getPaceOfChallenge();
+
+			$floatMinuteToSecond = sprintf( '%02d:%02d', (int) $paceOfChallenge, fmod( $paceOfChallenge, 1 ) * 60 );
+			//endpace
+			$item            = [
+				'user_name'            => $user->data->user_nicename,
+				'total_km'             => $challengeModel->getDistanceAlreadyRun(),
+				'amount_time_finished' => $challengeModel->getAmountTimeFinished(),
+				'pace'                 => $floatMinuteToSecond,
+			];
+			$list_finisher[] = $item;
+		}
+
+		return $list_finisher;
+	}
+
+	public function getPaceOfChallenge() {
+		$list_pace = ChallengeDb::getPaceOfChallengeById( $this->challenge->id );
+		if ( ! empty( $list_pace ) ) {
+			$distance_mile = 0;
+			$moving_time   = 0;
+			foreach ( $list_pace as $pace ) {
+				$distance_mile += HeplerStrava::getMiles( $pace->distance );
+				$moving_time   += $pace->moving_time;
+			}
+		}
+
+
+		$distance_mile = round( $distance_mile, 0 );
+
+		$moving_time = $moving_time / 60;
+
+		return $moving_time / $distance_mile;
+	}
+
+	public function getDistanceAlreadyRun() {
+		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $this->challenge->id, $this->challenge->user_id );
+		if ( ! empty( $distance_already ) ) {
+			$distance_already = round( $distance_already->distance * 0.001, 3 );
+		} else {
+			$distance_already = 0;
+		}
+
+		return $distance_already;
+	}
+
+	public function getAmountTimeFinished() {
+		if ( ! empty( $this->challenge->finished_at ) ) {
+			$start_date  = \DateTime::createFromFormat( 'Y-m-d H:i:s', $this->challenge->finished_at );
+			$end_date    = \DateTime::createFromFormat( 'Y-m-d H:i:s', $this->challenge->created_at );
+			$amount_time = $start_date->diff( $end_date );
+
+			return $amount_time->days;
+		} else {
+			return false;
+		}
+
+	}
+
 	public function canInsertDistanceToChallenge() {
 		switch ( $this->challenge->status ) {
 			case 0:
@@ -49,6 +130,7 @@ class ChallengeModel extends Model {
 		}
 	}
 
+	//return km
 
 	public function checkIfChallengeExpired() {
 		$start_date = $this->challenge->created_at;
@@ -74,8 +156,7 @@ class ChallengeModel extends Model {
 	}
 
 	public function checkIfCanFinishChallenge() {
-		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $this->challenge->id, $this->challenge->user_id );
-		$distance_already = $distance_already->distance * 0.001;
+		$distance_already = $this->getDistanceAlreadyRun();
 		$amount_distance  = $this->challenge->amount_distance;
 		if ( $distance_already > $amount_distance ) {
 			write_log( 'distance already' . $distance_already );
@@ -85,8 +166,6 @@ class ChallengeModel extends Model {
 		} else {
 			return false;
 		}
-
-
 	}
 
 	public function activeFinishedEventChallenge() {

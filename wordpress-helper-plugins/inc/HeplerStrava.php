@@ -130,4 +130,13 @@ class HeplerStrava {
 		return json_decode( $result );
 	}
 
+	public static function getMiles( $i ) {
+		return $i * 0.000621371192;
+	}
+
+
+	public static function convertFloatToMinutes( $float ) {
+		return $float * 60;
+	}
+
 }

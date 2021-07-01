@@ -2,13 +2,11 @@
 $products_challenge_html       = '';
 $render_list_challenges_report = '';
 
-
 if ( is_user_logged_in() ) {
 	$user_id     = get_current_user_id();
 	$WP_User     = get_userdata( $user_id );
 	$user_avatar = get_avatar( $user_id );
 
-	
 
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
@@ -30,6 +28,8 @@ if ( is_user_logged_in() ) {
 		$num_challenge_finished = 0;
 
 		foreach ( $challenges as $challenge ) {
+			\Elhelper\modules\productStravaModule\model\ChallengeModel::getListFinisherInfo( $challenge->product_id );
+
 //			$challengeModel          = new \Elhelper\modules\productStravaModule\model\ChallengeModel( $challenge );
 //			echo '<pre>';
 //			print_r($challengeModel->checkIfCanFinishChallenge());
@@ -42,7 +42,7 @@ if ( is_user_logged_in() ) {
 		}
 
 		//render list challenge report
-		$render_list_challenges_report = \Elhelper\widgets\userProfile\UserProfile::renderListChallengeReport( $challenge );
+		$render_list_challenges_report = \Elhelper\widgets\userProfile\UserProfile::renderListChallengeReport( $challenges );
 
 	}
 
@@ -65,10 +65,10 @@ $button_conntect_strava = require $str;
                 <div class="row justify-content-md-between">
                     <div class="order-md-1 col-md-3 col-lg-2">
                         <div class="call-to-action">
-                           <!-- <img class="image"
-                                 src="<?php /*echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); */?>"
+                            <!-- <img class="image"
+                                 src="<?php /*echo esc_url( plugins_url( 'assets/images/avartar.png', dirname( __FILE__ ) ) . '' ); */ ?>"
                                  alt="avartar">-->
-                            <?php echo $user_avatar ?>
+							<?php echo $user_avatar ?>
                         </div>
                     </div>
                     <div class="order-md-3 col-md-12 col-lg-7">

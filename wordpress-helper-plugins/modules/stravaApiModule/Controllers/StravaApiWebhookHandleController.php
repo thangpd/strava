@@ -77,7 +77,7 @@ class StravaApiWebhookHandleController extends Singleton {
 							'type'        => $res->type,
 							'activity_id' => $res->id,
 							'distance'    => $res->distance,
-							'moving_time' => $res->distance
+							'moving_time' => $res->moving_time
 						] );
 
 						/*	foreach ( $products as $product_id ) {

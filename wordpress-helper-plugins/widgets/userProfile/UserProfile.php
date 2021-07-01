@@ -4,6 +4,8 @@ namespace Elhelper\widgets\userProfile;
 
 use Elhelper\Elhelper_Plugin;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
+use Elhelper\modules\productStravaModule\db\ChallengeDb;
+use Elhelper\modules\productStravaModule\model\ChallengeModel;
 use MailPoet\WP\DateTime;
 
 class UserProfile extends \Elementor\Widget_Base {
@@ -37,13 +39,8 @@ class UserProfile extends \Elementor\Widget_Base {
 		$product_title = $product->get_title();
 
 
-		$distance_already = ChallengeController::getDistanceAlreadyOfProduct( $challenge->id, $user_id );
-
-		if ( ! empty( $distance_already ) ) {
-			$distance_already = round( $distance_already->distance * 0.001, 3 );
-		} else {
-			$distance_already = 0;
-		}
+		$challengeModel   = new ChallengeModel( $challenge );
+		$distance_already = $challengeModel->getDistanceAlreadyRun();
 //		$amount_distance = get_field( 'distance', $product_id );
 		$amount_distance = $challenge->amount_distance;
 		if ( $distance_already < $amount_distance ) {
@@ -207,17 +204,102 @@ HTML;
 		return $add_new_challenge;
 	}
 
-	public static function renderListChallengeReport( $challenges ) {
-		$list_challenge_report = '';
-		if ( ! empty( $challenges ) ) {
 
-			$list_challenge_report = include __DIR__ . '/templates/list_challenge_report_template.php';
+	public static function renderListChallengeReport( $challenges ) {
+		$html_template = '
+						<div class="list-challenges">
+						    <div class="container-fluid">
+						        <div class="list-challenges__wrap mx-3">
+						            <div class="row">
+						                <div class="col-md-12">
+						                    <h2 class="heading">Danh sách nhà chinh phục</h2>
+						                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+						                </div>
+						            </div>
+						
+						            <div class="row">
+						                <div class="col-md-12">
+						                    <h2>Chinh Phục Everest</h2>
+						                </div>
+						            </div>
+						
+						            <div class="row">
+						                <div class="col-md-12">
+						<div class="table-tab">
+						                        %1$s
+						                    </div>
+						                    </div>
+						            </div>
+						        </div>
+						    </div>
+						</div>';
+		$html          = '';
+		if ( ! empty( $challenges ) ) {
+			foreach ( $challenges as $challenge ) {
+				$html .= sprintf( $html_template, self::renderTableItemChallenge( $challenge ) );
+			}
 
 		}
 
-		return $list_challenge_report;
+		return $html;
 	}
 
+	public static function renderTableItemChallenge( $challenge ) {
+
+		$item_table_template  = '<div class="table-item">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">HẠNG</th>
+                                    <th scope="col">TÊN NHÀ CHINH PHỤC</th>
+                                    <th scope="col">TỐC ĐỘ <br>(avg Pace)</th>
+                                    <th scope="col">TỔNG KM</th>
+                                    <th scope="col">THỜI GIAN <br>CHINH PHỤC</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                %1$s
+                                </tbody>
+                            </table>
+                        </div>';
+		$renderedFinisherHtml = '';
+		$listsFinisher        = ChallengeModel::getListFinisherInfo( $challenge->product_id );
+		if ( ! empty( $listsFinisher ) ) {
+			$renderedFinisherHtml = self::renderListFinisherRowHtml( $listsFinisher );
+		}
+		$tables = sprintf( $item_table_template, $renderedFinisherHtml );
+
+		return $tables;
+
+	}
+
+	public static function renderListFinisherRowHtml( $listsFinisher ) {
+		$html = '';
+		foreach ( $listsFinisher as $index => $item ) {
+			$html .= self::renderFinisherRow( $index + 1, $item );
+		}
+
+		return $html;
+	}
+
+	/**
+	 * [user_name] => dinhthang
+	 * [total_km] => 228.998
+	 * [amount_time_finished] => 2
+	 * [pace] => 27.068965517241
+	 */
+	public static function renderFinisherRow( $index, $item ) {
+		$html = ' <tr>
+                                    <th scope="row">%1$s</th>
+                                    <td>%2$s</td>
+                                    <td>%3$s</td>
+                                    <td>%4$s km</td>
+                                    <td>%5$s</td>
+                                </tr>';
+		$html = sprintf( $html, $index, $item['user_name'], $item['pace'], $item['total_km'], $item['amount_time_finished'] );
+
+		return $html;
+	}
 
 	/**
 	 * @return [type]
