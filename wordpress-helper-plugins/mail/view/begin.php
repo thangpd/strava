@@ -1,5 +1,9 @@
+<?php 
+$html = <<<HTML
+
 <table cellpadding="0" cellspacing="0" width="600" style="min-width:600px;max-width:600px;width:600px;border:0px;border-collapse:collapse;table-layout:fixed;background-color:rgb(255,255,255)">
     <tbody>
+        <h2>  {$title} </h2>
         <tr>
             <td valign="top" width="600" style="width:600px;border:0px;min-height:570px;word-wrap:break-word;word-break:break-word">
                 <table cellspacing="0" cellpadding="0" style="min-width:100%;max-width:100%;table-layout:fixed;border:0px;border-collapse:collapse" width="100%">
@@ -425,3 +429,6 @@
         </tr>
     </tbody>
 </table>
+HTML;
+
+echo $html;

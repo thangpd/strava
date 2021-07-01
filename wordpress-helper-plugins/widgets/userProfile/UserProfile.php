@@ -245,25 +245,10 @@ HTML;
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
-
-		// Demo send mail
-		$args = array(
-			'post_type' 		=> 'product',
-			'posts_per_page' 	=> 1,
-			'post__in'			=> array(46)
-		);
-
-		$product = new \WP_Query( $args );
-
-		print_r( $product );
-
 		require WP_HELPER_PATH . 'mail/template.php';
 		$get_dir_mail_template = new Template();
 
-		$get_dir_mail_template->action_send_mail('begin', $product);
-
-
-
+		// $get_dir_mail_template->action_send_mail('begin', 46, 'nguyenhuutien.it.3895@gmail.com');
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$args = array(
