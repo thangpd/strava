@@ -82,134 +82,241 @@ function inspire_get_list_purchased_product_by_user_object( WP_User $user_obj ) 
 }
 
 
+function inspire_rewrite_activation() {
+	inspire_inspire_challenge();
+	inspire_history_challenge_athlete();
+	inspire_history_activity();
+}
+
+function inspire_inspire_challenge() {
+	global $wpdb;
+	$table_name      = \Elhelper\modules\productStravaModule\db\ChallengeDb::get_table();
+	$charset_collate = $wpdb->get_charset_collate();
+	$sql             = "CREATE TABLE `{$table_name}` (
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            order_id int(11),
+            product_id int(11),
+            user_id tinyint(1),
+            status tinyint,
+            amount_date int(10),
+            amount_distance int(10),
+            created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+            PRIMARY KEY (id)
+            ) $charset_collate;";
+
+	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	dbDelta( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
+
+function inspire_history_challenge_athlete() {
+	global $wpdb;
+	$table_name      = \Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb::get_table();
+	$charset_collate = $wpdb->get_charset_collate();
+	$sql             = "CREATE TABLE `{$table_name}` (
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            challenge_id int(11),
+            activity_id char(50),
+            created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            ) $charset_collate;";
+
+	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	dbDelta( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
+
+function inspire_history_activity() {
+	global $wpdb;
+	$table_name      = \Elhelper\modules\userStravaModule\db\ActivityDb::get_table();
+	$charset_collate = $wpdb->get_charset_collate();
+	$sql             = "CREATE TABLE `{$table_name}` (
+            
+            id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            athlete_id char(50),
+            type char(20),
+            activity_id char(50),
+            distance float,
+            moving_time int,
+			created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+            ) $charset_collate;";
+
+	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	dbDelta( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
+
+
+function inspire_uninstall_hook() {
+	inspire_drop_history_challenge_athlete();
+	inspire_drop_history_athlete();
+	inspire_drop_challenge();
+}
+
+function inspire_drop_history_challenge_athlete() {
+	global $wpdb;
+	$table_name = \Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb::get_table();
+	$sql        = "DROP TABLE IF EXISTS `$table_name`;";
+	$wpdb->query( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
+
+function inspire_drop_history_athlete() {
+	global $wpdb;
+	$table_name = \Elhelper\modules\userStravaModule\db\ActivityDb::get_table();
+	$sql        = "DROP TABLE IF EXISTS `$table_name`;";
+	$wpdb->query( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
+
+function inspire_drop_challenge() {
+	global $wpdb;
+	$table_name = \Elhelper\modules\productStravaModule\db\ChallengeDb::get_table();
+	$sql        = "DROP TABLE IF EXISTS `$table_name`;";
+	$wpdb->query( $sql );
+	if ( ! empty( $wpdb->last_error ) ) {
+		throw new \Exception( $wpdb->last_error );
+	}
+}
 
 
 // Custom field
-if( function_exists('acf_add_local_field_group') ):
+if ( function_exists( 'acf_add_local_field_group' ) ):
 
-	acf_add_local_field_group(array(
-		'key' => 'group_60dbff2342e90',
-		'title' => 'Setting Product Detail',
-		'fields' => array(
+	acf_add_local_field_group( array(
+		'key'                   => 'group_60dbff2342e90',
+		'title'                 => 'Setting Product Detail',
+		'fields'                => array(
 			array(
-				'key' => 'field_60dc2688cda7e',
-				'label' => 'Khoảng cách (km)',
-				'name' => 'distance',
-				'type' => 'number',
-				'instructions' => 'Độ dài thử thách.',
-				'required' => 1,
+				'key'               => 'field_60dc2688cda7e',
+				'label'             => 'Khoảng cách (km)',
+				'name'              => 'distance',
+				'type'              => 'number',
+				'instructions'      => 'Độ dài thử thách.',
+				'required'          => 1,
 				'conditional_logic' => 0,
-				'wrapper' => array(
+				'wrapper'           => array(
 					'width' => '',
 					'class' => '',
-					'id' => '',
+					'id'    => '',
 				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'min' => '',
-				'max' => '',
-				'step' => '',
+				'default_value'     => '',
+				'placeholder'       => '',
+				'prepend'           => '',
+				'append'            => '',
+				'min'               => '',
+				'max'               => '',
+				'step'              => '',
 			),
 			array(
-				'key' => 'field_60dc29c029bda',
-				'label' => 'Ngày bắt đầu',
-				'name' => 'start_date',
-				'type' => 'date_picker',
-				'instructions' => 'Chọn ngày bắt đầu',
-				'required' => 1,
+				'key'               => 'field_60dc29c029bda',
+				'label'             => 'Ngày bắt đầu',
+				'name'              => 'start_date',
+				'type'              => 'date_picker',
+				'instructions'      => 'Chọn ngày bắt đầu',
+				'required'          => 1,
 				'conditional_logic' => 0,
-				'wrapper' => array(
+				'wrapper'           => array(
 					'width' => '',
 					'class' => '',
-					'id' => '',
+					'id'    => '',
 				),
-				'display_format' => 'd/m/Y',
-				'return_format' => 'd/m/Y',
-				'first_day' => 1,
+				'display_format'    => 'd/m/Y',
+				'return_format'     => 'd/m/Y',
+				'first_day'         => 1,
 			),
 			array(
-				'key' => 'field_60dc2a0229bdb',
-				'label' => 'Ngày kết thúc',
-				'name' => 'end_date',
-				'type' => 'date_picker',
-				'instructions' => 'Chọn ngày kết thúc.',
-				'required' => 1,
+				'key'               => 'field_60dc2a0229bdb',
+				'label'             => 'Ngày kết thúc',
+				'name'              => 'end_date',
+				'type'              => 'date_picker',
+				'instructions'      => 'Chọn ngày kết thúc.',
+				'required'          => 1,
 				'conditional_logic' => 0,
-				'wrapper' => array(
+				'wrapper'           => array(
 					'width' => '',
 					'class' => '',
-					'id' => '',
+					'id'    => '',
 				),
-				'display_format' => 'd/m/Y',
-				'return_format' => 'd/m/Y',
-				'first_day' => 1,
+				'display_format'    => 'd/m/Y',
+				'return_format'     => 'd/m/Y',
+				'first_day'         => 1,
 			),
 			array(
-				'key' => 'field_60dc7a1ed31af',
-				'label' => 'Thời gian chạy (ngày)',
-				'name' => 'amount_day',
-				'type' => 'number',
-				'instructions' => 'Nhập thời gian của thử thách trong bao lâu. Đơn vị ngày.',
-				'required' => 1,
+				'key'               => 'field_60dc7a1ed31af',
+				'label'             => 'Thời gian chạy (ngày)',
+				'name'              => 'amount_date',
+				'type'              => 'number',
+				'instructions'      => 'Nhập thời gian của thử thách trong bao lâu. Đơn vị ngày.',
+				'required'          => 1,
 				'conditional_logic' => 0,
-				'wrapper' => array(
+				'wrapper'           => array(
 					'width' => '',
 					'class' => '',
-					'id' => '',
+					'id'    => '',
 				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'min' => '',
-				'max' => '',
-				'step' => '',
+				'default_value'     => '',
+				'placeholder'       => '',
+				'prepend'           => '',
+				'append'            => '',
+				'min'               => '',
+				'max'               => '',
+				'step'              => '',
 			),
 			array(
-				'key' => 'field_60dc4123a90eb',
-				'label' => 'Thumbail Thử thách',
-				'name' => 'thumbail_challenge',
-				'type' => 'image',
-				'instructions' => '',
-				'required' => 0,
+				'key'               => 'field_60dc4123a90eb',
+				'label'             => 'Thumbail Thử thách',
+				'name'              => 'thumbail_challenge',
+				'type'              => 'image',
+				'instructions'      => '',
+				'required'          => 0,
 				'conditional_logic' => 0,
-				'wrapper' => array(
+				'wrapper'           => array(
 					'width' => '',
 					'class' => '',
-					'id' => '',
+					'id'    => '',
 				),
-				'return_format' => 'array',
-				'preview_size' => 'large',
-				'library' => 'all',
-				'min_width' => '',
-				'min_height' => '',
-				'min_size' => '',
-				'max_width' => '',
-				'max_height' => '',
-				'max_size' => '',
-				'mime_types' => '',
+				'return_format'     => 'array',
+				'preview_size'      => 'large',
+				'library'           => 'all',
+				'min_width'         => '',
+				'min_height'        => '',
+				'min_size'          => '',
+				'max_width'         => '',
+				'max_height'        => '',
+				'max_size'          => '',
+				'mime_types'        => '',
 			),
 		),
-		'location' => array(
+		'location'              => array(
 			array(
 				array(
-					'param' => 'post_type',
+					'param'    => 'post_type',
 					'operator' => '==',
-					'value' => 'product',
+					'value'    => 'product',
 				),
 			),
 		),
-		'menu_order' => 0,
-		'position' => 'normal',
-		'style' => 'default',
-		'label_placement' => 'top',
+		'menu_order'            => 0,
+		'position'              => 'normal',
+		'style'                 => 'default',
+		'label_placement'       => 'top',
 		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
-	));
+		'hide_on_screen'        => '',
+		'active'                => true,
+		'description'           => '',
+	) );
 
 endif;
 

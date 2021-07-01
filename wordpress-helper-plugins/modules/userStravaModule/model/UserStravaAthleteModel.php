@@ -9,6 +9,9 @@
 namespace Elhelper\modules\userStravaModule\model;
 
 
+use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
+use Elhelper\modules\userStravaModule\db\ActivityDb;
+
 class UserStravaAthleteModel {
 
 	const ATHLETE_STRAVA = 'athlete_strava';
@@ -41,6 +44,8 @@ class UserStravaAthleteModel {
 		return $users;
 	}
 
+
+
 	public function saveAthleteObject( $object ) {
 		if ( ! empty( $object ) ) {
 			update_user_meta( $this->getUserId(), self::ATHLETE_STRAVA, $object );
@@ -70,16 +75,6 @@ class UserStravaAthleteModel {
 
 	public function getAthleteObject() {
 		return get_user_meta( $this->getUserId(), self::ATHLETE_STRAVA, true );
-	}
-
-	public function getDistanceOfProduct( $product_id ) {
-		$get_user_meta         = get_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT );
-		$list_product_distance = array_shift( $get_user_meta );
-		if ( isset( $list_product_distance[ $product_id ] ) ) {
-			return $list_product_distance[ $product_id ];
-		} else {
-			return [];
-		}
 	}
 
 	public function addDistanceOfUserOfProduct( $product_id, $meters ) {

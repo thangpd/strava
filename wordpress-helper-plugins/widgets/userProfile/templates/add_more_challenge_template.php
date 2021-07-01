@@ -5,7 +5,7 @@
  */
 
 $res = <<<HTML
-<div class="col-md-12">
+<div class="strava-challenges__item">
     <div class="strava-challenges__inner">
         <div class="strava-challenges__wrap-image">
             <div class="button more-challenge">THÊM THỬ THÁCH MỚI</div>

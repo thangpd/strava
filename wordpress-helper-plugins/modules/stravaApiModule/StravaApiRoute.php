@@ -12,7 +12,7 @@ use Elhelper\admin\modules\pages\stravaApiSettingPages\StravaApiSettingPage;
 use Elhelper\common\Controller;
 use Elhelper\common\SingleController;
 use Elhelper\Elhelper_Plugin;
-use Elhelper\modules\stravaApiModule\Controllers\StravaApiWebhookHandle;
+use Elhelper\modules\stravaApiModule\Controllers\StravaApiWebhookHandleController;
 use Elhelper\modules\stravaApiModule\models\StravaAccessToken;
 use Elhelper\modules\stravaApiModule\models\StravaApiModel;
 use Elhelper\modules\stravaApiModule\models\StravaWebHookModel;
@@ -54,7 +54,7 @@ class StravaApiRoute extends SingleController {
 			//method POST
 			/*set_transient( 'receive_webhook_header', json_encode( getallheaders() ) );
 			set_transient( 'receive_webhook_body', json_encode( file_get_contents( 'php://input' ) ) );*/
-			$controllerHandle = StravaApiWebhookHandle::instance();
+			$controllerHandle = StravaApiWebhookHandleController::instance();
 			if ( $controllerHandle->verifyWebhookStrava() ) {
 //
 			} else {
@@ -70,7 +70,7 @@ class StravaApiRoute extends SingleController {
 //			$template        = $plugin_dir_path;
 			//method POST
 
-			if ( StravaApiWebhookHandle::instance()->verifyAccessTokenStrava() ) {
+			if ( StravaApiWebhookHandleController::instance()->verifyAccessTokenStrava() ) {
 				$stravaAccessToken = new StravaAccessToken();
 				if ( isset( $_GET['access_token'] ) ) {
 					$stravaAccessToken->setStravaAccessToken( $_GET['access_token'] );
