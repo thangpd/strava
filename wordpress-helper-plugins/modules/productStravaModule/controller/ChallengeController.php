@@ -42,6 +42,9 @@ class ChallengeController extends Singleton {
 
 	}
 
+
+
+
 	function call_pos_management_call_api( $order_id ) {
 		if ( ! $order_id ) {
 			return;

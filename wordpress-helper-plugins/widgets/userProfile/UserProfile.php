@@ -46,11 +46,17 @@ class UserProfile extends \Elementor\Widget_Base {
 		}
 //		$amount_distance = get_field( 'distance', $product_id );
 		$amount_distance = $challenge->amount_distance;
+		if ( $distance_already < $amount_distance ) {
+			$distance_left         = $amount_distance - $distance_already;
+			$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
+			$distance_active       = round( $percent_distance_left / 10, 0 );
 
-		$distance_left         = $amount_distance - $distance_already;
-		$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
+		} else {
+			$distance_left         = 0;
+			$percent_distance_left = 100;
+			$distance_active       = 10;
+		}
 
-		$distance_active = round( $percent_distance_left / 10, 0 );
 
 // get_field products:
 		/*
