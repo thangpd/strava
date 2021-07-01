@@ -54,6 +54,7 @@ $button_conntect_strava = require $str;
 <div class="conatiner">
     <div class="wrap-modal-user-profile">
         <div class="overlay"></div>
+        <div class="close-modal"></div>
 
         <!-- Informations section -->
         <div class="strava-information mx-3">

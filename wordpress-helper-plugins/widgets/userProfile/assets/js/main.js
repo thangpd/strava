@@ -40,7 +40,7 @@ $(document).ready(function () {
         parent.addClass('active');
     });
 
-    $('.overlay').on('click', function (e) {
+    $('.close-modal').on('click', function (e) {
         e.preventDefault();
         var parent = $(this).parents('.wrap-modal-user-profile');
         parent.removeClass('active');
