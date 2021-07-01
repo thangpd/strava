@@ -1,6 +1,7 @@
 <?php
 $products_challenge_html       = '';
 $render_list_challenges_report = '';
+$user_avatar                   = '';
 
 if ( is_user_logged_in() ) {
 	$user_id     = get_current_user_id();
@@ -62,33 +63,55 @@ $button_conntect_strava = require $str;
                 <div class="row justify-content-md-between">
                     <div class="order-md-1 col-sm-12 col-md-3 order-lg-1 col-lg-2">
                         <div class="call-to-action">
-							<?php echo $user_avatar ?>
+							<?php if ( ! empty( $user_avatar ) ) {
+								echo $user_avatar;
+							} else {
+								?>
+                                <img src="http://example.com/wp-content/uploads/2017/01/wpb-default-gravatar.png"
+                                     alt="">
+								<?php
+							} ?>
                         </div>
                     </div>
                     <div class="order-md-3 col-sm-12 col-md-12 order-lg-2 col-lg-7">
-                        <h2><?php echo $WP_User->user_nicename ?></h2>
-                        <div class="d-flex align-items-end d-lg-block">
-                            <h3>TỔNG TÍCH LŨY</h3>
-                            <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-end d-lg-block">
-                                    <h3>SỐ THỬ THÁCH</h3>
-                                    <span class="number"><?php echo isset( $num_of_challenge ) ? $num_of_challenge : 0 ?></span>
+                        <h2><?php
+							if ( ! empty( $WP_User ) ) {
+								echo $WP_User->user_nicename;
+							}
+							?></h2>
+						<?php if ( is_user_logged_in() ): ?>
+
+                            <div class="d-flex align-items-end d-lg-block">
+                                <h3>TỔNG TÍCH LŨY</h3>
+                                <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-end d-lg-block">
+                                        <h3>SỐ THỬ THÁCH</h3>
+                                        <span class="number"><?php echo isset( $num_of_challenge ) ? $num_of_challenge : 0 ?></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="d-flex align-items-end d-lg-block">
+                                        <h3>ĐÃ HOÀN THÀNH</h3>
+                                        <span class="number"><?php echo isset( $num_challenge_finished ) ? $num_challenge_finished : 0 ?></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="d-flex align-items-end d-lg-block">
-                                    <h3>ĐÃ HOÀN THÀNH</h3>
-                                    <span class="number"><?php echo isset( $num_challenge_finished ) ? $num_challenge_finished : 0 ?></span>
-                                </div>
-                            </div>
-                        </div>
+
+						<?php endif; ?>
                     </div>
                     <div class="order-md-2 col-sm-12 col-md-5 order-lg-3 col-lg-3">
-                        <?php echo $button_conntect_strava ?>
-                        
+                        <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
+							 <span class="logout">ngắt kết nối với Strava</span>
+						</div>-->
+						<?php echo $button_conntect_strava ?>
+
+	                    <?php if ( is_user_logged_in() ) {
+		                    echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
+	                    } ?>
+
                     </div>
                 </div>
             </div>
@@ -151,10 +174,14 @@ $button_conntect_strava = require $str;
 												<?php echo wp_kses( get_the_title(), array( 'br' => array() ) ) ?>
                                             </div>
                                             <div class="thumb-item__distance-date">
-												<?php echo the_excerpt(); ?>
+												<?php $amount_distance = get_field( 'distance', get_the_ID() );
+												$amount_date           = get_field( 'amount_date', get_the_ID() );
+												echo $amount_distance . 'KM/' . $amount_date . ' NGÀY';
+												?>
                                             </div>
                                             <div class="thumb-item__description">
-												<?php echo the_content(); ?>
+												<?php echo the_excerpt(); ?>
+												<?php //echo the_content(); ?>
                                             </div>
                                             <div class="thumb-item__button-wrap">
                                                 <div class="thumb-item__button">

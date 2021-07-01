@@ -102,7 +102,13 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		//Thumbnail challenge
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
-
+		if ( $challenge->status == 1 ) {
+			$label_tag_finished_failed = ' <div class="strava-challenges__status-image">
+                                    <span>Đã hoàn thành</span>
+                                </div>';
+		} else {
+			$label_tag_finished_failed = '';
+		}
 
 		$html = <<<HTML
 		<div class="strava-challenges__item">
@@ -194,9 +200,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                     </div>
                                 </div>
 								<div class="strava-challenges__status">
-                                <div class="strava-challenges__status-image">
-                                    <span>Đã hoàn thành</span>
-                                </div>
+                               {$label_tag_finished_failed}
                             	</div>
                             </div>
                         </div>
@@ -224,12 +228,6 @@ HTML;
 						                <div class="col-md-12">
 						                    <h2 class="heading">Danh sách nhà chinh phục</h2>
 						                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-						                </div>
-						            </div>
-						
-						            <div class="row">
-						                <div class="col-md-12">
-						                    <h2>Chinh Phục Everest</h2>
 						                </div>
 						            </div>
 						
