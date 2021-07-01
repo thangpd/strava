@@ -28,40 +28,57 @@ class UserProfile extends \Elementor\Widget_Base {
 		] );
 	}
 
-	public static function renderProductChallenge( $product_id, $user_id ) {
+	public static function renderProductChallenge( $challenge ) {
+		$user_id     = $challenge->user_id;
+		$product_id  = $challenge->product_id;
 		$userAthlete = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
 
-		$distance_already = $userAthlete->getDistanceOfProduct( $product_id );
+		$distance_already = $userAthlete::getDistanceAlreadyOfProduct( $challenge->id );
+
 		if ( ! empty( $distance_already ) ) {
-			$distance_already *= 0.001;
+			$distance_already = round( $distance_already->distance * 0.001, 3 );
 		} else {
 			$distance_already = 0;
 		}
+
+
+		$distance_already_OfProduct = isset( $distance_already ) && ! empty( $distance_already ) ? $distance_already . 'km' : '0 km';
+//		$distnace_product = get_field( 'distance', $product_id );
+		$distnace_product = $challenge->amount_distance;
+
+		$distance_left         = $distnace_product - $distance_already;
+		$percent_distance_left = round( $distance_already / $distnace_product * 100, 0 );
+
+		$distance_active = round( $percent_distance_left / 10, 0 );
+
 // get_field products:
 		/*
 		 * distance
 		 * start_date
 		 * end_date
 		 * thumbail_challenge
+		 * amount_day
 		 * */
-		$distnace_product = get_field( 'distance', $product_id );
-		$start_date       = get_field( 'start_date', $product_id );
-		$end_date         = get_field( 'end_date', $product_id );
-		$now              = new \DateTime( 'now' );
+		$start_date = $challenge->created_at;
 
-		$date_range        = 0;
+//		$amount_date = get_field( 'amount_date', $product_id );
+		$amount_date = $challenge->amount_date;
+		$now         = new \DateTime( 'now' );
+
 		$date_left         = 0;
 		$date_left_percent = 0;
-		if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
-			$start_date = \DateTime::createFromFormat( 'd/m/Y', $start_date );
+		if ( ! empty( $start_date ) && ! empty( $amount_date ) ) {
+			$start_date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $start_date );
+			$end_date   = clone( $start_date );
+			$end_date->modify( '+' . $amount_date . 'days' );
 			//end date
-			$end_date          = \DateTime::createFromFormat( 'd/m/Y', $end_date );
-			$datediff          = $end_date->diff( $start_date );
-			$date_range        = $datediff->days;
+
 			$datediff_left     = $now->diff( $end_date );
 			$date_left         = $datediff_left->days;
-			$f                 = $date_left / $date_range;
+			$f                 = $date_left / $amount_date;
 			$date_left_percent = round( $f * 100, 0 );
+			$date_active       = round( $date_left_percent / 10, 0 );
+
 		} else {
 			$start_date = new \DateTime( 'now' );
 			$end_date   = new \DateTime( 'now' );
@@ -69,10 +86,6 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$thumbail_challenge = get_field( 'thumbail_challenge', $product_id );
 
-		$distance_already_OfProduct = isset( $distance_already ) && ! empty( $distance_already ) ? $distance_already . 'km' : '0 km';
-
-		$distance_left         = $distnace_product - $distance_already;
-		$percent_distance_left = round( $distance_already / $distance_left * 100, 0 );
 
 		$html = <<<HTML
 		<div class="col-md-12">
@@ -86,14 +99,14 @@ class UserProfile extends \Elementor\Widget_Base {
                                         </div>
                                         <div class="strava-challenges__head-info">
                                             <h2 class="d-block d-lg-none">Chinh phục Everest</h2>
-                                            <span class="distance-date d-block d-lg-none">{$distnace_product} km - {$date_range} ngày</span>
+                                            <span class="distance-date d-block d-lg-none">{$distnace_product} km - {$amount_date} ngày</span>
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-12 col-lg-9">
                                         <div class="strava-challenges__content">
                                             <h2 class="d-none d-lg-block">Chinh phục Everest</h2>
-                                            <span class="distance-date d-none d-lg-block">{$distnace_product} km - {$date_range} ngày</span>
+                                            <span class="distance-date d-none d-lg-block">{$distnace_product} km - {$amount_date} ngày</span>
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -112,7 +125,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                     <span class="percent">{$percent_distance_left}%</span>
                                                 </div>
                                                 <div class="col-9">
-                                                    <div class="line" data-active="0">
+                                                    <div class="line" data-active="{$distance_active}">
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
@@ -137,7 +150,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                     <span class="percent">{$date_left_percent}%</span>
                                                 </div>
                                                 <div class="col-9">
-                                                    <div class="line" data-active="7">
+                                                    <div class="line" data-active="${date_active}">
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
@@ -150,7 +163,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                     </div>
                                                     <div class="d-none d-lg-block distance-left">
-                                                        <b>{$date_range} ngày</b>
+                                                        <b>{$amount_date} ngày</b>
                                                         <span>Còn lại <b>{$date_left} ngày</b></span>
                                                     </div>
                                                 </div>

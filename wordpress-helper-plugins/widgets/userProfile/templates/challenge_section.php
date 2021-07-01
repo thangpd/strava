@@ -1,4 +1,6 @@
 <?php
+$products_challenge_html = '';
+
 if ( is_user_logged_in() ) {
 	$user_id              = get_current_user_id();
 	$WP_User              = get_userdata( $user_id );
@@ -13,14 +15,14 @@ if ( is_user_logged_in() ) {
 	$num_of_challenge       = 0;
 	$num_challenge_finished = 0;
 
-	$products                = inspire_get_list_purchased_product_by_user_object( $WP_User );
-	$products_challenge_html = '';
+//	$products                = inspire_get_list_purchased_product_by_user_object( $WP_User );
+	$challenges = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallenge();
 
-	if ( ! empty( $products ) ) {
+	if ( ! empty( $challenges ) ) {
 
-		$num_of_challenge = count( $products );
-		foreach ( $products as $product_id ) {
-			$products_challenge_html .= \Elhelper\widgets\userProfile\UserProfile::renderProductChallenge( $product_id, $user_id );
+		$num_of_challenge = count( $challenges );
+		foreach ( $challenges as $challenge ) {
+			$products_challenge_html .= \Elhelper\widgets\userProfile\UserProfile::renderProductChallenge( $challenge );
 
 		}
 		$num_challenge_finished = 0;
@@ -85,7 +87,7 @@ $button_conntect_strava = require $str;
                 </div>
                 <div class="row strava-challenges__list strava-challenges__list-slick">
 					<?php echo $products_challenge_html; ?>
-                    <?php echo \Elhelper\widgets\userProfile\UserProfile::renderAddNewChallenge() ?>
+					<?php echo \Elhelper\widgets\userProfile\UserProfile::renderAddNewChallenge() ?>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ use Elhelper\common\Controller;
 use Elhelper\common\View;
 use Elhelper\Elhelper_Plugin;
 use Elhelper\model\TechvsiStravaModel;
-use Elhelper\modules\stravaApiModule\Controllers\StravaApiWebhookHandle;
+use Elhelper\modules\stravaApiModule\Controllers\StravaApiWebhookHandleController;
 use Elhelper\modules\stravaApiModule\models\StravaAccessToken;
 use Elhelper\modules\stravaApiModule\models\StravaApiModel;
 use Elhelper\modules\stravaApiModule\models\StravaWebHookModel;

@@ -9,6 +9,9 @@
 namespace Elhelper\modules\userStravaModule\model;
 
 
+use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
+use Elhelper\modules\userStravaModule\db\ActivityDb;
+
 class UserStravaAthleteModel {
 
 	const ATHLETE_STRAVA = 'athlete_strava';
@@ -41,6 +44,26 @@ class UserStravaAthleteModel {
 		return $users;
 	}
 
+	public static function getDistanceAlreadyOfProduct( $challenge_id ) {
+		global $wpdb;
+
+
+		$sql           = 'SELECT round(sum(a.distance),2) as distance FROM  %1$s WHERE %2$s';
+		$history_table = HistoryChallengeAthleteDb::get_table() . ' as h, ' . ActivityDb::get_table() . ' as a ';
+		$where         = ' a.activity_id = h.activity_id and h.challenge_id=' . $challenge_id . ' ';
+		$sql           = $wpdb->prepare( $sql, $history_table, $where );
+
+		$results = $wpdb->get_results( $sql );
+
+		if ( ! empty( $results ) ) {
+			$results = array_shift( $results );
+		} else {
+			$results = [];
+		}
+
+		return $results;
+	}
+
 	public function saveAthleteObject( $object ) {
 		if ( ! empty( $object ) ) {
 			update_user_meta( $this->getUserId(), self::ATHLETE_STRAVA, $object );
@@ -70,16 +93,6 @@ class UserStravaAthleteModel {
 
 	public function getAthleteObject() {
 		return get_user_meta( $this->getUserId(), self::ATHLETE_STRAVA, true );
-	}
-
-	public function getDistanceOfProduct( $product_id ) {
-		$get_user_meta         = get_user_meta( $this->user_id, self::ATHLETE_DISTANCE_OF_PRODUCT );
-		$list_product_distance = array_shift( $get_user_meta );
-		if ( isset( $list_product_distance[ $product_id ] ) ) {
-			return $list_product_distance[ $product_id ];
-		} else {
-			return [];
-		}
 	}
 
 	public function addDistanceOfUserOfProduct( $product_id, $meters ) {

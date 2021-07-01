@@ -40,7 +40,6 @@ class DB {
 
 
 	static function get( $value, $column ) {
-		$column = $column || static::$primary_key;
 		global $wpdb;
 
 		return $wpdb->get_row( self::_fetch_sql( $value, $column ) );
@@ -70,12 +69,12 @@ class DB {
 		return $wpdb->query( $wpdb->prepare( $sql, $value ) );
 	}
 
-	static function fetch( $value ) {
-		global $wpdb;
-		$value = intval( $value );
-		$sql   = 'SELECT * FROM ' . self::_table() . " WHERE `ads_id` = '$value' order by `created_at` DESC";
+	/*	static function fetch( $value ) {
+			global $wpdb;
+			$value = intval( $value );
+			$sql   = 'SELECT * FROM ' . self::_table() . " WHERE `ads_id` = '$value' order by `created_at` DESC";
 
-		return $wpdb->get_results( $sql );
-	}
+			return $wpdb->get_results( $sql );
+		}*/
 
 }

@@ -18,6 +18,8 @@ use Elhelper\admin\modules\pages\stravaApiSettingPages\StravaApiSettingPage;
 use Elhelper\admin\modules\pages\stravaApiSettingPages\stravaChat\StravaChat;
 use Elhelper\admin\modules\pages\stravaApiSettingPages\stravaChatBotManager\StravaChatBotManager;
 use Elhelper\admin\modules\settings\ExampleSettingPage\ExampleSettingPage;
+use Elhelper\modules\activityModule\controller\ActivityController;
+use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use Elhelper\modules\stravaApiModule\models\StravaApiModel;
 use Elhelper\modules\stravaApiModule\StravaApiRoute;
 use Elhelper\modules\userStravaModule\controller\UserStravaController;
@@ -239,6 +241,8 @@ class Elhelper_Plugin {
 	public function init_controller() {
 
 		UserStravaController::instance();
+		ChallengeController::instance();
+		ActivityController::instance();
 
 		$this->controllers = [
 			StravaApiRoute::instance()

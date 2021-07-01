@@ -6,16 +6,18 @@
  * Time: 9:19 AM
  */
 
-namespace Elhelper\modules\stravaApiModule\db;
+namespace Elhelper\modules\userStravaModule\db;
 
 use Elhelper\inc\DB;
 
-class HistoryChallengeAthleteDb extends DB {
+class ActivityDb extends DB {
 
 	static $primary_key = 'inspire_athlete';
 
 	public function __construct() {
 	}
+
+
 
 
 	/**

@@ -85,7 +85,7 @@ function inspire_get_list_purchased_product_by_user_object( WP_User $user_obj ) 
 function inspire_rewrite_activation() {
 	inspire_inspire_challenge();
 	inspire_history_challenge_athlete();
-	inspire_history_athlete();
+	inspire_history_activity();
 }
 
 function inspire_inspire_challenge() {
@@ -94,9 +94,9 @@ function inspire_inspire_challenge() {
 	$charset_collate = $wpdb->get_charset_collate();
 	$sql             = "CREATE TABLE `{$table_name}` (
             id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            order_id int(11),
             product_id int(11),
             user_id tinyint(1),
-            history_id int(11),
             status tinyint,
             amount_date int(10),
             amount_distance int(10),
@@ -117,12 +117,9 @@ function inspire_history_challenge_athlete() {
 	$charset_collate = $wpdb->get_charset_collate();
 	$sql             = "CREATE TABLE `{$table_name}` (
             id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-            athlete_id int,
-            type char(20),
-            activity_id_strava int,
-            distance float,
-            moving_time int,
-			created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+            challenge_id int(11),
+            activity_id char(50),
+            created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id)
             ) $charset_collate;";
 
@@ -133,15 +130,19 @@ function inspire_history_challenge_athlete() {
 	}
 }
 
-function inspire_history_athlete() {
+function inspire_history_activity() {
 	global $wpdb;
-	$table_name      = \Elhelper\modules\userStravaModule\db\AthleteDb::get_table();
+	$table_name      = \Elhelper\modules\userStravaModule\db\ActivityDb::get_table();
 	$charset_collate = $wpdb->get_charset_collate();
 	$sql             = "CREATE TABLE `{$table_name}` (
+            
             id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-            product_id int(11),
-            activity_id tinyint(1),
-            created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+            athlete_id char(50),
+            type char(20),
+            activity_id char(50),
+            distance float,
+            moving_time int,
+			created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id)
             ) $charset_collate;";
 
@@ -171,7 +172,7 @@ function inspire_drop_history_challenge_athlete() {
 
 function inspire_drop_history_athlete() {
 	global $wpdb;
-	$table_name = \Elhelper\modules\userStravaModule\db\AthleteDb::get_table();
+	$table_name = \Elhelper\modules\userStravaModule\db\ActivityDb::get_table();
 	$sql        = "DROP TABLE IF EXISTS `$table_name`;";
 	$wpdb->query( $sql );
 	if ( ! empty( $wpdb->last_error ) ) {
@@ -255,7 +256,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ):
 			array(
 				'key'               => 'field_60dc7a1ed31af',
 				'label'             => 'Thời gian chạy (ngày)',
-				'name'              => 'amount_day',
+				'name'              => 'amount_date',
 				'type'              => 'number',
 				'instructions'      => 'Nhập thời gian của thử thách trong bao lâu. Đơn vị ngày.',
 				'required'          => 1,
