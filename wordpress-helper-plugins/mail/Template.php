@@ -4,16 +4,21 @@ namespace Elhelper\mail;
 
 class Template {
 
-	public static function action_sendmail( $product_id, $user_id, $template_number ) {
+	public static function action_sendmail( $product_id, $user_id, $template_number, $title ) {
 		$template_email = Template::getDataEmailTemplate( $product_id, $user_id, $template_number );
-		$userObj        = get_user_by( 'id', $user_id );
-		$useremail      = $userObj->data->user_email;
+		echo '<pre>';
+		print_r( $template_email );
+		echo '</pre>';
+
+		$userObj   = get_user_by( 'id', $user_id );
+		$useremail = $userObj->data->user_email;
 		if ( ! empty( $useremail ) ) {
-			self::send_mail( $useremail, 'The Mount begins', $template_email );
+			$res = self::send_mail( $useremail, $title, $template_email );
+			write_log( json_encode( $res ) . __FILE__ . __LINE__ );
 		}
 	}
 
-	public static function getDataEmailTemplate( $user_id, $product_id, $template_number ) {
+	public static function getDataEmailTemplate( $product_id, $user_id, $template_number ) {
 		switch ( $template_number ) {
 			case 0:
 				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
@@ -29,11 +34,154 @@ class Template {
 				}
 				$title        = '';
 				$template_dir = Template::get_template_dir( 0 );
-				$included     = require $template_dir;
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 1:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/CoverEver25.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				$userModel             = get_user_by( 'id', $user_id );
+				$username              = $userModel->data->user_nicename;
+				$sidebar_left_image    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/sherpa.png';
 
-				return $included;
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$title        = '';
+				$template_dir = Template::get_template_dir( 1 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 2:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/header.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$userModel     = get_user_by( 'id', $user_id );
+				$username      = $userModel->data->user_nicename;
+				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/sidebar.png';
+				$template_dir  = Template::get_template_dir( 2 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 3:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/header.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+
+				$userModel     = get_user_by( 'id', $user_id );
+				$username      = $userModel->data->user_nicename;
+				$template_dir  = Template::get_template_dir( 3 );
+				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/sidebar.png';
+
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 4:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/header.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$body_1 = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_1.png';
+				$body_2 = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_2.jpeg';
+
+				$title        = '';
+				$template_dir = Template::get_template_dir( 4 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 5:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$title        = '';
+				$template_dir = Template::get_template_dir( 5 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			case 6:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$title        = '';
+				$template_dir = Template::get_template_dir( 6 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
+				break;
+			default:
+				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
+				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product               = wc_get_product( $product_id );
+				if ( ! empty( $product ) ) {
+					$product_title = $product->get_title();
+					$product_link  = $product->get_permalink();
+				} else {
+					$product_title = 'Product Empty';
+					$product_link  = '#';
+				}
+				$title        = '';
+				$template_dir = Template::get_template_dir( 0 );
+				ob_start();
+				require $template_dir;
+				$included = ob_get_clean();
 				break;
 		}
+
+		return $included;
+
+
 	}
 
 	/**
@@ -80,10 +228,10 @@ class Template {
 	) {
 		$to      = "$email_to";
 		$subject = "$subject";
-		$headers = 'From: ' . $email_to . "\r\n" .
-		           'Reply-To: ' . 'finishing@inspiretrails.life' . "\r\n";
-
-		$send = wp_mail( $to, $subject, $message, $headers );
+//		$headers = 'From: ' . $email_to . "\r\n" .
+//		           'Reply-To: ' . 'finishing@inspiretrails.life' . "\r\n";
+		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+		$send    = wp_mail( $to, $subject, $message, $headers );
 
 		return $send;
 	}

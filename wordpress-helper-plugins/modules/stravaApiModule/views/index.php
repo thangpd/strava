@@ -6,7 +6,13 @@
 $res = [ 'code' => 200 ];
 //write_log( 'get'.json_encode( $_GET ) );
 //echo json_encode( $res );
-$data = [ 'code' => 200, 'hub.challenge' => $_GET['hub_challenge'] ];
+if ( isset( $_GET['hub_challenge'] ) ) {
+	$hub_challenge = $_GET['hub_challenge'];
+} else {
+	$hub_challenge = '';
+
+}
+$data = [ 'code' => 200, 'hub.challenge' => $hub_challenge ];
 header( 'Content-type:application/json;charset=utf-8' );
 echo json_encode( $data );
 
