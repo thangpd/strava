@@ -1,4 +1,4 @@
-<?php 
+<?php
 $html = <<<HTML
 
 <table cellpadding="0" cellspacing="0" width="600" style="min-width:600px;max-width:600px;width:600px;border:0px;border-collapse:collapse;table-layout:fixed;background-color:rgb(255,255,255)">
@@ -14,7 +14,7 @@ $html = <<<HTML
                                     <tbody>
                                         <tr>
                                             <td style="word-wrap:break-word;word-break:break-word;border:0px;padding:6px 30px;border-top:0px none rgb(17,17,17);border-bottom:0px none rgb(17,17,17)">
-                                                <p style="float:left;width:100%;padding:0px;margin:0px"><img alt="" style="width:100%;max-width:100%;vertical-align:top" src="https://mail.google.com/mail/u/0?ui=2&amp;ik=6bc9f3ccc0&amp;attid=0.1&amp;permmsgid=msg-f:1703996416590278272&amp;th=17a5cfb67566ee80&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ-kBTtVVw0H0GHM9m9zKQlSAWn9uWS4HHogNCItgDSRu9QCjVi7EVz9LJJ55Z03V77FjMEx_WxNY_Ilh5PxjzRqnX-iG8fLyoUnjSw9iF5KfS42XNHjeJmZjBI&amp;disp=emb&amp;realattid=17a32a74d9556161bdc1" width="540" height="260.719" data-image-whitelisted="" class="CToWUd a6T" tabindex="0">
+                                                <p style="float:left;width:100%;padding:0px;margin:0px"><img alt="" style="width:100%;max-width:100%;vertical-align:top" src="$image_template_cover" width="540" height="260.719" data-image-whitelisted="" class="CToWUd a6T" tabindex="0">
                                                 <div class="a6S" dir="ltr" style="opacity: 0.01; left: 934px; top: 447px;">
                                                     <div id=":14e" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" role="button" tabindex="0" aria-label="Download attachment CoverEverFinal.png" data-tooltip-class="a1V" data-tooltip="Download">
                                                         <div class="akn">
@@ -78,7 +78,7 @@ $html = <<<HTML
                                                     <font face="Verdana, Geneva, sans-serif" size="3" color="#e69e24"><b>Chúc mừng bạn đã đăng ký thành công&nbsp;</b></font>
                                                 </div>
                                                 <div style="text-align:center;margin:0px">
-                                                    <font face="Verdana, Geneva, sans-serif" size="3" color="#e69e24"><b>The Mount Everest</b></font>
+                                                    <font face="Verdana, Geneva, sans-serif" size="3" color="#e69e24"><b>{$product_title}</b></font>
                                                 </div>
                                             </td>
                                         </tr>
@@ -118,7 +118,7 @@ $html = <<<HTML
                                                                 <font></font>
                                                             </p>
                                                             <p dir="ltr" style="text-align:justify;line-height:1.2;padding:0px;margin:0px">
-                                                                <font color="#000000"><span style="font-size:9pt;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px"><span style="background-color:rgb(255,255,255)"><b>Bước 1:</b></span>Truy cập vào </span><span style="font-size:9pt;background-color:transparent;font-weight:700;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px"><a href="https://sender13.zohoinsights.com/ocgeturl/2d6f.327230a?l=48266670-d32c-11eb-8abb-5254004d4100&amp;m=48252df0-d32c-11eb-8abb-5254004d4100&amp;h=03e24aa238c02e7504e926067dd642836ecd4df6f4d571d25c39cb8d819e22da" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sender13.zohoinsights.com/ocgeturl/2d6f.327230a?l%3D48266670-d32c-11eb-8abb-5254004d4100%26m%3D48252df0-d32c-11eb-8abb-5254004d4100%26h%3D03e24aa238c02e7504e926067dd642836ecd4df6f4d571d25c39cb8d819e22da&amp;source=gmail&amp;ust=1625214231382000&amp;usg=AFQjCNE4zFcYVJjyDhM4WRxvHd7R9Dg5wA">trang sau</a>.</span>
+                                                                <font color="#000000"><span style="font-size:9pt;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px"><span style="background-color:rgb(255,255,255)"><b>Bước 1:</b></span>Truy cập vào </span><span style="font-size:9pt;background-color:transparent;font-weight:700;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px"><a href="http://inspiretrails.life/wp-admin" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" >trang sau</a>.</span>
                                                                     <font></font>
                                                                     <font></font>
                                                                 </font>
@@ -175,7 +175,7 @@ $html = <<<HTML
                                             <td style="word-wrap:break-word;word-break:break-word;border:0px;padding:6px 30px;border-top:0px none rgb(17,17,17);border-bottom:0px none rgb(17,17,17);font-family:Arial,Helvetica,sans-serif">
                                                 <div style="margin:0px"><span style="padding:0px;margin:0px">
                                                         <p dir="ltr" style="line-height:1.2;padding:0px;margin:0px">
-                                                            <font face="Verdana, Geneva, sans-serif"><span style="font-size:9pt;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;padding:0px;margin:0px">Thông tin chi tiết về thử thách Chinh Phục Everest, bạn có thể xem </span><span style="font-size:9pt;color:rgb(0,0,0);background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;padding:0px;margin:0px">tại đây</span>
+                                                            <font face="Verdana, Geneva, sans-serif"><span style="font-size:9pt;color:rgb(0,0,0);background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;padding:0px;margin:0px">Thông tin chi tiết về thử thách Chinh Phục Everest, bạn có thể xem </span><span style="font-size:9pt;color:rgb(0,0,0);background-color:transparent;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;padding:0px;margin:0px"><a href="${product_link}" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" >tại đây</a></span>
                                                                 <font></font>
                                                             </font>
                                                             <font></font>
@@ -199,11 +199,10 @@ $html = <<<HTML
                                         <tr>
                                             <td style="word-wrap:break-word;word-break:break-word;border:0px;padding:6px 30px;border-top:0px none rgb(17,17,17);border-bottom:0px none rgb(17,17,17);font-family:Arial,Helvetica,sans-serif">
                                                 <p style="text-align:justify;padding:0px;margin:0px"><span style="font-family:Verdana,Geneva,sans-serif;background-color:transparent;font-size:9pt;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px">
-                                                        <font color="#000000">Cảm ơn bạn đã cùng </font><a href="https://sender13.zohoinsights.com/ocgeturl/2d6f.327230a?l=48266671-d32c-11eb-8abb-5254004d4100&amp;m=48252df0-d32c-11eb-8abb-5254004d4100&amp;h=03e24aa238c02e7504e926067dd642836ecd4df6f4d571d25c39cb8d819e22da" title="https://journeyofyouth.vn/page/VOLUNTEERS-OF-FOREST-GARDEN" rel="noopener noreferrer" style="text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://sender13.zohoinsights.com/ocgeturl/2d6f.327230a?l%3D48266671-d32c-11eb-8abb-5254004d4100%26m%3D48252df0-d32c-11eb-8abb-5254004d4100%26h%3D03e24aa238c02e7504e926067dd642836ecd4df6f4d571d25c39cb8d819e22da&amp;source=gmail&amp;ust=1625214231382000&amp;usg=AFQjCNGRPWJxScPY5m5tY624mvRqmsdgow">
+                                                        <font color="#000000">Cảm ơn bạn đã cùng </font>
                                                             <font color="#000000">Joy Forest Garden</font>
-                                                        </a>
                                                     </span><span style="font-family:Verdana,Geneva,sans-serif;background-color:transparent;font-size:9pt;font-variant-numeric:normal;vertical-align:baseline;padding:0px;margin:0px">
-                                                        <font color="#000000">&nbsp;và Inspire Trails góp phần vào mục tiêu trồng 10,000 cây trước tháng 12, 2022. Đóng góp của bạn sẽ được cập nhật và thông báo <b>tại đây.</b>&nbsp;</font>
+                                                        <font color="#000000">&nbsp;và Inspire Trails góp phần vào mục tiêu trồng 10,000 cây trước tháng 12, 2022. Đóng góp của bạn sẽ được cập nhật và thông báo <b><a href="https://journeyofyouth.vn/page/VOLUNTEERS-OF-FOREST-GARDEN" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" >tại đây</a></b>&nbsp;</font>
                                                     </span>
                                                     <font></font>
                                                 </p>
@@ -234,7 +233,7 @@ $html = <<<HTML
                                     <tbody>
                                         <tr>
                                             <td style="word-wrap:break-word;word-break:break-word;border:0px;padding:6px 30px;border-top:0px none rgb(17,17,17);border-bottom:0px none rgb(17,17,17)">
-                                                <p style="width:100%;float:none;text-align:center;padding:0px;margin:0px"><img alt="" style="border:0px solid black;width:25%;max-width:100%;vertical-align:top" src="https://mail.google.com/mail/u/0?ui=2&amp;ik=6bc9f3ccc0&amp;attid=0.2&amp;permmsgid=msg-f:1703996416590278272&amp;th=17a5cfb67566ee80&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ_DdTk34kxy_LwW0oR4-qCe4wsq-joR2EP5AoO3WuiqrXND4HqY4v0JgEUNfLGHYvTHWgxSv3ZoerxohfiRGIBu7zFzuPJ8FTIHn3a5AYoo986LsoCZ-M_mkwI&amp;disp=emb&amp;realattid=17a32a74d95f57e17142" width="135" height="4.07812" data-image-whitelisted="" class="CToWUd"></p>
+                                                <p style="width:100%;float:none;text-align:center;padding:0px;margin:0px"><img alt="" style="border:0px solid black;width:25%;max-width:100%;vertical-align:top" src="{$line}" width="135" height="4.07812" data-image-whitelisted="" class="CToWUd"></p>
 
                                             </td>
                                         </tr>
@@ -397,7 +396,7 @@ $html = <<<HTML
                                     <tbody>
                                         <tr>
                                             <td style="word-wrap:break-word;word-break:break-word;border:0px;padding:6px 30px;border-top:0px none rgb(17,17,17);border-bottom:0px none rgb(17,17,17)">
-                                                <p style="width:100%;padding:0px;margin:0px"><img alt="" style="width:100%;max-width:100%;vertical-align:top" src="https://mail.google.com/mail/u/0?ui=2&amp;ik=6bc9f3ccc0&amp;attid=0.3&amp;permmsgid=msg-f:1703996416590278272&amp;th=17a5cfb67566ee80&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ_nKjFkd3Cn3DfMyWiOyLGQNP-byeY77JIzPy2-j079GM2YxdT7RhRqzAvXQ9_x-MPXOUblr-kLH1VudS1en4De_ln5d-gpkNq8944voXZ2SI1iipSpg6yhLHM&amp;disp=emb&amp;realattid=17a32a74d959f6698bf3" width="540" height="157.156" data-image-whitelisted="" class="CToWUd a6T" tabindex="0">
+                                                <p style="width:100%;padding:0px;margin:0px"><img alt="" style="width:100%;max-width:100%;vertical-align:top" src="{$image_template_footer}" width="540" height="157.156" data-image-whitelisted="" class="CToWUd a6T" tabindex="0">
                                                 <div class="a6S" dir="ltr" style="opacity: 0.01; left: 934px; top: 1295.72px;">
                                                     <div id=":14b" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" title="Download" role="button" tabindex="0" aria-label="Download attachment E.Footer.png" data-tooltip-class="a1V">
                                                         <div class="akn">

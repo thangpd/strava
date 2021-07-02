@@ -4,9 +4,14 @@
 
 
 //$url = home_url() . '/' . \Elhelper\modules\stravaApiModule\models\StravaAccessToken::getCallBackUrlVal();
-$products = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallengeId();
+//$products = \Elhelper\modules\productStravaModule\db\ChallengeDb::getAllChallengeId();
 //echo '<pre>';
 //print_r($products);
+//echo '</pre>';
+\Elhelper\mail\Template::getDataEmailTemplate( 1, 2, 0 );
+//$userObj        = get_user_by( 'id', 2 );
+//echo '<pre>';
+//print_r($userObj);
 //echo '</pre>';
 
 $domain = EL_HELPER_DEBUG == 'DEV' ? URL_DOMAIN : '';

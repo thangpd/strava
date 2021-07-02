@@ -99,6 +99,7 @@ class StravaApiWebhookHandleController extends Singleton {
 								] );
 								if ( $challengeModel->checkIfCanFinishChallenge() && $challengeModel->checkIfChallengeExpired() ) {
 									$challengeModel->activeFinishedEventChallenge();
+									$challengeModel->activeSendMailBaseOnPercentDistance();
 								}
 
 							}

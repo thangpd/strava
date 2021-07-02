@@ -10,6 +10,7 @@ namespace Elhelper\modules\productStravaModule\controller;
 
 
 use Elhelper\common\Singleton;
+use Elhelper\mail\Template;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
 use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
 use Elhelper\modules\userStravaModule\db\ActivityDb;
@@ -78,8 +79,7 @@ class ChallengeController extends Singleton {
 				'amount_date'     => $amount_date,
 				'amount_distance' => $amount_distance
 			] );
-
-
+			Template::action_sendmail( $product_id, $user_id, 0 );
 		}
 
 

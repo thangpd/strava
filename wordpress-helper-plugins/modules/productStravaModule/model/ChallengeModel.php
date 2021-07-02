@@ -11,6 +11,7 @@ namespace Elhelper\modules\productStravaModule\model;
 
 use Elhelper\common\Model;
 use Elhelper\inc\HeplerStrava;
+use Elhelper\mail\Template;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
 
@@ -114,6 +115,33 @@ class ChallengeModel extends Model {
 			return false;
 		}
 
+	}
+
+	public function activeSendMailBaseOnPercentDistance() {
+		$percentDistanceOff = $this->getPercentDistanceOff();
+		if ( $percentDistanceOff > 25 ) {
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 1 );
+		} elseif ( $percentDistanceOff > 50 ) {
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 2 );
+		} elseif ( $percentDistanceOff > 75 ) {
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 3 );
+		} elseif ( $percentDistanceOff == 100 ) {
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 4 );
+		}
+
+	}
+
+	public function getPercentDistanceOff() {
+		$distance_already = $this->getDistanceAlreadyRun();
+		$amount_distance  = $this->challenge->amount_distance;
+		if ( $distance_already < $amount_distance ) {
+			$percent_distance_left = round( $distance_already / $amount_distance * 100, 0 );
+
+		} else {
+			$percent_distance_left = 100;
+		}
+
+		return $percent_distance_left;
 	}
 
 	public function canInsertDistanceToChallenge() {
