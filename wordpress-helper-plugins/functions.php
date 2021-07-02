@@ -223,40 +223,6 @@ if ( function_exists( 'acf_add_local_field_group' ) ):
 				'step'              => '',
 			),
 			array(
-				'key'               => 'field_60dc29c029bda',
-				'label'             => 'Ngày bắt đầu',
-				'name'              => 'start_date',
-				'type'              => 'date_picker',
-				'instructions'      => 'Chọn ngày bắt đầu',
-				'required'          => 1,
-				'conditional_logic' => 0,
-				'wrapper'           => array(
-					'width' => '',
-					'class' => '',
-					'id'    => '',
-				),
-				'display_format'    => 'd/m/Y',
-				'return_format'     => 'd/m/Y',
-				'first_day'         => 1,
-			),
-			array(
-				'key'               => 'field_60dc2a0229bdb',
-				'label'             => 'Ngày kết thúc',
-				'name'              => 'end_date',
-				'type'              => 'date_picker',
-				'instructions'      => 'Chọn ngày kết thúc.',
-				'required'          => 1,
-				'conditional_logic' => 0,
-				'wrapper'           => array(
-					'width' => '',
-					'class' => '',
-					'id'    => '',
-				),
-				'display_format'    => 'd/m/Y',
-				'return_format'     => 'd/m/Y',
-				'first_day'         => 1,
-			),
-			array(
 				'key'               => 'field_60dc7a1ed31af',
 				'label'             => 'Thời gian chạy (ngày)',
 				'name'              => 'amount_date',
@@ -322,5 +288,13 @@ if ( function_exists( 'acf_add_local_field_group' ) ):
 	) );
 
 endif;
+
+
+add_filter( 'wp_head', 'custom_font_inspire' );
+function custom_font_inspire() {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">';
+}
 
 

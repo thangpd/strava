@@ -355,7 +355,7 @@ HTML;
 		$get_dir_mail_template = new Template();
 
 		// var_dump( $get_dir_mail_template->action_send_mail( 'begin', 46, 'nguyenhuutien.it.3895@gmail.com' ) );
-
+//		var_dump( wp_mail( 'thang.pham@techvsi.com', 'test', 'test' ) );
 		if ( class_exists( 'WooCommerce' ) ) {
 			$args = array(
 				'post_type'           => 'shop_order'
