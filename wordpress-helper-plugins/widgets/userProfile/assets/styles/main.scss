@@ -12,7 +12,6 @@ $md: 768px;
 $sm: 576px;
 
 $font: 'Livvic', sans-serif !important;
-$bg-color: #EBECED;
 
 html, body {
     font-family: $font;
@@ -21,10 +20,16 @@ html, body {
     color: #000;
 }
 
+.elementor-widget-wrap.elementor-element-populated {
+    padding: 0px !important;
+}
+
+
 .strava-information,
 .strava-challenges,
 .list-challenges,
 .popup-modal {
+    // background-color: #EBECED;
     .call-to-action {
         position: relative;
         display: block; 
