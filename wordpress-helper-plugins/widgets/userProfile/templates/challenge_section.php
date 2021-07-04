@@ -80,7 +80,6 @@ $button_conntect_strava = require $str;
 							}
 							?></h2>
 						<?php if ( is_user_logged_in() ): ?>
-
                             <div class="d-flex align-items-end d-lg-block">
                                 <h3>TỔNG TÍCH LŨY</h3>
                                 <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
@@ -106,12 +105,10 @@ $button_conntect_strava = require $str;
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
-						<?php echo $button_conntect_strava ?>
-
+						<?php echo $button_conntect_strava; ?>
 	                    <?php if ( is_user_logged_in() ) {
 		                    echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
 	                    } ?>
-
                     </div>
                 </div>
             </div>
@@ -206,6 +203,36 @@ $button_conntect_strava = require $str;
     </div>
 
     <!-- List Challenges -->
-	<?php echo $render_list_challenges_report ?>
+	<div class="list-challenges">
+		<div class="container-fluid">
+			<div class="list-challenges__wrap mx-3">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-tab">
+							<div class="list-challenges ">
+								<div class="container-fluid">
+									<div class="list-challenges__wrap mx-3">
+										<div class="row">
+											<div class="col-md-12">
+												<h2 class="heading">Danh sách nhà chinh phục</h2>
+												<span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
+													<?php echo $render_list_challenges_report ?>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- End List Challenges -->
 </div>

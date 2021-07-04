@@ -10,7 +10,7 @@ ob_start();
 if ( is_user_logged_in() ):
 	$userBearer = new \Elhelper\modules\userStravaModule\model\UserStravaBearerModel( $user_id );
 
-	if ( ! $userBearer->issetBearer() ) {
+	if ( $userBearer->issetBearer() ) {
 		?>
         <button class="button popup-strava-challenges get-access-token" data-client_id="<?php echo CLIENT_ID ?>"
                 data-state="<?php echo $state ?>" data-url="<?php echo $url ?>">
@@ -19,6 +19,7 @@ if ( is_user_logged_in() ):
 		<?php
 	} else {
 		$button_connected = <<<HTML
+					
         <div class="button popup-strava-challenges">Đã Kết Nối Strava
 			<a href="#" data-user_id="{$user_id}" class="deauthorize_strava"><span class="logout">ngắt kết nối với Strava</span></a>
 		</div>	
