@@ -11,22 +11,25 @@ $lg: 991px;
 $md: 768px;
 $sm: 576px;
 
+$font: 'Livvic', sans-serif !important;
+
 html, body {
-    font-family: 'Livvic', sans-serif;
+    font-family: $font;
     font-size: 14px;
     line-height: 1.25;
     color: #000;
-    background-color: #EBECED;
 }
 
-body, input, textarea, button, .button, .faux-button, .wp-block-button__link, .wp-block-file__button, .has-drop-cap:not(:focus)::first-letter, .has-drop-cap:not(:focus)::first-letter, .entry-content .wp-block-archives, .entry-content .wp-block-categories, .entry-content .wp-block-cover-image, .entry-content .wp-block-latest-comments, .entry-content .wp-block-latest-posts, .entry-content .wp-block-pullquote, .entry-content .wp-block-quote.is-large, .entry-content .wp-block-quote.is-style-large, .entry-content .wp-block-archives *, .entry-content .wp-block-categories *, .entry-content .wp-block-latest-posts *, .entry-content .wp-block-latest-comments *, .entry-content p, .entry-content ol, .entry-content ul, .entry-content dl, .entry-content dt, .entry-content cite, .entry-content figcaption, .entry-content .wp-caption-text, .comment-content p, .comment-content ol, .comment-content ul, .comment-content dl, .comment-content dt, .comment-content cite, .comment-content figcaption, .comment-content .wp-caption-text, .widget_text p, .widget_text ol, .widget_text ul, .widget_text dl, .widget_text dt, .widget-content .rssSummary, .widget-content cite, .widget-content figcaption, .widget-content .wp-caption-text {
-    font-family: 'Livvic', sans-serif !important;
+.elementor-widget-wrap.elementor-element-populated {
+    padding: 0px !important;
 }
+
 
 .strava-information,
 .strava-challenges,
 .list-challenges,
 .popup-modal {
+    // background-color: #EBECED;
     .call-to-action {
         position: relative;
         display: block; 
@@ -38,8 +41,17 @@ body, input, textarea, button, .button, .faux-button, .wp-block-button__link, .w
             object-fit: cover;
         }
     }
-    
+    tr,
+    th,
+    td,
+    li,
+    a {
+        font-family: $font;
+        text-decoration: none;
+    }
+
     h2 {
+        font-family: $font;
         font-style: normal;
         font-weight: 900;
         font-size: 30px;
@@ -48,6 +60,7 @@ body, input, textarea, button, .button, .faux-button, .wp-block-button__link, .w
         letter-spacing: 0.1em;
     }
     h3 {
+        font-family: $font;
         font-style: normal;
         font-weight: 600;
         font-size: 15px;
@@ -57,6 +70,7 @@ body, input, textarea, button, .button, .faux-button, .wp-block-button__link, .w
         margin-bottom: 0;
     }
     span {
+        font-family: $font;
         font-style: normal;
         font-weight: 900;
         letter-spacing: 0.1em;
@@ -69,6 +83,7 @@ body, input, textarea, button, .button, .faux-button, .wp-block-button__link, .w
         }
     }
     .button {
+        font-family: $font;
         width: 100%;
         padding: 16px 0;
         background: $secondary;

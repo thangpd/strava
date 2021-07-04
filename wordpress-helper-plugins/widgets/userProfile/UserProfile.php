@@ -168,7 +168,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                     </div>
-                                                    <div class="d-none d-lg-block distance-left">
+                                                    <div class="d-none d-lg-flex distance-left">
                                                         <b>{$distance_already} km</b>
                                                         <span>Còn lại <b>{$distance_left}km</b></span>
                                                     </div>
@@ -193,7 +193,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                     </div>
-                                                    <div class="d-none d-lg-block distance-left">
+                                                    <div class="d-none d-lg-flex distance-left">
                                                         <b>{$amount_date} ngày</b>
                                                         <span>Còn lại <b>{$date_left} ngày</b></span>
                                                     </div>
@@ -223,32 +223,11 @@ HTML;
 	}
 
 
-	public static function renderListChallengeReport( $challenges ) {
-		$html_template = '
-						<div class="list-challenges">
-						    <div class="container-fluid">
-						        <div class="list-challenges__wrap mx-3">
-						            <div class="row">
-						                <div class="col-md-12">
-						                    <h2 class="heading">Danh sách nhà chinh phục</h2>
-						                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-						                </div>
-						            </div>
-						
-						            <div class="row">
-						                <div class="col-md-12">
-						<div class="table-tab">
-						                        %1$s
-						                    </div>
-						                    </div>
-						            </div>
-						        </div>
-						    </div>
-						</div>';
-		$html          = '';
+	public static function renderListChallengeReport( $challenges ) {									
+		$html = '';
 		if ( ! empty( $challenges ) ) {
 			foreach ( $challenges as $challenge ) {
-				$html .= sprintf( $html_template, self::renderTableItemChallenge( $challenge ) );
+				$html .= sprintf( '%1$s', self::renderTableItemChallenge( $challenge ) );
 			}
 
 		}
