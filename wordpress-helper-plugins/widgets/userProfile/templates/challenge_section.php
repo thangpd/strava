@@ -12,7 +12,7 @@ if ( is_user_logged_in() ) {
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
 	$athleteTotalDistance = $userAthlete->getAthleteTotalDistance();
-	$user_total_distance  = ! empty( $athleteTotalDistance ) ? $athleteTotalDistance * 0.001 . ' km' : '0 km';
+	$user_total_distance  = ! empty( $athleteTotalDistance ) ? round( $athleteTotalDistance * 0.001, 2 ) . ' km' : '0 km';
 
 
 	//product
@@ -106,9 +106,9 @@ $button_conntect_strava = require $str;
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
 						<?php echo $button_conntect_strava; ?>
-	                    <?php if ( is_user_logged_in() ) {
-		                    echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
-	                    } ?>
+						<?php if ( is_user_logged_in() ) {
+							echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
+						} ?>
                     </div>
                 </div>
             </div>
@@ -203,36 +203,36 @@ $button_conntect_strava = require $str;
     </div>
 
     <!-- List Challenges -->
-	<div class="list-challenges">
-		<div class="container-fluid">
-			<div class="list-challenges__wrap mx-3">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="table-tab">
-							<div class="list-challenges ">
-								<div class="container-fluid">
-									<div class="list-challenges__wrap mx-3">
-										<div class="row">
-											<div class="col-md-12">
-												<h2 class="heading">Danh sách nhà chinh phục</h2>
-												<span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
+    <div class="list-challenges">
+        <div class="container-fluid">
+            <div class="list-challenges__wrap mx-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-tab">
+                            <div class="list-challenges ">
+                                <div class="container-fluid">
+                                    <div class="list-challenges__wrap mx-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 class="heading">Danh sách nhà chinh phục</h2>
+                                                <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
 													<?php echo $render_list_challenges_report ?>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End List Challenges -->
 </div>

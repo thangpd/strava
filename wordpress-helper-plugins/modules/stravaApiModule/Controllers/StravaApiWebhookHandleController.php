@@ -109,11 +109,8 @@ class StravaApiWebhookHandleController extends Singleton {
 										$challengeModel->activeSendMailBaseOnPercentDistance();
 									}
 									if ( $checkIfCanFinishChallenge && ! $checkIfChallengeIsExpired ) {
-										$title = 'Reached 100% Milestone';
-										write_log( 'sent template 4' );
-										Template::action_sendmail( $challenge->challenge->product_id, $challenge->challenge->user_id, 0, $title );
+										$challengeModel->activeSendMailBaseOnPercentDistance();
 										$challengeModel->activeFinishedEventChallenge();
-
 									}
 
 								}

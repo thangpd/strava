@@ -40,6 +40,7 @@ class ChallengeDb extends DB {
 	public static function getAllChallengeOfUser( $user_id ) {
 		global $wpdb;
 		$sql = sprintf( 'SELECT * FROM %s WHERE %s', self::get_table(), 'user_id=' . $user_id );
+
 		return $wpdb->get_results( $sql );
 	}
 
@@ -62,11 +63,20 @@ class ChallengeDb extends DB {
 		throw new \Exception( "Cannot unserialize a singleton." );
 	}
 
+	public static function getEmailPhaseOfProduct( $challenge_id ) {
+		global $wpdb;
+		$select = 'email_phase';
+		$table  = ChallengeDb::get_table();
+		$where  = 'id=' . $challenge_id;
+		$sql    = sprintf( 'SELECT %s FROM %s WHERE %s', $select, $table, $where );
+
+		return $wpdb->get_results( $sql );
+	}
+
 	/**
 	 * Singletons should not be cloneable.
 	 */
 	protected function __clone() {
 	}
-
 
 }

@@ -120,30 +120,33 @@ class ChallengeModel extends Model {
 	public function activeSendMailBaseOnPercentDistance() {
 		$percentDistanceOff = (int) $this->getPercentDistanceOff();
 		write_log( 'Active_sendmail at' . $percentDistanceOff . '%' );
+		$phase = 0;
 		if ( $percentDistanceOff > 25 && $percentDistanceOff < 50 ) {
 			write_log( 'sent template 1' );
-			$title = 'Reached 25% Milestone';
-
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 1, $title );
+			$phase = 1;
 		}
 		if ( $percentDistanceOff > 50 && $percentDistanceOff < 75 ) {
 			write_log( 'sent template 2' );
-			$title = 'Reached 50% Milestone';
-
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 2, $title );
+			$phase = 2;
 		}
 		if ( $percentDistanceOff > 75 && $percentDistanceOff < 75 ) {
 			write_log( 'sent template 3' );
-			$title = 'Reached 75% Milestone';
-
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 3, $title );
+			$phase = 3;
 		}
 		if ( $percentDistanceOff == 100 || $percentDistanceOff > 100 ) {
 			write_log( 'sent template 4' );
-			$title = 'Reached 100% Milestone';
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 4, $title );
+			$phase = 4;
 		}
-
+		$current_phase = $this->getEmailPhaseOfProduct();
+		if ( $current_phase == null ) {
+			$current_phase = 0;
+		}
+		if ( $current_phase < $phase ) {
+			for ( $i = $current_phase; $i <= $phase; $i ++ ) {
+				Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, $i );
+			}
+		}
+		$this->updateEmailPhase( $phase );
 	}
 
 	public function getPercentDistanceOff() {
@@ -159,6 +162,24 @@ class ChallengeModel extends Model {
 		return $percent_distance_left;
 	}
 
+	public function getEmailPhaseOfProduct() {
+		$res = ChallengeDb::getEmailPhaseOfProduct( $this->challenge->id );
+		if ( ! empty( $res ) ) {
+			return $res;
+		} else {
+			return [];
+		}
+	}
+
+	//return km
+
+	public function updateEmailPhase( $email_phase ) {
+		ChallengeDb::update( [ 'email_phase' => $email_phase ], [
+			'id'      => $this->challenge->id,
+			'user_id' => $this->challenge->user_id
+		] );
+	}
+
 	public function canInsertDistanceToChallenge() {
 		switch ( $this->challenge->status ) {
 			case 0:
@@ -172,8 +193,6 @@ class ChallengeModel extends Model {
 				break;
 		}
 	}
-
-	//return km
 
 	public function checkIfChallengeIsExpired() {
 		$start_date = $this->challenge->created_at;

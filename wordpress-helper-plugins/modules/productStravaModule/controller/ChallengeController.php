@@ -79,9 +79,7 @@ class ChallengeController extends Singleton {
 				'amount_date'     => $amount_date,
 				'amount_distance' => $amount_distance
 			] );
-			$title = 'The Mount begins';
-
-			Template::action_sendmail( $product_id, $user_id, 0, $title );
+			Template::action_sendmail( $product_id, $user_id, 0 );
 		}
 
 

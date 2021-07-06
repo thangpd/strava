@@ -4,12 +4,19 @@ namespace Elhelper\mail;
 
 class Template {
 
-	public static function action_sendmail( $product_id, $user_id, $template_number, $title ) {
+	public static function action_sendmail( $product_id, $user_id, $template_number ) {
+		$title          = [
+			'The Mount begins',
+			'Reached 25% Milestone',
+			'Reached 50% Milestone',
+			'Reached 75% Milestone',
+			'Reached 100% Milestone'
+		];
 		$template_email = Template::getDataEmailTemplate( $product_id, $user_id, $template_number );
 		$userObj        = get_user_by( 'id', $user_id );
 		$useremail      = $userObj->data->user_email;
 		if ( ! empty( $useremail ) ) {
-			$res = self::send_mail( $useremail, $title, $template_email );
+			$res = self::send_mail( $useremail, $title[ $template_number ], $template_email );
 			write_log( json_encode( $res ) . __FILE__ . __LINE__ );
 		}
 	}
@@ -110,9 +117,9 @@ class Template {
 					$product_title = 'Product Empty';
 					$product_link  = '#';
 				}
-				$site_link=home_url();
-				$body_1 = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_1.png';
-				$body_2 = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_2.jpeg';
+				$site_link = home_url();
+				$body_1    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_1.png';
+				$body_2    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_2.jpeg';
 
 				$title        = '';
 				$template_dir = Template::get_template_dir( 4 );
@@ -121,9 +128,9 @@ class Template {
 				$included = ob_get_clean();
 				break;
 			case 5:
-				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
-				$footer= plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
-				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$header       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/CoverEverFinal.png';
+				$footer       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/E.Footer.png';
+				$line         = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
 				$template_dir = Template::get_template_dir( 5 );
 				ob_start();
 				require $template_dir;
