@@ -167,6 +167,7 @@ class Elhelper_Plugin {
 		}
 
 		//enqueue
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_script' ] );
 		add_filter( 'template_include', [ $this, 'summit_template_include' ], 10 );
 

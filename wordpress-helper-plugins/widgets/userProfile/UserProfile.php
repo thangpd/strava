@@ -40,7 +40,10 @@ class UserProfile extends \Elementor\Widget_Base {
 		$product_title = $product->get_title();
 
 
-		$challengeModel   = new ChallengeModel( $challenge );
+		$challengeModel = new ChallengeModel( $challenge );
+//		Template::action_sendmail( 485, 2, 4, 'test' );
+
+
 		$distance_already = $challengeModel->getDistanceAlreadyRun();
 
 //		$amount_distance = get_field( 'distance', $product_id );
@@ -75,15 +78,16 @@ class UserProfile extends \Elementor\Widget_Base {
 		$date_left_percent = 0;
 		if ( ! empty( $start_date ) && ! empty( $amount_date ) ) {
 			$start_date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $start_date );
-			$end_date   = clone( $start_date );
+			$start_date->modify( '+1 day' );
+			$end_date = clone( $start_date );
 			$end_date->modify( '+' . $amount_date . 'days' );
 			//end date
 
 			$datediff_left = $now->diff( $end_date );
 			if ( $datediff_left->days > 0 ) {
 				$date_left         = $datediff_left->days;
-				$f                 = $date_left / $amount_date;
-				$date_left_percent = round( $f * 100, 0 );
+				$f                 = ( $date_left / $amount_date );
+				$date_left_percent = 100 - round( $f * 100, 0 );
 				$date_active       = round( $date_left_percent / 10, 0 );
 			} else {
 				$date_left         = 0;
@@ -177,7 +181,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                     <span class="percent">{$date_left_percent}%</span>
                                                 </div>
                                                 <div class="col-9">
-                                                    <div class="line" data-active="${date_active}">
+                                                    <div class="line" data-active="{$date_active}">
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
                                                         <div class="rectangle"></div>
@@ -329,9 +333,9 @@ HTML;
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
-
-		require WP_HELPER_PATH . 'mail/template.php';
-		$get_dir_mail_template = new Template();
+		/*
+				require WP_HELPER_PATH . 'mail/template.php';
+				$get_dir_mail_template = new Template();*/
 
 		// var_dump( $get_dir_mail_template->action_send_mail( 'begin', 46, 'nguyenhuutien.it.3895@gmail.com' ) );
 //		var_dump( wp_mail( 'thang.pham@techvsi.com', 'test', 'test' ) );

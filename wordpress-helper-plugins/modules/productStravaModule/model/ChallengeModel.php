@@ -118,15 +118,30 @@ class ChallengeModel extends Model {
 	}
 
 	public function activeSendMailBaseOnPercentDistance() {
-		$percentDistanceOff = $this->getPercentDistanceOff();
-		if ( $percentDistanceOff > 25 ) {
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 1 );
-		} elseif ( $percentDistanceOff > 50 ) {
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 2 );
-		} elseif ( $percentDistanceOff > 75 ) {
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 3 );
-		} elseif ( $percentDistanceOff == 100 ) {
-			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 4 );
+		$percentDistanceOff = (int) $this->getPercentDistanceOff();
+		write_log( 'Active_sendmail at' . $percentDistanceOff . '%' );
+		if ( $percentDistanceOff > 25 && $percentDistanceOff < 50 ) {
+			write_log( 'sent template 1' );
+			$title = 'Reached 25% Milestone';
+
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 1, $title );
+		}
+		if ( $percentDistanceOff > 50 && $percentDistanceOff < 75 ) {
+			write_log( 'sent template 2' );
+			$title = 'Reached 50% Milestone';
+
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 2, $title );
+		}
+		if ( $percentDistanceOff > 75 && $percentDistanceOff < 75 ) {
+			write_log( 'sent template 3' );
+			$title = 'Reached 75% Milestone';
+
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 3, $title );
+		}
+		if ( $percentDistanceOff == 100 || $percentDistanceOff > 100 ) {
+			write_log( 'sent template 4' );
+			$title = 'Reached 100% Milestone';
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, 4, $title );
 		}
 
 	}
@@ -160,7 +175,7 @@ class ChallengeModel extends Model {
 
 	//return km
 
-	public function checkIfChallengeExpired() {
+	public function checkIfChallengeIsExpired() {
 		$start_date = $this->challenge->created_at;
 
 //		$amount_date = get_field( 'amount_date', $product_id );
@@ -176,9 +191,9 @@ class ChallengeModel extends Model {
 		$end_date     = $end_date->setTimestamp( $end_datetime->getTimestamp() - 1 );
 		//end date
 		if ( $now < $end_date ) {
-			return true;
-		} else {
 			return false;
+		} else {
+			return true;
 		}
 
 	}

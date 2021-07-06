@@ -60,7 +60,6 @@ class StravaApiRoute extends SingleController {
 			} else {
 				write_log( 'Error verify Webhook Strava' );
 			}
-
 			$template = $this->render( 'index.php' );
 		}
 		//domain.tm/el_strava_api/access-token
