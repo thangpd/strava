@@ -69,11 +69,14 @@ class StravaApiWebhookHandleController extends Singleton {
 					write_log( 'challenges_of_user' . json_encode( $challenges ) );
 					$activity = new \Elhelper\modules\activityModule\model\ActivityStravaModel();
 					$res      = $activity->getActivityInfo( $user_objs->ID, $json['object_id'] );
+
+					// add all distance of all activity to user total distance
+					$userAthlete->addAthleteTotalDistance( $res->distance );
+
 					//Type of activity. For example - Run, Ride etc.
 					if ( ! empty( $challenges ) ) {
 						if ( $res->type == 'Run' || true ) {
 							write_log( 'added_athlete_total_distance' );
-							$userAthlete->addAthleteTotalDistance( $res->distance );
 							$activity_history = new ActivityDb();
 							$activity_history->insert( [
 								'athlete_id'  => $res->athlete->id,

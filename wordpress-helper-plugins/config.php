@@ -87,7 +87,6 @@ return [
 					'media' => '',
 
 				],
-
 			],
 		],
 		'default_arr' => [

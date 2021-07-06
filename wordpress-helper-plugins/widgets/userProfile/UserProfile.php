@@ -78,13 +78,12 @@ class UserProfile extends \Elementor\Widget_Base {
 		$date_left_percent = 0;
 		if ( ! empty( $start_date ) && ! empty( $amount_date ) ) {
 			$start_date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $start_date );
-			$start_date->modify( '+1 day' );
+//			$start_date->modify( '+1 day' );
 			$end_date = clone( $start_date );
 			$end_date->modify( '+' . $amount_date . 'days' );
-			//end date
 
 			$datediff_left = $now->diff( $end_date );
-			if ( $datediff_left->days > 0 ) {
+			if ( $datediff_left->days > 0 && $now < $end_date ) {
 				$date_left         = $datediff_left->days;
 				$f                 = ( $date_left / $amount_date );
 				$date_left_percent = 100 - round( $f * 100, 0 );
@@ -223,7 +222,7 @@ HTML;
 	}
 
 
-	public static function renderListChallengeReport( $challenges ) {									
+	public static function renderListChallengeReport( $challenges ) {
 		$html = '';
 		if ( ! empty( $challenges ) ) {
 			foreach ( $challenges as $challenge ) {
