@@ -11,22 +11,24 @@ use Elhelper\mail\Template;
 
 class UserProfile extends \Elementor\Widget_Base {
 
+	private $assets;
+
 	/**
 	 * @param array $data
 	 * @param array|null $args
 	 */
 	public function __construct( array $data = [], array $args = null ) {
 		parent::__construct( $data, $args );
-		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'userprofile', [
+		$this->assets = Elhelper_Plugin::instance()->wpackio_register( 'testapp', 'userprofile', [
 			'js'      => true,
 			'js_dep'  => [
 				'elementor-frontend-modules',
 			],
 			'css_dep' => [
-//				'font-awesome-all',
-//				'font-awesome',
-//				'fontawesome-pro-5',
-//				'slimselect',
+				'font-awesome-all',
+				'font-awesome',
+				'fontawesome-pro-5',
+				'slimselect',
 				'bootstrap'
 			],
 		] );
@@ -39,8 +41,23 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$product_title = $product->get_title();
 
+//		$challenge = ChallengeModel::getChallengeByProductIdAndUserId( 485, 2 );
 
 		$challengeModel = new ChallengeModel( $challenge );
+		/*$challenges     = ChallengeDb::getAllChallengeOfUser( $user_id );
+		echo '<pre>';
+		print_r( $challenges );
+		echo '</pre>';
+		foreach ( $challenges as $challenge ) {
+			$challengeModel = new ChallengeModel( $challenge );
+			$challengeModel->activeSendMailBaseOnPercentDistance();
+		}*/
+//		Template::action_sendmail( $challenge->id, 2, 0 );
+//		$emailPhaseOfProduct = $challengeModel->getEmailPhaseOfProduct();
+//		echo '<pre>';
+//		print_r($emailPhaseOfProduct->email_phase);
+//		echo '</pre>';
+
 //		Template::action_sendmail( 485, 2, 4, 'test' );
 
 
@@ -331,6 +348,14 @@ HTML;
 	 * @return [type]
 	 */
 	public function render() {
+		wp_enqueue_script( array_pop(
+			$this->assets['js']
+		)['handle'] );
+		wp_enqueue_style( array_pop(
+			$this->assets['css']
+		)['handle'] );
+
+
 		$settings = $this->get_settings_for_display();
 		/*
 				require WP_HELPER_PATH . 'mail/template.php';

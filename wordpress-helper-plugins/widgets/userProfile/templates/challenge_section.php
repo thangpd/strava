@@ -27,7 +27,6 @@ if ( is_user_logged_in() ) {
 		//num of challenge
 		$num_of_challenge       = count( $challenges );
 		$num_challenge_finished = 0;
-
 		foreach ( $challenges as $challenge ) {
 			\Elhelper\modules\productStravaModule\model\ChallengeModel::getListFinisherInfo( $challenge->product_id );
 
@@ -106,9 +105,6 @@ $button_conntect_strava = require $str;
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
 						<?php echo $button_conntect_strava; ?>
-						<?php if ( is_user_logged_in() ) {
-							echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
-						} ?>
                     </div>
                 </div>
             </div>

@@ -75,22 +75,26 @@ class ChallengeModel extends Model {
 	}
 
 	public function getPaceOfChallenge() {
-		$list_pace = ChallengeDb::getPaceOfChallengeById( $this->challenge->id );
+		$list_pace     = ChallengeDb::getPaceOfChallengeById( $this->challenge->id );
+		$distance_mile = 0;
+		$moving_time   = 0;
 		if ( ! empty( $list_pace ) ) {
-			$distance_mile = 0;
-			$moving_time   = 0;
+
 			foreach ( $list_pace as $pace ) {
 				$distance_mile += HeplerStrava::getMiles( $pace->distance );
 				$moving_time   += $pace->moving_time;
 			}
 		}
-
-
 		$distance_mile = round( $distance_mile, 0 );
 
 		$moving_time = $moving_time / 60;
+		if ( $distance_mile != 0 ) {
+			$f = $moving_time / $distance_mile;
+		} else {
+			$f = 0;
+		}
 
-		return $moving_time / $distance_mile;
+		return $f;
 	}
 
 	public function getDistanceAlreadyRun() {
@@ -117,36 +121,48 @@ class ChallengeModel extends Model {
 
 	}
 
+	public static function getChallengeByProductIdAndUserId( $product_id, $user_id ) {
+		$res = ChallengeDb::getChallengeByProductIdAndUserId( $product_id, $user_id );
+//		echo '<pre>';
+//		print_r($res);
+//		echo '</pre>';
+
+	}
+
 	public function activeSendMailBaseOnPercentDistance() {
 		$percentDistanceOff = (int) $this->getPercentDistanceOff();
 		write_log( 'Active_sendmail at' . $percentDistanceOff . '%' );
 		$phase = 0;
 		if ( $percentDistanceOff > 25 && $percentDistanceOff < 50 ) {
-			write_log( 'sent template 1' );
 			$phase = 1;
 		}
 		if ( $percentDistanceOff > 50 && $percentDistanceOff < 75 ) {
-			write_log( 'sent template 2' );
 			$phase = 2;
 		}
 		if ( $percentDistanceOff > 75 && $percentDistanceOff < 75 ) {
-			write_log( 'sent template 3' );
 			$phase = 3;
 		}
 		if ( $percentDistanceOff == 100 || $percentDistanceOff > 100 ) {
-			write_log( 'sent template 4' );
 			$phase = 4;
 		}
 		$current_phase = $this->getEmailPhaseOfProduct();
-		if ( $current_phase == null ) {
+		if ( $current_phase->email_phase == null ) {
 			$current_phase = 0;
+			write_log( 'sent mail template 0 for challengeid' . $this->challenge->id );
+			Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, $current_phase );
+			$this->updateEmailPhase( $phase );
+		} else {
+			$current_phase = $current_phase->email_phase;
 		}
+
 		if ( $current_phase < $phase ) {
-			for ( $i = $current_phase; $i <= $phase; $i ++ ) {
+			write_log( 'current phast' . $current_phase );
+			write_log( 'phase send' . $phase );
+			for ( $i = $current_phase + 1; $i <= $phase; $i ++ ) {
 				Template::action_sendmail( $this->challenge->product_id, $this->challenge->user_id, $i );
 			}
+			$this->updateEmailPhase( $phase );
 		}
-		$this->updateEmailPhase( $phase );
 	}
 
 	public function getPercentDistanceOff() {
@@ -165,7 +181,9 @@ class ChallengeModel extends Model {
 	public function getEmailPhaseOfProduct() {
 		$res = ChallengeDb::getEmailPhaseOfProduct( $this->challenge->id );
 		if ( ! empty( $res ) ) {
-			return $res;
+
+
+			return array_shift( $res );
 		} else {
 			return [];
 		}
@@ -183,15 +201,21 @@ class ChallengeModel extends Model {
 	public function canInsertDistanceToChallenge() {
 		switch ( $this->challenge->status ) {
 			case 0:
-				return true;
+				$res = true;
 				break;
 			case 1:
-				return false;
+				$res = true;
 				break;
 			case 2:
-				return false;
+				$res = false;
 				break;
 		}
+		if ( $res == false ) {
+			return false;
+		} else {
+			return ! $this->checkIfChallengeIsExpired();
+		}
+
 	}
 
 	public function checkIfChallengeIsExpired() {

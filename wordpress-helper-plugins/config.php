@@ -6,7 +6,7 @@
 define( 'EL_HELPER', 'EL_HELPER' );
 define( 'WP_HELPER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_HELPER_INC_URI', plugins_url( '', __FILE__ ) );
-define( 'URL_DOMAIN', 'http://314276c8bbe6.ngrok.io/' );
+define( 'URL_DOMAIN', 'http://5b48ad0a2c7f.ngrok.io' );
 define( 'CLIENT_ID', 67628 );
 define( 'CLIENT_SECRET', '37923ec215f0f5120ef372bbce3cc9b6073e58d0' );
 define( 'SECRET_TOKEN', 'inspire_strava_password' );
@@ -87,6 +87,25 @@ return [
 					'media' => '',
 
 				],
+				'font-awesome-all'   => [
+					'src'   => plugins_url( '/assets/lib/fontawesome/css/all.css', __FILE__ ),
+					'dep'   => '',
+					'ver'   => '',
+					'media' => '',
+
+				],
+				'font-awesome'       => [
+					'src'   => plugins_url( '/assets/lib/fontawesome/css/fontawesome.css', __FILE__ ),
+					'dep'   => 'font-awesome-all',
+					'ver'   => '',
+					'media' => '',
+				],
+				'fontawesome-pro-5' => [
+					'src'   => plugins_url( '/assets/lib/fontawesome-5-pro/css/all.css', __FILE__ ),
+					'dep'   => '',
+					'ver'   => '',
+					'media' => '',
+				]
 			],
 		],
 		'default_arr' => [

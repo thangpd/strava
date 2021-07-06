@@ -44,6 +44,13 @@ class ChallengeDb extends DB {
 		return $wpdb->get_results( $sql );
 	}
 
+	public static function getChallengeByProductIdAndUserId( $product_id, $user_id ) {
+		global $wpdb;
+		$sql = sprintf( 'SELECT * FROM %s WHERE %s', self::get_table(), 'user_id=' . $user_id . ' and product_id=' . $product_id );
+
+		return $wpdb->get_results( $sql );
+	}
+
 
 	public static function getPaceOfChallengeById( $challenge_id ) {
 		global $wpdb;
@@ -55,14 +62,6 @@ class ChallengeDb extends DB {
 		return $wpdb->get_results( $sql );
 	}
 
-
-	/**
-	 * Singletons should not be restorable from strings.
-	 */
-	public function __wakeup() {
-		throw new \Exception( "Cannot unserialize a singleton." );
-	}
-
 	public static function getEmailPhaseOfProduct( $challenge_id ) {
 		global $wpdb;
 		$select = 'email_phase';
@@ -71,6 +70,13 @@ class ChallengeDb extends DB {
 		$sql    = sprintf( 'SELECT %s FROM %s WHERE %s', $select, $table, $where );
 
 		return $wpdb->get_results( $sql );
+	}
+
+	/**
+	 * Singletons should not be restorable from strings.
+	 */
+	public function __wakeup() {
+		throw new \Exception( "Cannot unserialize a singleton." );
 	}
 
 	/**

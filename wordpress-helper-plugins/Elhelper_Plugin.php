@@ -345,6 +345,28 @@ class Elhelper_Plugin {
 		//wpackio
 		return self::$enqueue->enqueue( $app, $entry, $config );
 	}
+	/**
+	 * https://wpack.io/apis/php-api/
+	 * Wpackio enqueue
+	 * $params
+	 * Normalizes the configuration array of assets.
+	 *
+	 * Here are the supported keys:
+	 * `js` (`boolean`) True if we are to include javascripts.
+	 * `css` (`boolean`) True if we are to include stylesheets.
+	 * `js_dep` (`array`) Additional dependencies for the javascript assets.
+	 * `css_dep` (`array`) Additional dependencies for the stylesheet assets.
+	 * `in_footer` (`boolean`) Whether to print the assets in footer (for js only).
+	 * `media` (`string`) Media attribute for stylesheets (defaults `'all'`).
+	 *
+	 * @param array $config Configuration array.
+	 *
+	 * @return array Normalized configuration with all the mentioned keys.
+	 */
+	public function wpackio_register( $app, $entry, $config = [] ) {
+		//wpackio
+		return self::$enqueue->register( $app, $entry, $config );
+	}
 
 
 	/**

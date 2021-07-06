@@ -47,7 +47,7 @@ class StravaChatBotManager extends Controller {
 			'css_dep' => [
 				'slimselect',
 				'fontawesome-pro-5',
-				'bootstrap'
+				//'bootstrap'
 			]
 		] );
 

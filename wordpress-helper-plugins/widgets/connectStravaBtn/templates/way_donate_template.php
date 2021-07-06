@@ -25,6 +25,7 @@ $state   = urlencode( json_encode( array(
 if ( is_user_logged_in() ):
 	$userBearer = new \Elhelper\modules\userStravaModule\model\UserStravaBearerModel( $user_id );
 
+
 	if ( $userBearer->issetBearer() ) {
 		?>
 
