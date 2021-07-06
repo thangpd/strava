@@ -61,7 +61,7 @@ $button_conntect_strava = require $str;
         <div class="strava-information mx-3">
             <div class="container-fluid">
                 <div class="row justify-content-md-between">
-                    <div class="order-md-1 col-sm-12 col-md-3 order-lg-1 col-lg-2">
+                    <div class="order-md-1 col-sm-3 col-md-3 order-lg-1 col-lg-2">
                         <div class="call-to-action">
 							<?php if ( ! empty( $user_avatar ) ) {
 								echo $user_avatar;
@@ -101,7 +101,7 @@ $button_conntect_strava = require $str;
 
 						<?php endif; ?>
                     </div>
-                    <div class="order-md-2 col-sm-12 col-md-5 order-lg-3 col-lg-3">
+                    <div class="order-md-2 col-sm-5 col-md-5 order-lg-3 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->

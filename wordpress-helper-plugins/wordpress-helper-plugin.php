@@ -20,4 +20,3 @@ register_activation_hook( __FILE__, 'inspire_rewrite_activation' );
 
 //Function rewrite when activation
 register_activation_hook( __FILE__, [ $instance, 'elhelper_rewrite_activation' ] );
-
