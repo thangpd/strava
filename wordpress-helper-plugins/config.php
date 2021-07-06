@@ -87,25 +87,7 @@ return [
 					'media' => '',
 
 				],
-				'font-awesome-all'  => [
-					'src'   => plugins_url( '/assets/lib/fontawesome/css/all.css', __FILE__ ),
-					'dep'   => '',
-					'ver'   => '',
-					'media' => '',
 
-				],
-				'font-awesome'      => [
-					'src'   => plugins_url( '/assets/lib/fontawesome/css/fontawesome.css', __FILE__ ),
-					'dep'   => 'font-awesome-all',
-					'ver'   => '',
-					'media' => '',
-				],
-				'fontawesome-pro-5' => [
-					'src'   => plugins_url( '/assets/lib/fontawesome-5-pro/css/all.css', __FILE__ ),
-					'dep'   => '',
-					'ver'   => '',
-					'media' => '',
-				]
 			],
 		],
 		'default_arr' => [

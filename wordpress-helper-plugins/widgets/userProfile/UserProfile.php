@@ -23,10 +23,10 @@ class UserProfile extends \Elementor\Widget_Base {
 				'elementor-frontend-modules',
 			],
 			'css_dep' => [
-				'font-awesome-all',
-				'font-awesome',
-				'fontawesome-pro-5',
-				'slimselect',
+//				'font-awesome-all',
+//				'font-awesome',
+//				'fontawesome-pro-5',
+//				'slimselect',
 				'bootstrap'
 			],
 		] );

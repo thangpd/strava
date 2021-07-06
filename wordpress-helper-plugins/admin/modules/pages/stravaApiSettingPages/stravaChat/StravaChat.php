@@ -41,9 +41,9 @@ class StravaChat extends Controller {
 	public function mt_settings_page() {
 		$assets = Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'stravaChat', [
 			'css_dep' => [
-				'font-awesome-all',
-				'font-awesome',
-				'fontawesome-pro-5',
+//				'font-awesome-all',
+//				'font-awesome',
+//				'fontawesome-pro-5',
 			],
 		] );
 
