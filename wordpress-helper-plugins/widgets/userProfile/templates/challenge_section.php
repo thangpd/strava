@@ -51,7 +51,7 @@ $str                    = __DIR__ . '/conntect_strava_btn.php';
 $button_conntect_strava = require $str;
 
 ?>
-<div class="container-fluid p-0">
+<div class="container p-0">
     <div class="wrap-modal-user-profile">
         <div class="overlay"></div>
         <div class="close-modal"></div>
