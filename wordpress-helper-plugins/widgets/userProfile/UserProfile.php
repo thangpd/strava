@@ -156,11 +156,11 @@ class UserProfile extends \Elementor\Widget_Base {
                                             <span class="distance-date d-none d-lg-block">{$amount_distance} km - {$amount_date} ngày</span>
 
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-6">
                                                     <h3>Ngày bắt đầu</h3>
                                                     <span class="date">{$start_date_html}</span>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-6">
                                                     <h3>Ngày kết thúc</h3>
                                                     <span class="date">{$end_date_html}</span>
                                                 </div>
@@ -265,15 +265,15 @@ HTML;
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">HẠNG</th>
+                                    <th class="d-none d-md-table-cell" scope="col">HẠNG</th>
                                     <th scope="col">TÊN NHÀ CHINH PHỤC</th>
-                                    <th scope="col">TỐC ĐỘ <br>(avg Pace)</th>
-                                    <th scope="col">TỔNG KM</th>
+                                    <th class="d-none d-md-table-cell" scope="col">TỐC ĐỘ <br>(avg Pace)</th>
+                                    <th class="d-none d-md-table-cell" scope="col">TỔNG KM</th>
                                     <th scope="col">THỜI GIAN <br>CHINH PHỤC</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                %1$s
+                                	%1$s
                                 </tbody>
                             </table>
                         </div>';
@@ -304,11 +304,13 @@ HTML;
 	 * [pace] => 27.068965517241
 	 */
 	public static function renderFinisherRow( $index, $item ) {
-		$html = ' <tr>
-                                    <th scope="row">%1$s</th>
+		$html = ' 
+								
+								<tr>
+                                    <th class="d-none d-md-table-cell" scope="row">%1$s</th>
                                     <td>%2$s</td>
-                                    <td>%3$s</td>
-                                    <td>%4$s km</td>
+                                    <td class="d-none d-md-table-cell">%3$s</td>
+                                    <td class="d-none d-md-table-cell">%4$s km</td>
                                     <td>%5$s</td>
                                 </tr>';
 		$html = sprintf( $html, $index, $item['user_name'], $item['pace'], $item['total_km'], $item['amount_time_finished'] );

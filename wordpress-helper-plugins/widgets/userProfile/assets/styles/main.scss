@@ -18,12 +18,8 @@ html, body {
     font-size: 14px;
     line-height: 1.25;
     color: #000;
+    background-color: #EBECED !important;
 }
-
-.elementor-widget-wrap.elementor-element-populated {
-    padding: 0px !important;
-}
-
 
 .strava-information,
 .strava-challenges,
@@ -126,6 +122,7 @@ html, body {
         .slick-prev,
         .slick-next {
             position: absolute;
+            z-index: 9999999;
             top: -47px;
             cursor: pointer;
             color: #202020;

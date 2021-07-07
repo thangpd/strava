@@ -59,8 +59,8 @@ $button_conntect_strava = require $str;
         <!-- Informations section -->
         <div class="strava-information mx-3">
             <div class="container-fluid">
-                <div class="row justify-content-md-between">
-                    <div class="order-md-1 col-sm-12 col-md-3 order-lg-1 col-lg-2">
+                <div class="row justify-content-sm-between justify-content-md-between">
+                    <div class="order-sm-1 order-md-1 col-sm-4 col-md-3 order-lg-1 col-lg-2">
                         <div class="call-to-action">
 							<?php if ( ! empty( $user_avatar ) ) {
 								echo $user_avatar;
@@ -72,7 +72,7 @@ $button_conntect_strava = require $str;
 							} ?>
                         </div>
                     </div>
-                    <div class="order-md-3 col-sm-12 col-md-12 order-lg-2 col-lg-7">
+                    <div class="order-sm-3 order-md-3 col-sm-12 col-md-12 order-lg-2 col-lg-7">
                         <h2><?php
 							if ( ! empty( $WP_User ) ) {
 								echo $WP_User->user_nicename;
@@ -84,23 +84,22 @@ $button_conntect_strava = require $str;
                                 <span class="distance"><?php echo isset( $user_total_distance ) ? $user_total_distance : '0 km' ?></span>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-4">
+                                <div class="col-6 col-md-4 col-lg-4">
                                     <div class="d-flex align-items-end d-lg-block">
                                         <h3>SỐ THỬ THÁCH</h3>
                                         <span class="number"><?php echo isset( $num_of_challenge ) ? $num_of_challenge : 0 ?></span>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-6 col-md-8 col-lg-8">
                                     <div class="d-flex align-items-end d-lg-block">
                                         <h3>ĐÃ HOÀN THÀNH</h3>
                                         <span class="number"><?php echo isset( $num_challenge_finished ) ? $num_challenge_finished : 0 ?></span>
                                     </div>
                                 </div>
                             </div>
-
 						<?php endif; ?>
                     </div>
-                    <div class="order-md-2 col-sm-12 col-md-5 order-lg-3 col-lg-3">
+                    <div class="order-sm-2 order-md-2 col-sm-5 col-md-5 order-lg-3 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
@@ -199,36 +198,30 @@ $button_conntect_strava = require $str;
     </div>
 
     <!-- List Challenges -->
-    <div class="list-challenges">
-        <div class="container-fluid">
-            <div class="list-challenges__wrap mx-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-tab">
-                            <div class="list-challenges ">
-                                <div class="container-fluid">
-                                    <div class="list-challenges__wrap mx-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h2 class="heading">Danh sách nhà chinh phục</h2>
-                                                <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
-													<?php echo $render_list_challenges_report ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="list-challenges">
+		<div class="container-fluid">
+			<div class="list-challenges__wrap mx-3">
+				<div class="list-challenges ">
+					<div class="container-fluid">
+						<div class="list-challenges__wrap mx-3">
+							<div class="row">
+								<div class="col-md-12">
+									<h2 class="heading">Danh sách nhà chinh phục</h2>
+									<span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
+										<?php echo $render_list_challenges_report ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- End List Challenges -->
 </div>

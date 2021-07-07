@@ -4,8 +4,8 @@ import "slick-carousel";
 $(document).ready(function () {
     $('.table-tab.is-slide').slick({
         arrows: true,
-        prevArrow: "<div class='slick-prev arrow-left'><i class='fal fa-chevron-left'></i></div>",
-        nextArrow: "<div class='slick-next arrow-right'><i class='fal fa-chevron-right'></i></div>",
+        prevArrow: "<div class='slick-prev arrow-left'> < </div>",
+        nextArrow: "<div class='slick-next arrow-right'> > </div>",
         dots: true,
         dotsClass: 'table-paging',
         customPaging: function (slider, i) {
@@ -16,8 +16,8 @@ $(document).ready(function () {
     $('.popup-modal__challenges-list').slick({
         arrows: true,
         slidesToShow: 2,
-        prevArrow: "<div class='slick-prev arrow-left'><i class='fal fa-chevron-left'></i></div>",
-        nextArrow: "<div class='slick-next arrow-right'><i class='fal fa-chevron-right'></i></div>",
+        prevArrow: "<div class='slick-prev arrow-left'> < </div>",
+        nextArrow: "<div class='slick-next arrow-right'> > </div>",
         dots: false,
         responsive: [
             {
