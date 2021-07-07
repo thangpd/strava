@@ -122,6 +122,7 @@ html, body {
         .slick-prev,
         .slick-next {
             position: absolute;
+            z-index: 9999999;
             top: -47px;
             cursor: pointer;
             color: #202020;
