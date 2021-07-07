@@ -11,13 +11,15 @@ use Elhelper\mail\Template;
 
 class UserProfile extends \Elementor\Widget_Base {
 
+	private $assets;
+
 	/**
 	 * @param array $data
 	 * @param array|null $args
 	 */
 	public function __construct( array $data = [], array $args = null ) {
 		parent::__construct( $data, $args );
-		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'userprofile', [
+		$this->assets = Elhelper_Plugin::instance()->wpackio_register( 'testapp', 'userprofile', [
 			'js'      => true,
 			'js_dep'  => [
 				'elementor-frontend-modules',
@@ -39,8 +41,23 @@ class UserProfile extends \Elementor\Widget_Base {
 
 		$product_title = $product->get_title();
 
+//		$challenge = ChallengeModel::getChallengeByProductIdAndUserId( 485, 2 );
 
 		$challengeModel = new ChallengeModel( $challenge );
+		/*$challenges     = ChallengeDb::getAllChallengeOfUser( $user_id );
+		echo '<pre>';
+		print_r( $challenges );
+		echo '</pre>';
+		foreach ( $challenges as $challenge ) {
+			$challengeModel = new ChallengeModel( $challenge );
+			$challengeModel->activeSendMailBaseOnPercentDistance();
+		}*/
+//		Template::action_sendmail( $challenge->id, 2, 0 );
+//		$emailPhaseOfProduct = $challengeModel->getEmailPhaseOfProduct();
+//		echo '<pre>';
+//		print_r($emailPhaseOfProduct->email_phase);
+//		echo '</pre>';
+
 //		Template::action_sendmail( 485, 2, 4, 'test' );
 
 
@@ -78,13 +95,12 @@ class UserProfile extends \Elementor\Widget_Base {
 		$date_left_percent = 0;
 		if ( ! empty( $start_date ) && ! empty( $amount_date ) ) {
 			$start_date = \DateTime::createFromFormat( 'Y-m-d H:i:s', $start_date );
-			$start_date->modify( '+1 day' );
+//			$start_date->modify( '+1 day' );
 			$end_date = clone( $start_date );
 			$end_date->modify( '+' . $amount_date . 'days' );
-			//end date
 
 			$datediff_left = $now->diff( $end_date );
-			if ( $datediff_left->days > 0 ) {
+			if ( $datediff_left->days > 0 && $now < $end_date ) {
 				$date_left         = $datediff_left->days;
 				$f                 = ( $date_left / $amount_date );
 				$date_left_percent = 100 - round( $f * 100, 0 );
@@ -223,7 +239,7 @@ HTML;
 	}
 
 
-	public static function renderListChallengeReport( $challenges ) {									
+	public static function renderListChallengeReport( $challenges ) {
 		$html = '';
 		if ( ! empty( $challenges ) ) {
 			foreach ( $challenges as $challenge ) {
@@ -334,6 +350,14 @@ HTML;
 	 * @return [type]
 	 */
 	public function render() {
+		wp_enqueue_script( array_pop(
+			$this->assets['js']
+		)['handle'] );
+		wp_enqueue_style( array_pop(
+			$this->assets['css']
+		)['handle'] );
+
+
 		$settings = $this->get_settings_for_display();
 		/*
 				require WP_HELPER_PATH . 'mail/template.php';

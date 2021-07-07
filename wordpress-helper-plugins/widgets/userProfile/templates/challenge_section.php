@@ -12,7 +12,7 @@ if ( is_user_logged_in() ) {
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
 	$athleteTotalDistance = $userAthlete->getAthleteTotalDistance();
-	$user_total_distance  = ! empty( $athleteTotalDistance ) ? $athleteTotalDistance * 0.001 . ' km' : '0 km';
+	$user_total_distance  = ! empty( $athleteTotalDistance ) ? round( $athleteTotalDistance * 0.001, 2 ) . ' km' : '0 km';
 
 
 	//product
@@ -27,7 +27,6 @@ if ( is_user_logged_in() ) {
 		//num of challenge
 		$num_of_challenge       = count( $challenges );
 		$num_challenge_finished = 0;
-
 		foreach ( $challenges as $challenge ) {
 			\Elhelper\modules\productStravaModule\model\ChallengeModel::getListFinisherInfo( $challenge->product_id );
 
@@ -60,8 +59,8 @@ $button_conntect_strava = require $str;
         <!-- Informations section -->
         <div class="strava-information mx-3">
             <div class="container-fluid">
-                <div class="row justify-content-sm-between justify-content-md-between">
-                    <div class="order-sm-1 order-md-1 col-sm-4 col-md-3 order-lg-1 col-lg-2">
+                <div class="row justify-content-between justify-content-md-between">
+                    <div class="order-1 order-lg-1 col-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="call-to-action">
 							<?php if ( ! empty( $user_avatar ) ) {
 								echo $user_avatar;
@@ -73,7 +72,7 @@ $button_conntect_strava = require $str;
 							} ?>
                         </div>
                     </div>
-                    <div class="order-sm-3 order-md-3 col-sm-12 col-md-12 order-lg-2 col-lg-7">
+                    <div class="order-3 order-lg-2 col-12 col-sm-12 col-md-12 col-lg-7">
                         <h2><?php
 							if ( ! empty( $WP_User ) ) {
 								echo $WP_User->user_nicename;
@@ -100,14 +99,11 @@ $button_conntect_strava = require $str;
                             </div>
 						<?php endif; ?>
                     </div>
-                    <div class="order-sm-2 order-md-2 col-sm-5 col-md-5 order-lg-3 col-lg-3">
+                    <div class="order-2 order-lg-3 col-6 col-sm-5 col-md-5 col-lg-3">
                         <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
 						</div>-->
 						<?php echo $button_conntect_strava; ?>
-	                    <?php if ( is_user_logged_in() ) {
-		                    echo '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
-	                    } ?>
                     </div>
                 </div>
             </div>
@@ -197,8 +193,6 @@ $button_conntect_strava = require $str;
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <!-- List Challenges -->
@@ -227,5 +221,5 @@ $button_conntect_strava = require $str;
 			</div>
 		</div>
 	</div>
-    <!-- End List Challenges -->
+
 </div>

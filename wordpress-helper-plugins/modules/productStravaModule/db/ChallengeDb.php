@@ -40,6 +40,14 @@ class ChallengeDb extends DB {
 	public static function getAllChallengeOfUser( $user_id ) {
 		global $wpdb;
 		$sql = sprintf( 'SELECT * FROM %s WHERE %s', self::get_table(), 'user_id=' . $user_id );
+
+		return $wpdb->get_results( $sql );
+	}
+
+	public static function getChallengeByProductIdAndUserId( $product_id, $user_id ) {
+		global $wpdb;
+		$sql = sprintf( 'SELECT * FROM %s WHERE %s', self::get_table(), 'user_id=' . $user_id . ' and product_id=' . $product_id );
+
 		return $wpdb->get_results( $sql );
 	}
 
@@ -54,6 +62,15 @@ class ChallengeDb extends DB {
 		return $wpdb->get_results( $sql );
 	}
 
+	public static function getEmailPhaseOfProduct( $challenge_id ) {
+		global $wpdb;
+		$select = 'email_phase';
+		$table  = ChallengeDb::get_table();
+		$where  = 'id=' . $challenge_id;
+		$sql    = sprintf( 'SELECT %s FROM %s WHERE %s', $select, $table, $where );
+
+		return $wpdb->get_results( $sql );
+	}
 
 	/**
 	 * Singletons should not be restorable from strings.
@@ -67,6 +84,5 @@ class ChallengeDb extends DB {
 	 */
 	protected function __clone() {
 	}
-
 
 }

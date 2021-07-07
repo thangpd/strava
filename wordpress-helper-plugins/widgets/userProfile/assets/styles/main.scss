@@ -412,7 +412,7 @@ html, body {
         top: 10px;
         width: 32px;
         height: 32px;
-        z-index: 99991;
+        z-index: 99999;
         cursor: pointer;
 
         &:before,
@@ -474,6 +474,7 @@ html, body {
                         text-decoration: none;
                     }
                     &__image {
+                        max-width: 410px;
                         img {
                             object-fit: cover;
                         }
@@ -600,6 +601,12 @@ html, body {
             font-size: 26px;
             line-height: 23px;
             margin-left: 20px;
+        }
+    }
+
+    @media (max-width: $sm) {
+        .button.popup-strava-challenges {
+            font-size: 15px;
         }
     }
 }
