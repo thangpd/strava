@@ -8,6 +8,8 @@ $state   = urlencode( json_encode( array(
 ) ) );
 ob_start();
 if ( is_user_logged_in() ):
+	$button_logout = '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
+
 	$userBearer = new \Elhelper\modules\userStravaModule\model\UserStravaBearerModel( $user_id );
 	if ( ! $userBearer->issetBearer() ) {
 		?>
@@ -16,8 +18,8 @@ if ( is_user_logged_in() ):
             KẾT NỐI STRAVA
         </button>
 		<?php
+		echo $button_logout;
 	} else {
-		$button_connected = '<a href="' . wp_logout_url() . '" class="button">ĐĂNG XUẤT</a>';
 
 		$button_connected_strava = <<<HTML
 					
@@ -25,7 +27,7 @@ if ( is_user_logged_in() ):
 			<a href="#" data-user_id="{$user_id}" class="deauthorize_strava"><span class="logout">ngắt kết nối với Strava</span></a>
 		</div>	
 HTML;
-		echo $button_connected . $button_connected_strava;
+		echo $button_logout . $button_connected_strava;
 	}
 
 	$userStravaModel = new \Elhelper\modules\userStravaModule\model\UserStravaModel( $user_id );
