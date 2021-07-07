@@ -21,6 +21,10 @@ html, body {
     background-color: #EBECED !important;
 }
 
+.elementor-column-gap-default>.elementor-column>.elementor-element-populated {
+    padding: 0px !important;
+}
+
 .strava-information,
 .strava-challenges,
 .list-challenges,
@@ -142,7 +146,7 @@ html, body {
             list-style: none;
             color: #202020;
             letter-spacing: 0.1em;
-            top: -38px;
+            top: 11px;
             padding: 0;
             margin: 0;
             li {
@@ -395,10 +399,6 @@ html, body {
     .slick-next {
         top: 0 !important;
     }
-
-    .table-paging {
-        top: 7px !important;
-    }
 }
 
 .wrap-modal-user-profile {
@@ -474,7 +474,6 @@ html, body {
                         text-decoration: none;
                     }
                     &__image {
-                        max-width: 410px;
                         img {
                             object-fit: cover;
                         }
