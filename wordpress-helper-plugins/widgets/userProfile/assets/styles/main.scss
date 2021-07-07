@@ -21,6 +21,10 @@ html, body {
     background-color: #EBECED !important;
 }
 
+.elementor-column-gap-default>.elementor-column>.elementor-element-populated {
+    padding: 0px !important;
+}
+
 .strava-information,
 .strava-challenges,
 .list-challenges,
