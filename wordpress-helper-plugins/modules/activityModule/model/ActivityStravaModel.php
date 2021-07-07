@@ -10,12 +10,30 @@ namespace Elhelper\modules\activityModule\model;
 
 
 use Elhelper\inc\HeplerStrava;
+use Elhelper\modules\userStravaModule\db\ActivityDb;
 use Elhelper\modules\userStravaModule\model\UserStravaBearerModel;
 
 class ActivityStravaModel {
-	public function __construct() {
+	private $activity_id;
+
+	public function __construct( $activity_id ) {
+		$this->activity_id = $activity_id;
 	}
 
+	public function issetActivityId() {
+		$res = $this->getAcitivityById();
+		if ( ! empty( $res ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getAcitivityById() {
+		$v = ActivityDb::get( $this->activity_id, 'activity_id' );
+
+		return $v;
+	}
 
 	/**
 	 * stdClass Object

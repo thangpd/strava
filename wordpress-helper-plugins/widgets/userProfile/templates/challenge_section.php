@@ -8,7 +8,6 @@ if ( is_user_logged_in() ) {
 	$WP_User     = get_userdata( $user_id );
 	$user_avatar = get_avatar( $user_id );
 
-
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
 	$athleteTotalDistance = $userAthlete->getAthleteTotalDistance();
@@ -198,30 +197,30 @@ $button_conntect_strava = require $str;
     </div>
 
     <!-- List Challenges -->
-	<div class="list-challenges">
-		<div class="container-fluid">
-			<div class="list-challenges__wrap mx-3">
-				<div class="list-challenges ">
-					<div class="container-fluid">
-						<div class="list-challenges__wrap mx-3">
-							<div class="row">
-								<div class="col-md-12">
-									<h2 class="heading">Danh sách nhà chinh phục</h2>
-									<span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
+    <div class="list-challenges">
+        <div class="container-fluid">
+            <div class="list-challenges__wrap mx-3">
+                <div class="list-challenges ">
+                    <div class="container-fluid">
+                        <div class="list-challenges__wrap mx-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="heading">Danh sách nhà chinh phục</h2>
+                                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
 										<?php echo $render_list_challenges_report ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End List Challenges -->
 </div>
