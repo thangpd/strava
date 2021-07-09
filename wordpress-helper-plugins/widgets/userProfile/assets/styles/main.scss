@@ -587,11 +587,11 @@ html, body {
 .strava-information {
     @media (max-width: $lg) {
         h2 {
-            margin-top: 35px;
+            margin-top: 30px;
         }
 
         .button.popup-strava-challenges {
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         span.distance,
@@ -605,6 +605,7 @@ html, body {
     @media (max-width: $sm) {
         .button.popup-strava-challenges {
             font-size: 15px;
+            margin-top: 0px;
         }
     }
 }
@@ -683,6 +684,12 @@ html, body {
         &__inner {
             height: 390px;
         }
+        &__head-info {
+            h2 {
+                font-size: 25px;
+                line-height: 25px;
+            }
+        }
     }
 }
 
@@ -723,9 +730,12 @@ html, body {
     @media (max-width: $md) {
         .popup-modal {
             top: 40%;
-            &__challenges-list{
-                .thumb-item{
-                    height: auto;
+            &__challenges{
+                margin: 0px;
+                &-list{
+                    .thumb-item{
+                        height: auto;
+                    }
                 }
             }
         }

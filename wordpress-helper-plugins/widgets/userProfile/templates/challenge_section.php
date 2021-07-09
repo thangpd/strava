@@ -99,9 +99,9 @@ $button_conntect_strava = require $str;
 						<?php endif; ?>
                     </div>
                     <div class="order-2 order-lg-3 col-6 col-sm-5 col-md-5 col-lg-3">
-                        <!--<div class="button popup-strava-challenges">KẾT NỐI STRAVA
+                        <div class="button popup-strava-challenges">KẾT NỐI STRAVA
 							 <span class="logout">ngắt kết nối với Strava</span>
-						</div>-->
+						</div>
 						<?php echo $button_conntect_strava; ?>
                     </div>
                 </div>
