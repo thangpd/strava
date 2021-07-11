@@ -232,13 +232,52 @@ html, body {
     &.distance-date {
       font-size: 14px;
     }
+    &__list {
+      margin-right: -15px;
+      margin-left: -15px;
 
-    &.percent {
-      font-weight: bold;
-      font-size: 25px;
-      line-height: 30px;
-      letter-spacing: 0.1em;
-      color: #000;
+      &-slick {
+        .slick-dots {
+          display: flex;
+          list-style: none;
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, 50%);
+          margin: 0;
+          padding: 0;
+
+          li {
+            padding: 4px;
+
+            i {
+              font-size: 13px;
+              color: #C9CCCF;
+            }
+
+            &.slick-active {
+              i {
+                color: #959494;
+              }
+            }
+          }
+        }
+
+        .slick-track {
+          display: flex !important;
+        }
+
+        .slick-slide {
+          height: inherit !important;
+        }
+      }
+
+      .slick-list {
+        margin: 0 -27px;
+      }
+
+      .slick-slide {
+        margin: 0 27px;
+      }
     }
 
     &.date {
