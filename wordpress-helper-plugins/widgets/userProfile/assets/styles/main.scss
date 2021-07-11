@@ -317,14 +317,6 @@ html, body {
                 height: inherit !important; 
             }
         }
-
-        .slick-list {
-            margin: 0 -27px;
-        }
-
-        .slick-slide {
-            margin: 0 27px;
-        }
     }
 
     &__status {
@@ -557,7 +549,7 @@ html, body {
                 display: flex;
             }
             .slick-slide {
-                margin: 0 30px;
+                margin: 0 50px;
                 // height: 545px;
                 background-color: #fff;
             }
@@ -571,6 +563,10 @@ html, body {
             }
             .slick-next {
                 right: 43px;
+            }
+
+            .slick-list {
+                margin: 0 -50px;
             }
         }
     }
