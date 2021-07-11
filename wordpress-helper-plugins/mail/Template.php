@@ -189,8 +189,9 @@ class Template {
 		$subject = "$subject";
 //		$headers = 'From: ' . $email_to . "\r\n" .
 //		           'Reply-To: ' . 'finishing@inspiretrails.life' . "\r\n";
-		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
-		$send    = wp_mail( $to, $subject, $message, $headers );
+		$headers = 'Content-Type: text/html; charset=UTF-8';
+		write_log( 'to: ' . $to . '//subject:' . $subject . '//message:' . $message . '//headers:' . $headers );
+		$send = wp_mail( $to, $subject, $message, $headers );
 
 		return $send;
 	}

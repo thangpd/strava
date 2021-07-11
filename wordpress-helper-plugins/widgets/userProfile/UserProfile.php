@@ -58,7 +58,6 @@ class UserProfile extends \Elementor\Widget_Base {
 //		print_r($emailPhaseOfProduct->email_phase);
 //		echo '</pre>';
 
-//		Template::action_sendmail( 485, 2, 4, 'test' );
 
 
 		$distance_already = $challengeModel->getDistanceAlreadyRun();

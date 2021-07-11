@@ -2,6 +2,7 @@
 $products_challenge_html       = '';
 $render_list_challenges_report = '';
 $user_avatar                   = '';
+//\Elhelper\mail\Template::action_sendmail( 887, 2, 0);
 
 if ( is_user_logged_in() ) {
 	$user_id     = get_current_user_id();
