@@ -352,7 +352,7 @@ html, body {
       margin-top: 40px;
       margin-bottom: 0;
       letter-spacing: 0.15em;
-      font-size: 32px;
+      font-size: 40px;
       font-weight: 800;
     }
   }
@@ -479,7 +479,7 @@ html, body {
             }
           }
           &__content {
-            padding: 25px;
+            padding: 15px 20px 20px 20px;
             position: relative;
             overflow: hidden;
           }
@@ -529,10 +529,12 @@ html, body {
             justify-content: center;
             &-wrap {
               position: absolute;
-              width: 345px;
               display: block;
               bottom: -50px;
-              transition: bottom 0.5s 0s ease;
+              left: 50%;
+              transform: translate( -50%, 0);
+              width: 80%;
+              transition: bottom .5s 0s ease;
             }
           }
 
@@ -550,7 +552,6 @@ html, body {
       }
       .slick-slide {
         margin: 0 50px;
-        // height: 545px;
         background-color: #fff;
       }
       .slick-prev,
@@ -728,6 +729,10 @@ html, body {
         .thumb-item{
           height: auto;
         }
+      }
+
+      .slick-list {
+        margin: 0;
       }
     }
   }
