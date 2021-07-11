@@ -317,6 +317,14 @@ html, body {
                 height: inherit !important; 
             }
         }
+
+        .slick-list {
+            margin: 0 -27px;
+        }
+
+        .slick-slide {
+            margin: 0 27px;
+        }
     }
 
     &__status {
