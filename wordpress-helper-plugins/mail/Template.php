@@ -31,134 +31,106 @@ class Template {
 	}
 
 	public static function getDataEmailTemplate( $product_id, $user_id, $template_number ) {
+		$footer        = get_field( 'footer_image', $product_id );
+		$facebook_link = get_field( 'footer_link_facebook', $product_id );
+		$line          = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+		$product       = wc_get_product( $product_id );
+		if ( ! empty( $product ) ) {
+			$product_title = $product->get_title();
+		} else {
+			$product_title = 'Product Title Empty';
+		}
+		$product_link = get_field( 'link_product_detail', $product_id );
+		if ( ! empty( $product_link ) ) {
+			$product_link = $product_link['url'];
+		} else {
+			$product_link = '#';
+		}
 		switch ( $template_number ) {
 			case 0:
-				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/header.png';
-				$footer  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product = wc_get_product( $product_id );
-				if ( ! empty( $product ) ) {
-					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
-				} else {
-					$product_title = 'Product Empty';
-					$product_link  = '#';
-				}
-				$title        = '';
-				$template_dir = Template::get_template_dir( 0 );
+				//begin
+//				$header               = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/header.png';
+				$header               = get_field( 'begin_header_image', $product_id );
+				$link_trang_trong_cay = get_field( 'begin_link_trang_trong_cay', $product_id );
+				$template_dir         = Template::get_template_dir( 0 );
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			case 1:
-				$image_template_cover = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/CoverEver25.png';
-				$footer               = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line                 = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product              = wc_get_product( $product_id );
-				$userModel            = get_user_by( 'id', $user_id );
-				$username             = $userModel->data->user_nicename;
-				$sidebar_image        = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/sherpa.png';
+				//25%
+//				$header        = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/header.png';
+				$header        = get_field( '25_header_image', $product_id );
+				$userModel     = get_user_by( 'id', $user_id );
+				$username      = $userModel->data->user_nicename;
+				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/25percent/sherpa.png';
 
-				if ( ! empty( $product ) ) {
-					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
-				} else {
-					$product_title = 'Product Empty';
-					$product_link  = '#';
-				}
-				$title        = '';
 				$template_dir = Template::get_template_dir( 1 );
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			case 2:
-				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/header.png';
-				$footer  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product = wc_get_product( $product_id );
-				if ( ! empty( $product ) ) {
-					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
-				} else {
-					$product_title = 'Product Empty';
-					$product_link  = '#';
-				}
-				$userModel     = get_user_by( 'id', $user_id );
-				$username      = $userModel->data->user_nicename;
-				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/sidebar.png';
-				$template_dir  = Template::get_template_dir( 2 );
+				//50%
+//				$header        = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/header.png';
+				$header = get_field( '50_header_image', $product_id );
+//				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/50percent/sidebar.png';
+				$sidebar_image = get_field( '50_sidebar_image', $product_id );
+
+				$userModel    = get_user_by( 'id', $user_id );
+				$username     = $userModel->data->user_nicename;
+				$template_dir = Template::get_template_dir( 2 );
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			case 3:
-				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/header.png';
-				$footer  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product = wc_get_product( $product_id );
-				if ( ! empty( $product ) ) {
-					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
-				} else {
-					$product_title = 'Product Empty';
-					$product_link  = '#';
-				}
-
+				//75%
+//				$header        = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/header.png';
+				$header = get_field( '75_header_image', $product_id );
+//				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/sidebar.png';
+				$sidebar_image = get_field( '75_sidebar_image', $product_id );
 				$userModel     = get_user_by( 'id', $user_id );
 				$username      = $userModel->data->user_nicename;
 				$template_dir  = Template::get_template_dir( 3 );
-				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/sidebar.png';
 
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			case 4:
-				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/header.png';
-				$footer  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product = wc_get_product( $product_id );
-				if ( ! empty( $product ) ) {
-					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
-				} else {
-					$product_title = 'Product Empty';
-					$product_link  = '#';
-				}
-				$site_link    = home_url();
-				$body_1       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_1.png';
-				$body_2       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_2.jpeg';
+				//100%
+//				$header       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/header.png';
+				$header      = get_field( '100_header_image', $product_id );
+				$header      = get_field( '100_header_image', $product_id );
+				$site_link   = home_url();
+				$medal       = get_field( '100_medal', $product_id );
+				$certificate = get_field( '100_certificate', $product_id );
+//				$body_2       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/100percent/body_2.jpeg';
 				$userModel    = get_user_by( 'id', $user_id );
 				$username     = $userModel->data->user_nicename;
-				$title        = '';
 				$template_dir = Template::get_template_dir( 4 );
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			case 5:
+				//3days before expired
 				$header       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/header.png';
-				$footer       = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line         = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
 				$template_dir = Template::get_template_dir( 5 );
 				ob_start();
 				require $template_dir;
 				$included = ob_get_clean();
 				break;
 			default:
-				$image_template_cover  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/header.png';
-				$image_template_footer = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/footer.png';
-				$line                  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
-				$product               = wc_get_product( $product_id );
+				$header  = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/begin/header.png';
+				$line    = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/images/line.png';
+				$product = wc_get_product( $product_id );
 				if ( ! empty( $product ) ) {
 					$product_title = $product->get_title();
-					$product_link  = $product->get_permalink();
 				} else {
 					$product_title = 'Product Empty';
-					$product_link  = '#';
 				}
-				$title        = '';
 				$template_dir = Template::get_template_dir( 0 );
 				ob_start();
 				require $template_dir;

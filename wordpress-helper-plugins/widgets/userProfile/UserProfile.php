@@ -52,7 +52,7 @@ class UserProfile extends \Elementor\Widget_Base {
 			$challengeModel = new ChallengeModel( $challenge );
 			$challengeModel->activeSendMailBaseOnPercentDistance();
 		}*/
-//		Template::action_sendmail( $challenge->id, 2, 0 );
+//		Template::action_sendmail( 887, 2, 0 );
 //		$emailPhaseOfProduct = $challengeModel->getEmailPhaseOfProduct();
 //		echo '<pre>';
 //		print_r($emailPhaseOfProduct->email_phase);
@@ -142,7 +142,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                         </div>
                                         <div class="strava-challenges__head-info">
                                             <h2 class="d-block d-lg-none">{$product_title}</h2>
-                                            <span class="distance-date d-block d-lg-none">{$amount_distance} km - {$amount_date} ngày</span>
+                                            <span class="distance-date d-block d-lg-none">{$amount_distance} KM - {$amount_date} ngày</span>
                                         </div>
                                     </div>
                                     </div>
