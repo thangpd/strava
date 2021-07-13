@@ -375,6 +375,10 @@ html, body {
         line-height: 45px;
       }
     }
+
+    &--incompleted {
+      background-image: url('../images/status_incompleted.png');
+    }
   }
 }
 
