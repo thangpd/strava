@@ -1,5 +1,5 @@
 *, ::after, ::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 $primary: #FDB913;
@@ -14,748 +14,851 @@ $sm: 576px;
 $font: 'Livvic', sans-serif !important;
 
 html, body {
-    font-family: $font;
-    font-size: 14px;
-    line-height: 1.25;
-    color: #000;
-    background-color: #EBECED !important;
+  font-family: $font;
+  font-size: 14px;
+  line-height: 1.25;
+  color: #000;
+  background-color: #EBECED !important;
 }
 
-.elementor-column-gap-default>.elementor-column>.elementor-element-populated {
-    padding: 0px !important;
+.elementor-column-gap-default > .elementor-column > .elementor-element-populated {
+  padding: 0px !important;
 }
 
 .strava-information,
 .strava-challenges,
 .list-challenges,
 .popup-modal {
-    // background-color: #EBECED;
-    .call-to-action {
-        position: relative;
-        display: block; 
+  // background-color: #EBECED;
+  .call-to-action {
+    position: relative;
+    display: block;
 
-        img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
     }
-    tr,
-    th,
-    td,
-    li,
-    a {
-        font-family: $font;
-        text-decoration: none;
-    }
+  }
 
-    h2 {
-        font-family: $font;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 30px;
-        color: #000;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-    h3 {
-        font-family: $font;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 15px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #000000;
-        margin-bottom: 0;
-    }
-    span {
-        font-family: $font;
-        font-style: normal;
-        font-weight: 900;
-        letter-spacing: 0.1em;
-        color: $primary;
-        &.distance {
-            font-size: 31px;
-        }
-        &.number {
-            font-size: 25px;
-        }
-    }
-    .button {
-        font-family: $font;
-        width: 100%;
-        padding: 16px 0;
-        background: $secondary;
-        color: #fff;
-        display: inline-block;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: 900;
-        font-size: 19px;
-        text-align: center;
-        margin-bottom: 30px;
-        position: relative;
+  tr,
+  th,
+  td,
+  li,
+  a {
+    font-family: $font;
+    text-decoration: none;
+  }
 
-        &:first-child {
-            span {
-                font-style: italic;
-                font-weight: normal;
-                position: absolute;
-                font-size: 10px;
-                text-decoration-line: underline;
-                color: #000;
-                top: 100%;
-                right: 0;
-                margin-top: 3px;
-                letter-spacing: 0;
-                text-align: right;
-                text-transform: none;
-            }
-        }
+  h2 {
+    font-family: $font;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
 
-        &:nth-child(2) {
-            background: $primary;
-            color: #000;
-        }
+  h3 {
+    font-family: $font;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 0;
+  }
+
+  span {
+    font-family: $font;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: $primary;
+
+    &.distance {
+      font-size: 31px;
     }
 
-    .table-tab,
-    .popup-modal__challenges {
-        position: relative;
-        .slick-prev,
-        .slick-next {
-            position: absolute;
-            z-index: 9999999;
-            top: -47px;
-            cursor: pointer;
-            color: #202020;
-            font-size: 30px;
-        }
-        .slick-prev {
-            right: 60px;
-        }
-        .slick-next { 
-            right: 0;
-        }
-        .table-paging {
-            cursor: pointer;
-            position: absolute;
-            font-size: 17px;
-            right: 21px;
-            list-style: none;
-            color: #202020;
-            letter-spacing: 0.1em;
-            top: 11px;
-            padding: 0;
-            margin: 0;
-            li {
-                display: none;
-                &.slick-active {
-                    display: block;
-                }
-            }
-        }
+    &.number {
+      font-size: 25px;
     }
-    .logout {
+  }
+
+  .button {
+    font-family: $font;
+    width: 100%;
+    padding: 16px 0;
+    background: $secondary;
+    color: #fff;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 19px;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+
+    &:first-child {
+      span {
+        font-style: italic;
+        font-weight: normal;
         position: absolute;
+        font-size: 10px;
+        text-decoration-line: underline;
+        color: #000;
         top: 100%;
         right: 0;
-        color: #000;
-        font-style: italic;
-        font-size: 14px;
-        line-height: 1.5;
-        font-weight: 400;
-        text-decoration-line: underline;
+        margin-top: 3px;
         letter-spacing: 0;
-    }
-}
-
-.strava-challenges {
-    margin-top: 30px;
-    h2.heading {
-        margin-bottom: 15px;
-    }
-    h3 {
-        margin-top: 20px;
-        font-size: 12px;
+        text-align: right;
         text-transform: none;
-
-        &.label {
-            text-transform: uppercase;
-        }
-    }
-    &__banner {
-        height: 343px;
-        img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-    }
-    &__inner {
-        background-color: white;
-        position: relative;
-        margin: 15px 15px 0 15px;
-        height: 343px;
-    }
-    &__content {
-        padding: 25px 25px 25px 0;
-        a {
-            text-decoration: none;
-            color: #000;
-        }
-    }
-    span {
-        &.distance-date {
-            font-size: 14px;
-        }
-        &.percent {
-            font-weight: bold;
-            font-size: 25px;
-            line-height: 30px;
-            letter-spacing: 0.1em;
-            color: #000;
-        }
-        &.date {
-            color: #000;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            line-height: 1.5;
-        }
-    }
-    .line {
-        margin-top: 20px;
-        display: flex;
-        flex-wrap: nowrap;
-        .rectangle {
-            position: relative;
-            flex-grow: 1;
-            height: 25px;
-            background-color: #C4C4C4;
-            margin-left: 2px;
-        }
-    }
-    @for $i from 1 through 10 {
-        .line[data-active='#{$i}'] {
-            > .rectangle {
-                &:nth-child(-n+#{$i}) {
-                    background-color: $primary;
-                }
-            }
-        }
-    }
-    .distance-left {
-        display: flex;
-        justify-content: space-between;
-        color: #000;
-        font-size: 12px;
-        line-height: 25px;
-        letter-spacing: 0.2em;
-        span {
-            font-weight: 600;
-            text-transform: none;
-            color: #000;
-        }
-    }
-    &__wrap-image {
-        background-image: url('../images/man-runner-wearing-sports-shoes-trail-running-forest.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        .button {
-            background-color: $primary;
-            display: block;
-            width: 45%;
-            left: 50%;
-            top: 50%;
-            color: #000;
-            font-size: 16px;
-            border: none;
-            margin: 0;
-            transform: translate(-50%, 50%);
-            position: absolute;
-            cursor: pointer;
-        }
+      }
     }
 
-    &__list {
-        margin-right: -15px;
-        margin-left: -15px;
-        &-slick {
-            .slick-dots {
-                display: flex;
-                list-style: none;
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 50%);
-                margin: 0;
-                padding: 0;
-
-                li {
-                    padding: 4px;
-                    i {
-                        font-size: 13px;
-                        color: #C9CCCF;
-                    }
-
-                    &.slick-active {
-                        i {
-                            color: #959494;
-                        }
-                    }
-                }
-            } 
-            .slick-track { 	
-                display: flex !important; 
-            }  
-            .slick-slide { 	
-                height: inherit !important; 
-            }
-        }
+    &:nth-child(2) {
+      background: $primary;
+      color: #000;
     }
+  }
 
-    &__status {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 145px;
-        height: 50px;
-        &-image {
-            background-image:  url('../images/status.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: 100%;
-            height: 100%;
-            span {
-                font-weight: bold;
-                text-align: center;
-                display: block;
-                color: black;
-                line-height: 45px;
-            }
-        }   
-    }
-}
-
-.list-challenges {
-    background-color: #fff;
-
-    h2 {
-        font-weight: bold;
-
-        &.heading{
-            margin-top: 40px;
-            margin-bottom: 0;
-            letter-spacing: 0.15em;
-            font-size: 40px;
-            font-weight: 800;
-        }
-    }
-    span {
-        &.sub {
-            font-style: italic;
-            font-weight: normal;
-            font-size: 20px;
-            letter-spacing: 0.05em;
-            text-transform: none;
-            color: #000;
-            margin-bottom: 40px;
-            display: block;
-        }
-    }
-
-    table {
-        font-weight: bold;
-        font-size: 20px;
-        letter-spacing: 0.1em;
-
-        th, 
-        td {
-            padding: 20px 0;
-        }
-
-        thead {
-            th {
-                background-color: #EBECED;
-                text-align: center;
-                vertical-align: middle;
-            }
-        }
-        tbody {
-            th,
-            td {
-                text-align: center;
-                vertical-align: middle;
-            }
-        }
-    }
+  .table-tab,
+  .popup-modal__challenges {
+    position: relative;
 
     .slick-prev,
     .slick-next {
-        top: 0 !important;
+      position: absolute;
+      z-index: 9999999;
+      top: -47px;
+      cursor: pointer;
+      color: #202020;
+      font-size: 30px;
     }
-}
 
-.wrap-modal-user-profile {
-    padding: 45px 0 50px 0;
-    position: relative;
+    .slick-prev {
+      right: 60px;
+    }
 
-    .close-modal {
+    .slick-next {
+      right: 0;
+    }
+
+    .table-paging {
+      cursor: pointer;
+      position: absolute;
+      font-size: 17px;
+      right: 21px;
+      list-style: none;
+      color: #202020;
+      letter-spacing: 0.1em;
+      top: 11px;
+      padding: 0;
+      margin: 0;
+
+      li {
         display: none;
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        width: 32px;
-        height: 32px;
-        z-index: 99999;
-        cursor: pointer;
 
-        &:before,
-        &:after {
-            position: absolute;
-            left: 15px;
-            content: ' ';
-            height: 33px;
-            width: 2px;
-            background-color: white;
+        &.slick-active {
+          display: block;
         }
+      }
     }
-    .close-modal {
-        &:before {
-            transform: rotate(45deg);
-        }
-    }
-    .close-modal {
-        &:after {
-            transform: rotate(-45deg);
-        }
-    }
+  }
 
-    .overlay {
-        position: absolute;
-        background: #000;
-        visibility: hidden;
-        opacity: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        content: "";
-        z-index: 99990;
-    }
-
-    .popup-modal {
-        position: absolute;
-        padding: 0;
-        top: 50%;
-        left: 50%;
-        z-index: 99991;
-        visibility: hidden;
-        opacity: 0;
-        transform: translate(-50%,-47%);
-        width: 100%;
-        height: auto;
-        transition: opacity 0.2s ease, visibility 0.2s ease;
-        backface-visibility: hidden;
-
-        &__challenges {
-            margin: 0 90px;
-            &-list {
-                .thumb-item {
-                    cursor: pointer;
-                    height: 100%;
-                    width: 100%;
-                    a {
-                        text-decoration: none;
-                    }
-                    &__image {
-                        img {
-                            object-fit: cover;
-                        }
-                    }
-                    &__content {
-                        padding: 15px 20px 20px 20px;
-                        position: relative;
-                        overflow: hidden;
-                    }
-                    &__heading {
-                        font-weight: 900;
-                        font-size: 31px;
-                        letter-spacing: 0.1em;
-                        color: #000;
-                    }
-                    &__distance-date {
-                        font-size: 20px;
-                        font-style: normal;
-                        font-weight: 900;
-                        letter-spacing: 0.1em;
-                        color: #3A3A3A;
-                        line-height: 35px;
-                        margin-bottom: 10px;
-                        p {
-                            margin-bottom: 0;
-                        }
-                    }
-                    &__description {
-                        color: #3A3A3A;
-                        font-size: 17px;
-                        font-style: normal;
-                        font-weight: normal;
-                        letter-spacing: 0.1em;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 3;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        line-height: 22px;
-                    }
-                    &__button {
-                        background-color: $primary;
-                        color: #000;
-                        padding: 10px 0;
-                        width: 100%;
-                        border-radius: 3px;
-                        font-weight: bold;
-                        font-size: 16px;
-                        margin-bottom: 0;
-                        min-height: 45px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        &-wrap {
-                            position: absolute;
-                            display: block;
-                            bottom: -50px;
-                            left: 50%;
-                            transform: translate( -50%, 0);
-                            width: 80%;
-                            transition: bottom .5s 0s ease;
-                        }
-                    } 
-
-                    &:hover {
-                        .thumb-item__button {
-                            &-wrap {
-                                bottom: 15px;
-                            }
-                        }
-                    }
-                }
-            }
-            .slick-track {
-                display: flex;
-            }
-            .slick-slide {
-                margin: 0 65px;
-                background-color: #fff;
-            }
-            .slick-list {
-                margin: 0 -65px;
-            }
-            .slick-prev,
-            .slick-next {
-                color: #fff;
-                top: -50px;
-            }
-            .slick-prev {
-                right: 100px;
-            }
-            .slick-next {
-                right: 43px;
-            }
-        }
-    }
-
-    &.active {
-        .overlay {
-            // display: block;
-            opacity: 0.8;
-            // transition: all 3s;
-            visibility: visible;
-            cursor: pointer;
-        }
-        .popup-modal {
-            visibility: visible;
-            opacity: 1;
-        }
-        .close-modal {
-            display: block;
-        }
-    }
-}
-
-.strava-information {
-    @media (max-width: $lg) {
-        h2 {
-            margin-top: 30px;
-        }
-
-        .button.popup-strava-challenges {
-            margin-top: 20px;
-        }
-
-        span.distance,
-        span.number {
-            font-size: 26px;
-            line-height: 23px;
-            margin-left: 20px;
-        }
-    }
-
-    @media (max-width: $sm) {
-        .button.popup-strava-challenges {
-            font-size: 15px;
-            margin-top: 0px;
-        }
-    }
+  .logout {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: #000;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    text-decoration-line: underline;
+    letter-spacing: 0;
+  }
 }
 
 .strava-challenges {
-    @media (max-width: $lg) {
-        h2.heading {
-            margin-bottom: 0;
-        }
-        &__inner {
-            margin-top: 25px;
-            height: 430px;
-        }
-        &__head {
-            display: flex;
-            &-info {
-                padding: 15px;
-            }
-        }
-        &__banner, 
-        &__content {
-            min-height: unset;
-        }
-        &__banner {
-            flex: 0 0 200px;
-            height: unset;
-            width: 100%;
-            img {
-                width: 100%;
-                height: 200px;
-            }
-        }
-        &__content {
-            padding: 20px;
-            .rectangle {
-                height: 30px !important;
-            }
-        }
-        &__head-info {
-            flex: 1;
-        }
+  margin-top: 30px;
 
-        &__status {
-            left: 0;
-            &-image {
-                transform: scaleX(-1);
-                span {
-                    transform: scaleX(-1);
-                }
-            }
-        }
+  h2.heading {
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    font-size: 12px;
+    text-transform: none;
+
+    &.label {
+      text-transform: uppercase;
+    }
+  }
+
+  &__banner {
+    height: 343px;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  &__inner {
+    background-color: white;
+    position: relative;
+    margin: 15px 15px 0 15px;
+    height: 343px;
+  }
+
+  &__content {
+    padding: 25px 25px 25px 0;
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+
+  span {
+    &.distance-date {
+      font-size: 14px;
     }
 
-    @media (max-width: $md) {
-        &__content {
-            padding: 15px;
-        }
-        &__banner {
-            flex: 0 0 150px;
-            img {
-                height: 150px;
-            }
-        }
-        &__inner {
-            height: 400px;
-        }
+    &.percent {
+      font-weight: bold;
+      font-size: 25px;
+      line-height: 30px;
+      letter-spacing: 0.1em;
+      color: #000;
     }
 
-    @media (max-width: $sm) {
-        &__banner {
-            flex: 0 0 130px;
-            img {
-                height: 130px;
-            }
-        }
-        &__inner {
-            height: 390px;
-        }
-        &__head-info {
-            h2 {
-                font-size: 25px;
-                line-height: 25px;
-            }
-        }
+    &.date {
+      color: #000;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      line-height: 1.5;
     }
+  }
+
+  .line {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    .rectangle {
+      position: relative;
+      flex-grow: 1;
+      height: 25px;
+      background-color: #C4C4C4;
+      margin-left: 2px;
+    }
+  }
+
+  @for $i from 1 through 10 {
+    .line[data-active='#{$i}'] {
+      > .rectangle {
+        &:nth-child(-n+#{$i}) {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+
+  .distance-left {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    font-size: 12px;
+    line-height: 25px;
+    letter-spacing: 0.2em;
+
+    span {
+      font-weight: 600;
+      text-transform: none;
+      color: #000;
+    }
+  }
+
+  &__wrap-image {
+    background-image: url('../images/man-runner-wearing-sports-shoes-trail-running-forest.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    .button {
+      background-color: $primary;
+      display: block;
+      width: 45%;
+      left: 50%;
+      top: 50%;
+      color: #000;
+      font-size: 16px;
+      border: none;
+      margin: 0;
+      transform: translate(-50%, 50%);
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    margin-right: -15px;
+    margin-left: -15px;
+
+    &-slick {
+      .slick-dots {
+        display: flex;
+        list-style: none;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        margin: 0;
+        padding: 0;
+
+        li {
+          padding: 4px;
+
+          i {
+            font-size: 13px;
+            color: #C9CCCF;
+          }
+
+          &.slick-active {
+            i {
+              color: #959494;
+            }
+          }
+        }
+      }
+
+      .slick-track {
+        display: flex !important;
+      }
+
+      .slick-slide {
+        height: inherit !important;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 145px;
+    height: 50px;
+
+    &-image {
+      background-image: url('../images/status.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+
+      span {
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        color: black;
+        line-height: 45px;
+      }
+    }
+  }
 }
 
 .list-challenges {
-    @media (max-width: $lg) {
-        .table-tab  {
-            table {
-                font-size: 16px;
-            }
-            .slick-prev,
-            .slick-next {
-                font-size: 24px;
-                top: 4px !important;
-            }
-        }
+  background-color: #fff;
+
+  h2 {
+    font-weight: bold;
+
+    &.heading {
+      margin-top: 40px;
+      margin-bottom: 0;
+      letter-spacing: 0.15em;
+      font-size: 32px;
+      font-weight: 800;
+    }
+  }
+
+  span {
+    &.sub {
+      font-style: italic;
+      font-weight: normal;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      text-transform: none;
+      color: #000;
+      margin-bottom: 40px;
+      display: block;
+    }
+  }
+
+  table {
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+
+    th,
+    td {
+      padding: 20px 0;
     }
 
-    @media (max-width: $md) {
-        .table-tab  {
-            table {
-                font-size: 14px;
-            }
-        }
+    thead {
+      th {
+        background-color: #EBECED;
+        text-align: center;
+        vertical-align: middle;
+      }
     }
+
+    tbody {
+      th,
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .slick-prev,
+  .slick-next {
+    top: 0 !important;
+  }
 }
 
 .wrap-modal-user-profile {
-    @media (max-width: $lg) {
-        .popup-modal {
-            &__challenges-list{
-                .thumb-item{
-                    height: auto;
-                }
+  padding: 45px 0 50px 0;
+  position: relative;
+
+  .close-modal {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    z-index: 99999;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      height: 33px;
+      width: 2px;
+      background-color: white;
+    }
+  }
+
+  .close-modal {
+    &:before {
+      transform: rotate(45deg);
+    }
+  }
+
+  .close-modal {
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    background: #000;
+    visibility: hidden;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    content: "";
+    z-index: 99990;
+  }
+
+  .popup-modal {
+    position: absolute;
+    padding: 0;
+    top: 50%;
+    left: 50%;
+    z-index: 99991;
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, -47%);
+    width: 100%;
+    height: auto;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    backface-visibility: hidden;
+
+    &__challenges {
+      margin: 0 90px;
+
+      &-list {
+        .thumb-item {
+          cursor: pointer;
+          height: 100%;
+          width: 100%;
+
+          a {
+            text-decoration: none;
+          }
+
+          &__image {
+            img {
+              object-fit: cover;
             }
-            .slick-list {
-                margin: 0;
+          }
+
+          &__content {
+            padding: 15px 20px 20px 20px;
+            position: relative;
+            overflow: hidden;
+          }
+
+          &__heading {
+            font-weight: 900;
+            font-size: 31px;
+            letter-spacing: 0.1em;
+            color: #000;
+          }
+
+          &__distance-date {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            color: #3A3A3A;
+            line-height: 35px;
+            margin-bottom: 10px;
+
+            p {
+              margin-bottom: 0;
             }
+          }
+
+          &__description {
+            color: #3A3A3A;
+            font-size: 17px;
+            font-style: normal;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 22px;
+          }
+
+          &__button {
+            background-color: $primary;
+            color: #000;
+            padding: 10px 0;
+            width: 100%;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 0;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-wrap {
+              position: absolute;
+              display: block;
+              bottom: -50px;
+              left: 50%;
+              transform: translate(-50%, 0);
+              width: 80%;
+              transition: bottom .5s 0s ease;
+            }
+          }
+
+          &:hover {
+            .thumb-item__button {
+              &-wrap {
+                bottom: 15px;
+              }
+            }
+          }
         }
+      }
+
+      .slick-track {
+        display: flex;
+      }
+
+      .slick-slide {
+        margin: 0 65px;
+        background-color: #fff;
+      }
+
+      .slick-list {
+        margin: 0 -65px;
+      }
+
+      .slick-prev,
+      .slick-next {
+        color: #fff;
+        top: -50px;
+      }
+
+      .slick-prev {
+        right: 100px;
+      }
+
+      .slick-next {
+        right: 43px;
+      }
+    }
+  }
+
+  &.active {
+    .overlay {
+      // display: block;
+      opacity: 0.8;
+      // transition: all 3s;
+      visibility: visible;
+      cursor: pointer;
     }
 
-    @media (max-width: $md) {
-        .popup-modal {
-            &__challenges{
-                margin: 0px;
-                &-list{
-                    .thumb-item{
-                        height: auto;
-                    }
-                }
-            }
-            .slick-slide {
-                margin: 0 85px;
-            }
-        }
+    .popup-modal {
+      visibility: visible;
+      opacity: 1;
     }
 
-    @media (max-width: $sm) {
-        .popup-modal {
-            .slick-slide {
-                margin: 0 15px;
-            }
-        }
+    .close-modal {
+      display: block;
     }
+  }
+}
+
+.btn-logout {
+  background: #fdb913 !important;
+  color: black !important;
+  margin-bottom: 25px !important;
+  @media (max-width: $md) {
+    margin-bottom: 13px !important;
+  }
+
+}
+
+.btn-connected-strava {
+  background: #fc4c02 !important;
+  color: white !important;
+  text-transform: uppercase;
+
+}
+
+.btn-connected-strava .deauthorize_strava .logout {
+  text-transform: lowercase;
+}
+
+.distance, .strava-challenges__status-image span {
+  text-transform: uppercase;
+}
+
+.strava-challenges__status-image span {
+  font-size: 12px;
+}
+
+.strava-challenges__content .distance-date {
+  text-transform: uppercase;
+}
+
+
+.strava-information {
+  @media (max-width: $lg) {
+    h2 {
+      margin-top: 30px;
+    }
+
+    .button.popup-strava-challenges {
+      margin-top: 20px;
+    }
+
+    span.distance,
+    span.number {
+      font-size: 26px;
+      line-height: 23px;
+      margin-left: 20px;
+    }
+  }
+
+  @media (max-width: $sm) {
+    .button.popup-strava-challenges {
+      font-size: 15px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.strava-challenges {
+  @media (max-width: $lg) {
+    h2.heading {
+      margin-bottom: 0;
+    }
+    &__inner {
+      margin-top: 25px;
+      height: 430px;
+    }
+    &__head {
+      display: flex;
+
+      &-info {
+        padding: 15px;
+      }
+    }
+    &__banner,
+    &__content {
+      min-height: unset;
+    }
+    &__banner {
+      flex: 0 0 200px;
+      height: unset;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: 200px;
+      }
+    }
+    &__content {
+      padding: 20px;
+
+      .rectangle {
+        height: 30px !important;
+      }
+    }
+    &__head-info {
+      flex: 1;
+    }
+
+    &__status {
+      left: 0;
+
+      &-image {
+        transform: scaleX(-1);
+
+        span {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    &__content {
+      padding: 15px;
+    }
+    &__banner {
+      flex: 0 0 150px;
+
+      img {
+        height: 150px;
+      }
+    }
+    &__inner {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: $sm) {
+    &__banner {
+      flex: 0 0 130px;
+
+      img {
+        height: 130px;
+      }
+    }
+    &__inner {
+      height: 390px;
+    }
+    &__head-info {
+      h2 {
+        font-size: 25px;
+        line-height: 25px;
+      }
+    }
+  }
+}
+
+.list-challenges {
+  @media (max-width: $lg) {
+    .table-tab {
+      table {
+        font-size: 16px;
+      }
+
+      .slick-prev,
+      .slick-next {
+        font-size: 24px;
+        top: 4px !important;
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    .table-tab {
+      table {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.wrap-modal-user-profile {
+  @media (max-width: $lg) {
+    .popup-modal {
+      &__challenges-list {
+        .thumb-item {
+          height: auto;
+        }
+      }
+
+      .slick-list {
+        margin: 0;
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    .popup-modal {
+      &__challenges {
+        margin: 0;
+
+        &-list {
+          .thumb-item {
+            height: auto;
+          }
+        }
+      }
+
+      .slick-slide {
+        margin: 0 85px;
+      }
+    }
+  }
+
+  @media (max-width: $sm) {
+    .popup-modal {
+      .slick-slide {
+        margin: 0 15px;
+      }
+    }
+  }
 }

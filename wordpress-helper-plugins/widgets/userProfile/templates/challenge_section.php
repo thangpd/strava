@@ -2,12 +2,12 @@
 $products_challenge_html       = '';
 $render_list_challenges_report = '';
 $user_avatar                   = '';
+//\Elhelper\mail\Template::action_sendmail( 887, 2, 0);
 
 if ( is_user_logged_in() ) {
 	$user_id     = get_current_user_id();
 	$WP_User     = get_userdata( $user_id );
 	$user_avatar = get_avatar( $user_id );
-
 
 	$username             = $WP_User->user_login;
 	$userAthlete          = new \Elhelper\modules\userStravaModule\model\UserStravaAthleteModel( $user_id );
@@ -100,9 +100,6 @@ $button_conntect_strava = require $str;
 						<?php endif; ?>
                     </div>
                     <div class="order-2 order-lg-3 col-6 col-sm-5 col-md-5 col-lg-3">
-                        <div class="button popup-strava-challenges">KẾT NỐI STRAVA
-							 <span class="logout">ngắt kết nối với Strava</span>
-						</div>
 						<?php echo $button_conntect_strava; ?>
                     </div>
                 </div>
@@ -152,9 +149,17 @@ $button_conntect_strava = require $str;
 						if ( $products->have_posts() ) {
 							while ( $products->have_posts() ) {
 								$products->the_post();
+								$product_link = get_field( 'link_product_detail', get_the_ID() );
+								if ( ! empty( $product_link ) ) {
+									$product_link = $product_link['url'];
+								} else {
+									$product_link = '#';
+								}
 								?>
                                 <div class="thumb-item">
-                                    <a href="<?php the_permalink(); ?>">
+                                    <a href="<?php
+									echo $product_link
+									?>">
                                         <div class="thumb-item__image">
 											<?php the_post_thumbnail( 'shop_catelog', [
 												'class' => 'img-responsive',
@@ -196,30 +201,30 @@ $button_conntect_strava = require $str;
     </div>
 
     <!-- List Challenges -->
-	<div class="list-challenges">
-		<div class="container-fluid">
-			<div class="list-challenges__wrap mx-3">
-				<div class="list-challenges ">
-					<div class="container-fluid">
-						<div class="list-challenges__wrap mx-3">
-							<div class="row">
-								<div class="col-md-12">
-									<h2 class="heading">Danh sách nhà chinh phục</h2>
-									<span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
-										<?php echo $render_list_challenges_report ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
+    <div class="list-challenges">
+        <div class="container-fluid">
+            <div class="list-challenges__wrap mx-3">
+                <div class="list-challenges ">
+                    <div class="container-fluid">
+                        <div class="list-challenges__wrap mx-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="heading">Danh sách nhà chinh phục</h2>
+                                    <span class="sub">(Xếp hạng dựa vào thời gian chinh phục)</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-tab <?php echo ( $num_of_challenge >= 2 ) ? ' is-slide' : ''; ?> ">
+										<?php echo $render_list_challenges_report ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

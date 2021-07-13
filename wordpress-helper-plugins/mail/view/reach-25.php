@@ -11,7 +11,7 @@
 <table width="100%" style="min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" cellpadding="0" cellspacing="0" title="">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 0px 0px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17)">
-<p style="float: left; width: 100%; padding: 0px; margin: 0px"><img height="391.25" width="600" src="{$image_template_cover}" style="width: 100%; max-width: 100%; vertical-align: top" alt="" class="zpImage"></p>
+<p style="float: left; width: 100%; padding: 0px; margin: 0px"><img height="391.25" width="600" src="{$header}" style="width: 100%; max-width: 100%; vertical-align: top" alt="" class="zpImage"></p>
 
 </td>
 </tr>

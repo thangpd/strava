@@ -54,21 +54,28 @@ class ChallengeModel extends Model {
 		$challenges = ChallengeDb::getAllChallengeByProduct( $product_id, 1 );
 
 		$list_finisher = array();
-		foreach ( $challenges as $challenge ) {
-			$user           = get_user_by( 'id', $challenge->user_id );
-			$challengeModel = new ChallengeModel( $challenge );
-			//pace
-			$paceOfChallenge = $challengeModel->getPaceOfChallenge();
+		if ( ! empty( $challenges ) ) {
+			foreach ( $challenges as $challenge ) {
+				$user           = get_user_by( 'id', $challenge->user_id );
+				$challengeModel = new ChallengeModel( $challenge );
+				//pace
+				$paceOfChallenge = $challengeModel->getPaceOfChallenge();
 
-			$floatMinuteToSecond = sprintf( '%02d:%02d', (int) $paceOfChallenge, fmod( $paceOfChallenge, 1 ) * 60 );
-			//endpace
-			$item            = [
-				'user_name'            => $user->data->user_nicename,
-				'total_km'             => $challengeModel->getDistanceAlreadyRun(),
-				'amount_time_finished' => $challengeModel->getAmountTimeFinished(),
-				'pace'                 => $floatMinuteToSecond,
-			];
-			$list_finisher[] = $item;
+				$floatMinuteToSecond = sprintf( '%02d:%02d', (int) $paceOfChallenge, fmod( $paceOfChallenge, 1 ) * 60 );
+				//endpace
+				if ( isset( $user->data ) ) {
+					$user_nicename = $user->data->user_nicename;
+				} else {
+					$user_nicename = "Anonymous";
+				}
+				$item            = [
+					'user_name'            => $user_nicename,
+					'total_km'             => $challengeModel->getDistanceAlreadyRun(),
+					'amount_time_finished' => $challengeModel->getAmountTimeFinished(),
+					'pace'                 => $floatMinuteToSecond,
+				];
+				$list_finisher[] = $item;
+			}
 		}
 
 		return $list_finisher;
@@ -212,8 +219,6 @@ class ChallengeModel extends Model {
 		}
 		if ( $res == false ) {
 			return false;
-		} else {
-			return ! $this->checkIfChallengeIsExpired();
 		}
 
 	}

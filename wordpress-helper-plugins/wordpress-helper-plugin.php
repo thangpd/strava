@@ -3,7 +3,7 @@
  Plugin Name: Strava Integrate Plugin
  Description: This plugin will be attached to woocommerce order flow. Once ordered confirmed, will call to Strava api. This plugin include dashboard for configuration for url api and debug.
  Author: wearesection
- Version: 1.0.1
+ Version: 1.0.2
  Author URI: https://wearesection.com/
  Text Domain: elhelper
  */
