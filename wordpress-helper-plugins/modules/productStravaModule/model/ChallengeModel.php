@@ -219,8 +219,6 @@ class ChallengeModel extends Model {
 		}
 		if ( $res == false ) {
 			return false;
-		} else {
-			return ! $this->checkIfChallengeIsExpired();
 		}
 
 	}
