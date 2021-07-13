@@ -59,7 +59,6 @@ class UserProfile extends \Elementor\Widget_Base {
 //		echo '</pre>';
 
 
-
 		$distance_already = $challengeModel->getDistanceAlreadyRun();
 
 //		$amount_distance = get_field( 'distance', $product_id );
@@ -99,8 +98,9 @@ class UserProfile extends \Elementor\Widget_Base {
 			$end_date->modify( '+' . $amount_date . 'days' );
 
 			$datediff_left = $now->diff( $end_date );
+
 			if ( $datediff_left->days > 0 && $now < $end_date ) {
-				$date_left         = $datediff_left->days;
+				$date_left         = $datediff_left->h > 0 ? $datediff_left->days + 1 : $datediff_left->days;
 				$f                 = ( $date_left / $amount_date );
 				$date_left_percent = 100 - round( $f * 100, 0 );
 				$date_active       = round( $date_left_percent / 10, 0 );

@@ -582,7 +582,7 @@ html, body {
               display: block;
               bottom: -50px;
               left: 50%;
-              transform: translate( -50%, 0);
+              transform: translate(-50%, 0);
               width: 80%;
               transition: bottom .5s 0s ease;
             }
@@ -606,6 +606,7 @@ html, body {
         margin: 0 65px;
         background-color: #fff;
       }
+
       .slick-list {
         margin: 0 -65px;
       }
@@ -645,6 +646,40 @@ html, body {
     }
   }
 }
+
+.btn-logout {
+  background: #fdb913 !important;
+  color: black !important;
+  margin-bottom: 25px !important;
+  @media (max-width: $md) {
+    margin-bottom: 13px !important;
+  }
+
+}
+
+.btn-connected-strava {
+  background: #fc4c02 !important;
+  color: white !important;
+  text-transform: uppercase;
+
+}
+
+.btn-connected-strava .deauthorize_strava .logout {
+  text-transform: lowercase;
+}
+
+.distance, .strava-challenges__status-image span {
+  text-transform: uppercase;
+}
+
+.strava-challenges__status-image span {
+  font-size: 12px;
+}
+
+.strava-challenges__content .distance-date {
+  text-transform: uppercase;
+}
+
 
 .strava-information {
   @media (max-width: $lg) {
@@ -794,6 +829,7 @@ html, body {
           height: auto;
         }
       }
+
       .slick-list {
         margin: 0;
       }
@@ -802,7 +838,7 @@ html, body {
 
   @media (max-width: $md) {
     .popup-modal {
-      &__challenges{
+      &__challenges {
         margin: 0;
 
         &-list {
@@ -811,6 +847,7 @@ html, body {
           }
         }
       }
+
       .slick-slide {
         margin: 0 85px;
       }
