@@ -76,7 +76,7 @@ class StravaApiWebhookHandleController extends Singleton {
 
 						//Type of activity. For example - Run, Ride etc.
 						if ( ! empty( $challenges ) ) {
-							if ( $res->type == 'Run' || true ) {
+							if ( $res->type == 'Run' ) {
 								write_log( 'added_athlete_total_distance' );
 								$activity_history = new ActivityDb();
 								$activity_history->insert( [
@@ -98,18 +98,17 @@ class StravaApiWebhookHandleController extends Singleton {
 								//add activity to history challenge run
 								foreach ( $challenges as $challenge ) {
 									$challengeModel = new ChallengeModel( $challenge );
-									if ( $challengeModel->canInsertDistanceToChallenge() ) {
+									if ( $challengeModel->canInsertDistanceToChallenge() && ! $challengeModel->checkIfChallengeIsExpired() ) {
 										$history_chal_ath = new HistoryChallengeAthleteDb();
 										$history_chal_ath->insert( [
 											'challenge_id' => $challenge->id,
 											'activity_id'  => $res->id
 										] );
 										$checkIfCanFinishChallenge = $challengeModel->checkIfCanFinishChallenge();
-										$checkIfChallengeIsExpired = $challengeModel->checkIfChallengeIsExpired();
-										if ( ! $checkIfCanFinishChallenge && ! $checkIfChallengeIsExpired ) {
+										if ( ! $checkIfCanFinishChallenge ) {
 											$challengeModel->activeSendMailBaseOnPercentDistance();
 										}
-										if ( $checkIfCanFinishChallenge && ! $checkIfChallengeIsExpired ) {
+										if ( $checkIfCanFinishChallenge ) {
 											$challengeModel->activeSendMailBaseOnPercentDistance();
 											$challengeModel->activeFinishedEventChallenge();
 										}
