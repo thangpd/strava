@@ -479,7 +479,7 @@ html, body {
                         }
                     }
                     &__content {
-                        padding: 25px;
+                        padding: 15px 20px 20px 20px;
                         position: relative;
                         overflow: hidden;
                     }
@@ -529,10 +529,12 @@ html, body {
                         justify-content: center;
                         &-wrap {
                             position: absolute;
-                            width: 345px;
                             display: block;
                             bottom: -50px;
-                            transition: bottom 0.5s 0s ease;
+                            left: 50%;
+                            transform: translate( -50%, 0);
+                            width: 80%;
+                            transition: bottom .5s 0s ease;
                         }
                     } 
 
@@ -549,9 +551,11 @@ html, body {
                 display: flex;
             }
             .slick-slide {
-                margin: 0 50px;
-                // height: 545px;
+                margin: 0 65px;
                 background-color: #fff;
+            }
+            .slick-list {
+                margin: 0 -65px;
             }
             .slick-prev,
             .slick-next {
@@ -563,10 +567,6 @@ html, body {
             }
             .slick-next {
                 right: 43px;
-            }
-
-            .slick-list {
-                margin: 0 -50px;
             }
         }
     }
@@ -729,12 +729,14 @@ html, body {
                     height: auto;
                 }
             }
+            .slick-list {
+                margin: 0;
+            }
         }
     }
 
     @media (max-width: $md) {
         .popup-modal {
-            top: 40%;
             &__challenges{
                 margin: 0px;
                 &-list{
@@ -742,6 +744,17 @@ html, body {
                         height: auto;
                     }
                 }
+            }
+            .slick-slide {
+                margin: 0 85px;
+            }
+        }
+    }
+
+    @media (max-width: $sm) {
+        .popup-modal {
+            .slick-slide {
+                margin: 0 15px;
             }
         }
     }
