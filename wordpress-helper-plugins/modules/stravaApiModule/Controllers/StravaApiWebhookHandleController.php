@@ -113,6 +113,8 @@ class StravaApiWebhookHandleController extends Singleton {
 											$challengeModel->activeFinishedEventChallenge();
 										}
 
+									} else {
+										$challengeModel->activeFailEventChallenge();
 									}
 								}
 							}

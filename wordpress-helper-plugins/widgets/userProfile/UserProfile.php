@@ -96,26 +96,25 @@ class UserProfile extends \Elementor\Widget_Base {
 //			$start_date->modify( '+1 day' );
 			$end_date = clone( $start_date );
 			$end_date->modify( '+' . $amount_date . 'days' );
-
 			$datediff_left = $now->diff( $end_date );
 
 			if ( $datediff_left->days > 0 && $now < $end_date ) {
-				$date_left         = $datediff_left->h > 0 ? $datediff_left->days + 1 : $datediff_left->days;
+				$date_left         = $datediff_left->h > 0 && $datediff_left->days != $amount_date ? $datediff_left->days + 1 : $datediff_left->days;
 				$f                 = ( $date_left / $amount_date );
 				$date_left_percent = 100 - round( $f * 100, 0 );
 				$date_active       = round( $date_left_percent / 10, 0 );
+				$date_passed       = $amount_date - $date_left;
 			} else {
 				$date_left         = 0;
 				$date_left_percent = 100;
 				$date_active       = 10;
+				$date_passed       = $amount_date - $date_left;
 			}
 
 		} else {
 			$start_date = new \DateTime( 'now' );
 			$end_date   = new \DateTime( 'now' );
 		}
-
-
 		$start_date_html = $start_date->format( 'd/m/Y' );
 		$end_date_html   = $end_date->format( 'd/m/Y' );
 
@@ -125,10 +124,12 @@ class UserProfile extends \Elementor\Widget_Base {
 			$label_tag_finished_failed = ' <div class="strava-challenges__status-image">
                                     <span>Đã hoàn thành</span>
                                 </div>';
-		} else {
+		}
+
+		if ( $challenge->status == 2 ) {
 			// $label_tag_finished_failed = '';
 			$label_tag_finished_failed = ' <div class="strava-challenges__status-image strava-challenges__status--incompleted">
-			<span>Đã hoàn thành</span>
+			<span>Chưa hoàn thành</span>
 		</div>';
 		}
 
@@ -212,7 +213,7 @@ class UserProfile extends \Elementor\Widget_Base {
                                                         <div class="rectangle"></div>
                                                     </div>
                                                     <div class="d-none d-lg-flex distance-left">
-                                                        <b>{$amount_date} ngày</b>
+                                                        <b>{$date_passed} ngày</b>
                                                         <span>Còn lại <b>{$date_left} ngày</b></span>
                                                     </div>
                                                 </div>

@@ -39,7 +39,7 @@ class ChallengeDb extends DB {
 
 	public static function getAllChallengeOfUser( $user_id ) {
 		global $wpdb;
-		$sql = sprintf( 'SELECT * FROM %s WHERE %s order by finished_at', self::get_table(), 'user_id=' . $user_id );
+		$sql = sprintf( 'SELECT * FROM %s WHERE %s order by status', self::get_table(), 'user_id=' . $user_id );
 		return $wpdb->get_results( $sql );
 	}
 
