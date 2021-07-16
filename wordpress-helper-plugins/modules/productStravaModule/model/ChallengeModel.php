@@ -14,6 +14,7 @@ use Elhelper\inc\HeplerStrava;
 use Elhelper\mail\Template;
 use Elhelper\modules\productStravaModule\controller\ChallengeController;
 use Elhelper\modules\productStravaModule\db\ChallengeDb;
+use Elhelper\modules\stravaApiModule\db\HistoryChallengeAthleteDb;
 
 class ChallengeModel extends Model {
 
@@ -28,7 +29,7 @@ class ChallengeModel extends Model {
 				[created_at] => 2021-06-28 23:46:59
 				[order_id] => 0
 	 * */
-	private $challenge;
+	public $challenge;
 
 	public function __construct( $challenge ) {
 		$this->challenge = $challenge;
@@ -211,15 +212,14 @@ class ChallengeModel extends Model {
 				$res = true;
 				break;
 			case 1:
-				$res = true;
+				$res = false;
 				break;
 			case 2:
 				$res = false;
 				break;
 		}
-		if ( $res == false ) {
-			return false;
-		}
+
+		return $res;
 
 	}
 
@@ -280,5 +280,15 @@ class ChallengeModel extends Model {
 			'user_id' => $this->challenge->user_id
 		] );
 	}
+
+	public function ifExistsActivity( $activity ) {
+		$res = HistoryChallengeAthleteDb::getActivityByIdChallenge( $this->challenge->id, $activity );
+		if ( ! empty( $res ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }

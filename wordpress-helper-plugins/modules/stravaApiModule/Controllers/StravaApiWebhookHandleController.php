@@ -96,9 +96,15 @@ class StravaApiWebhookHandleController extends Singleton {
 										}
 									}*/
 								//add activity to history challenge run
+								write_log( json_encode( $challenges ) );
 								foreach ( $challenges as $challenge ) {
 									$challengeModel = new ChallengeModel( $challenge );
-									if ( $challengeModel->canInsertDistanceToChallenge() && ! $challengeModel->checkIfChallengeIsExpired() ) {
+									if ( $challengeModel->checkIfChallengeIsExpired() ) {
+										$challengeModel->activeFailEventChallenge();
+									}
+									if ( $challengeModel->challenge->status == 0 && ! $challengeModel->checkIfChallengeIsExpired() && ! $challengeModel->ifExistsActivity( $res->id ) ) {
+										write_log( 'vao' . $challenge->id );
+										write_log( 'activiti id' . $res->id );
 										$history_chal_ath = new HistoryChallengeAthleteDb();
 										$history_chal_ath->insert( [
 											'challenge_id' => $challenge->id,
@@ -113,9 +119,8 @@ class StravaApiWebhookHandleController extends Singleton {
 											$challengeModel->activeFinishedEventChallenge();
 										}
 
-									} else {
-										$challengeModel->activeFailEventChallenge();
 									}
+
 								}
 							}
 						}

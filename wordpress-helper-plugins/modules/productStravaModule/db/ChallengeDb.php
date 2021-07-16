@@ -71,6 +71,8 @@ class ChallengeDb extends DB {
 		return $wpdb->get_results( $sql );
 	}
 
+
+
 	/**
 	 * Singletons should not be restorable from strings.
 	 */
