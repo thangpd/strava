@@ -126,7 +126,10 @@ class UserProfile extends \Elementor\Widget_Base {
                                     <span>Đã hoàn thành</span>
                                 </div>';
 		} else {
-			$label_tag_finished_failed = '';
+			// $label_tag_finished_failed = '';
+			$label_tag_finished_failed = ' <div class="strava-challenges__status-image strava-challenges__status--incompleted">
+			<span>Đã hoàn thành</span>
+		</div>';
 		}
 
 		$html = <<<HTML
