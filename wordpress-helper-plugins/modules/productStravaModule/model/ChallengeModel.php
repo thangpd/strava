@@ -52,7 +52,7 @@ class ChallengeModel extends Model {
 	 * [email_phase] =>
 	 * )*/
 	public static function getListFinisherInfo( $product_id ) {
-		$challenges = ChallengeDb::getAllChallengeByProduct( $product_id, 1 );
+		$challenges = ChallengeDb::getAllChallengeByProductOrderbyFinishedTime( $product_id, 1 );
 
 		$list_finisher = array();
 		if ( ! empty( $challenges ) ) {
@@ -117,6 +117,8 @@ class ChallengeModel extends Model {
 	}
 
 	public function getAmountTimeFinished() {
+		//sort array multiple dimension
+		//https://stackoverflow.com/questions/2699086/how-to-sort-a-multi-dimensional-array-by-value
 		if ( ! empty( $this->challenge->finished_at ) ) {
 			$start_date  = \DateTime::createFromFormat( 'Y-m-d H:i:s', $this->challenge->finished_at );
 			$end_date    = \DateTime::createFromFormat( 'Y-m-d H:i:s', $this->challenge->created_at );

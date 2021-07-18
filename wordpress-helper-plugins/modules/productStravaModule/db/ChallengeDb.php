@@ -36,6 +36,16 @@ class ChallengeDb extends DB {
 
 		return $wpdb->get_results( $sql );
 	}
+	/**
+	 * @param $product_id
+	 * @param $status 0,1,2
+	 */
+	public static function getAllChallengeByProductOrderbyFinishedTime( $product_id, $status = 0 ) {
+		global $wpdb;
+		$sql = sprintf( 'SELECT * FROM %s WHERE %s order by  TIMEDIFF(created_at, finished_at) DESC', self::get_table(), 'product_id=' . $product_id . ' and status=' . $status );
+
+		return $wpdb->get_results( $sql );
+	}
 
 	public static function getAllChallengeOfUser( $user_id ) {
 		global $wpdb;

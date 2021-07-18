@@ -104,7 +104,13 @@ class UserProfile extends \Elementor\Widget_Base {
 				$date_left_percent = 100 - round( $f * 100, 0 );
 				$date_active       = round( $date_left_percent / 10, 0 );
 				$date_passed       = $amount_date - $date_left;
-			} else {
+			} elseif($datediff_left->days == 0 && $now < $end_date){
+				$date_left         = 1;
+				$f                 = ( $date_left / $amount_date );
+				$date_left_percent = 100 - round( $f * 100, 0 );
+				$date_active       = round( $date_left_percent / 10, 0 );
+				$date_passed       = $amount_date - $date_left;
+			}else {
 				$date_left         = 0;
 				$date_left_percent = 100;
 				$date_active       = 10;
