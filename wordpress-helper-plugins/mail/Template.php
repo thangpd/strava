@@ -9,17 +9,23 @@ class Template {
 
 	public static function action_sendmail( $product_id, $user_id, $template_number ) {
 //		$challenge = ChallengeModel::getChallengeByProductIdAndUserId( $product_id, $user_id );
-
+		$userObj        = get_user_by( 'id', $user_id );
+		$useremail      = $userObj->data->user_email;
+		$product       = wc_get_product( $product_id );
+		if ( ! empty( $product ) ) {
+			$product_name = $product->get_title();
+		} else {
+			$product_name = 'Product Title Empty';
+		}
 		$title          = [
-			'The Mount begins',
+			'Chào mừng ' . $userObj->data->user_nicename . ' đến với Thử Thách ' . $product_name,
 			'Reached 25% Milestone',
 			'Reached 50% Milestone',
 			'Reached 75% Milestone',
 			'Reached 100% Milestone'
 		];
 		$template_email = Template::getDataEmailTemplate( $product_id, $user_id, $template_number );
-		$userObj        = get_user_by( 'id', $user_id );
-		$useremail      = $userObj->data->user_email;
+
 		write_log( 'sent mail product_id' . $product_id . 'user' . $user_id . 'template.' . $template_number );
 
 		if ( ! empty( $useremail ) ) {

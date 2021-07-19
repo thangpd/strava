@@ -75,7 +75,7 @@ $button_conntect_strava = require $str;
                     <div class="order-3 order-lg-2 col-12 col-sm-12 col-md-12 col-lg-7">
                         <h2><?php
 							if ( ! empty( $WP_User ) ) {
-								echo $WP_User->user_lastname.' '. $WP_User->user_firstname;
+								echo $WP_User->user_firstname.' '. $WP_User->user_lastname;
 							}
 							?></h2>
 						<?php if ( is_user_logged_in() ): ?>
