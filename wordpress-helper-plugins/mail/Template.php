@@ -9,9 +9,9 @@ class Template {
 
 	public static function action_sendmail( $product_id, $user_id, $template_number ) {
 //		$challenge = ChallengeModel::getChallengeByProductIdAndUserId( $product_id, $user_id );
-		$userObj        = get_user_by( 'id', $user_id );
-		$useremail      = $userObj->data->user_email;
-		$product       = wc_get_product( $product_id );
+		$userObj   = get_user_by( 'id', $user_id );
+		$useremail = $userObj->data->user_email;
+		$product   = wc_get_product( $product_id );
 		if ( ! empty( $product ) ) {
 			$product_name = $product->get_title();
 		} else {
@@ -19,10 +19,10 @@ class Template {
 		}
 		$title          = [
 			'Chào mừng ' . $userObj->data->user_nicename . ' đến với Thử Thách ' . $product_name,
-			'Reached 25% Milestone',
-			'Reached 50% Milestone',
-			'Reached 75% Milestone',
-			'Reached 100% Milestone'
+			'Hey  ' . $userObj->data->user_nicename . ' , chúc mừng bạn đã hoàn thành 25% hành trình ' . $product_name,
+			'Chúc mừng ' . $userObj->data->user_nicename . ' đã hoàn thành 50% chặng đường',
+			$userObj->data->user_nicename . ' ơi! Đã 75% hành trình rồi!',
+			'Chúc mừng ' . $userObj->data->user_nicename . ' đã hoàn thành ' . $product_name,
 		];
 		$template_email = Template::getDataEmailTemplate( $product_id, $user_id, $template_number );
 
@@ -96,9 +96,11 @@ class Template {
 				$header = get_field( '75_header_image', $product_id );
 //				$sidebar_image = plugin_dir_url( dirname( __FILE__ ) ) . '/mail/assets/75percent/sidebar.png';
 				$sidebar_image = get_field( '75_sidebar_image', $product_id );
-				$userModel     = get_user_by( 'id', $user_id );
-				$username      = $userModel->data->user_nicename;
-				$template_dir  = Template::get_template_dir( 3 );
+				$site_link     = home_url();
+
+				$userModel    = get_user_by( 'id', $user_id );
+				$username     = $userModel->data->user_nicename;
+				$template_dir = Template::get_template_dir( 3 );
 
 				ob_start();
 				require $template_dir;
