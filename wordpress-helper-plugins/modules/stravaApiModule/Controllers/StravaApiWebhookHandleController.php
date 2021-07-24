@@ -76,7 +76,7 @@ class StravaApiWebhookHandleController extends Singleton {
 
 						//Type of activity. For example - Run, Ride etc.
 						if ( ! empty( $challenges ) ) {
-							if ( $res->type == 'Run' ) {
+							if ( $res->type == 'Run' || true) {
 								write_log( 'added_athlete_total_distance' );
 								$activity_history = new ActivityDb();
 								$activity_history->insert( [

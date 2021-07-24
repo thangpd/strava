@@ -86,7 +86,7 @@ $html = <<<HTML
 <table title="" cellspacing="0" cellpadding="0" style="min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17)">
-<p style="width: 100%; float: none; text-align: center; padding: 0px; margin: 0px"><img class="zpImage" alt="" style="width: 100%; max-width: 100%; vertical-align: top" imgsize="F" src="{$medal}" orgwidth="843" width="540" height="381.781"></p>
+<p style="width: 100%; float: none; text-align: center; padding: 0px; margin: 0px"><img class="zpImage" alt="" style="width: 100%; max-width: 100%; vertical-align: top" imgsize="F" src="{$certificate}" orgwidth="843" width="540" height="381.781"></p>
 
 </td>
 </tr>
@@ -122,7 +122,7 @@ $html = <<<HTML
 <table title="" cellspacing="0" cellpadding="0" style="min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17)">
-<p style="width: 100%; padding: 0px; margin: 0px"><img class="zpImage" alt="" style="width: 100%; max-width: 100%; vertical-align: top" imgsize="F" src="{$certificate}" orgwidth="1280" width="540" height="326.109"></p>
+<p style="width: 100%; padding: 0px; margin: 0px"><img class="zpImage" alt="" style="width: 100%; max-width: 100%; vertical-align: top" imgsize="F" src="{$medal}" orgwidth="1280" width="540" height="381.781"></p>
 
 </td>
 </tr>

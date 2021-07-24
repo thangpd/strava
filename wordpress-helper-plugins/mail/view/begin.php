@@ -69,18 +69,32 @@ $html = <<<HTML
 <tr>
 <td style="border: 0px" valign="top">
 <table width="100%" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" cellpadding="0" cellspacing="0" title="">
+<tbody>
+<tr>
+<td valign="top" style="border: 0px">
+<table title="" cellspacing="0" cellpadding="0" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17); font-family: Arial, Helvetica, sans-serif">
-<div style="margin: 0px"><span style="padding: 0px; margin: 0px"><font face="Verdana, Geneva, sans-serif"><p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><span style="font-size: 9pt; color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px">Để bắt đầu hành trình, Inspire Trails gửi đến bạn cách thức đăng nhập vào hệ thống:</span><font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><span style="font-size: 9pt; color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><br></span></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font></font><font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font color="#000000"><span style="font-size: 9pt; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><span style="background-color: rgb(255, 255, 255)"><b style="">Bước 1:</b></span>Truy cập vào </span><span style="font-size: 9pt; background-color: transparent; font-weight: 700; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><a style="text-decoration: none" rel="noopener noreferrer" title="http://inspiretrails.life/user-profile" href="http://inspiretrails.life/user-profile" target="_blank">trang sau</a>.</span><font></font><font></font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font color="#000000"><span style="font-size: 9pt; background-color: transparent; font-weight: 700; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><br></span><font></font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font color="#000000"><span style="font-size: 9pt; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><b style=""><span style="background-color: rgb(255, 255, 255)">Bước 2:</span><span style="background-color: rgb(255, 255, 255)">&nbsp;</span><font></font><font></font><font></font></b>Đăng ký tài khoản và kết nối tài khoản của bạn với ứng dụng STRAVA.</span><font></font><font></font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font color="#000000"><span style="font-size: 9pt; background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px">&nbsp;</span><font></font><font></font><font></font></font></p>
-<p style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font color="#000000"><span style="font-size: 9pt; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><b style=""><span style="background-color: rgb(255, 255, 255)">Bước 3:</span>&nbsp;<font></font><font></font></b></span><span style="font-size: 9.5pt; background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px">Vượt qua thử thách bằng cách hoàn thành mục tiêu hoạt động trong thời gian có sẵn. Đừng quên “Record" mỗi hoạt động.&nbsp;</span><font></font><font></font><font></font><font></font></font></p>
+<div style="margin: 0px">
+<span style="padding: 0px; margin: 0px"><font face="Verdana, Geneva, sans-serif"><p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font size="2"><span style="color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px">Để bắt đầu hành trình, Inspire Trails gửi đến bạn cách thức đăng nhập vào hệ thống:</span><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><span style="color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font size="2"><br></font></span></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font size="2"><font></font><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000" size="2"><span style="font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><span style="background-color: rgb(255, 255, 255)"><b style="">Bước 1:</b></span>Truy cập vào </span><span style="background-color: transparent; font-weight: 700; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><span style="text-decoration-color: initial"><a href="https://www.inspiretrails.life/user-profile/" title="http://inspiretrails.life" target="_blank" rel="noopener noreferrer" data_issistrackenabled="false" style="text-decoration: none">trang sau</a></span>.</span><font></font><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000" size="2"><span style="background-color: transparent; font-weight: 700; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><br></span><font></font><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000" size="2"><span style="font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><b style=""><span style="background-color: rgb(255, 255, 255)">Bước 2:</span><span style="background-color: rgb(255, 255, 255)"> </span><font></font><font></font><font></font><font></font></b>Đăng nhập vào tài khoản bằng tài khoản bạn đã tạo trước đó.</span><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000"><span style="font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font size="2"><br></font></span></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000"><span style="font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font size="2"><b>Bước 3:</b> Kết nối tài khoản với ứng dụng STRAVA. </font></span></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000" size="2"><span style="background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"> </span><font></font><font></font><font></font><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000"><font size="2"><span style="font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><b style=""><span style="background-color: rgb(255, 255, 255)">Bước 4:</span> <font></font><font></font><font></font></b></span><span style="background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px">Vượt qua thử thách bằng cách hoàn thành mục tiêu hoạt động trong thời gian có sẵn. Đừng quên “Record" mỗi hoạt động. </span><font></font><font></font><font></font><font></font></font><font></font><font></font><font></font><font></font><font></font><font></font><font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000"><font size="2"><span style="background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><br></span><font></font></font></font></p>
+<p dir="ltr" style="text-align: justify; line-height: 1.2; padding: 0px; margin: 0px"><font color="#000000" size="2">Để hỗ trợ tối ưu nhất cho bạn, nếu bạn chưa bắt đầu hành trình ngay sau khi thanh toán thành công, hãy thông báo ngay với Inspire Trails để được hỗ trợ dời ngày bắt đầu nhé! </font></p>
 </font></span>
-<font></font><font></font></div>
+<font></font>
+<font></font>
+</div>
+</td>
+</tr>
+</tbody></table>
 </td>
 </tr>
 </tbody></table>
@@ -89,28 +103,61 @@ $html = <<<HTML
 <tr>
 <td style="border: 0px" valign="top">
 <table width="100%" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" cellpadding="0" cellspacing="0" title="">
+<tbody>
+<tr>
+<td valign="top" style="border: 0px">
+<table title="" cellspacing="0" cellpadding="0" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17); font-family: Arial, Helvetica, sans-serif">
-<div style="margin: 0px"><span style="padding: 0px; margin: 0px"><p style="line-height: 1.2; padding: 0px; margin: 0px" dir="ltr"><font face="Verdana, Geneva, sans-serif"><span style="font-size: 9pt; color: rgb(0, 0, 0); background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; padding: 0px; margin: 0px">Thông tin chi tiết về thử thách Chinh Phục Everest, bạn có thể xem </span><span style="font-size: 9pt; color: rgb(0, 0, 0); background-color: transparent; font-weight: 700; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline; padding: 0px; margin: 0px"><a href="${product_link}" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" >tại đây</a></span><font></font></font><font></font><font></font></p>
-</span>
-<font></font><font></font><font></font></div>
+<font color="#000000" face="Verdana, Geneva, sans-serif" size="2">Cùng gia nhập vào group của Inspire Trails để tìm những đồng đội giống như bạn. Hãy chia sẽ trải nghiệm của mình khi trải nghiệm thử thách và khoe những thành tích bạn đạt được tại đây nhé.</font>
+</td>
+</tr>
+</tbody></table>
 </td>
 </tr>
 </tbody></table>
 </td>
 </tr>
 <tr>
-<td style="border: 0px" valign="top">
-<table width="100%" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" cellpadding="0" cellspacing="0" title="">
+<td valign="top" style="border: 0px">
+<table title="" align="center" cellspacing="0" cellpadding="0" style="min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
+<tbody><tr>
+<td align="center" style="border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17)">
+<table cellspacing="0" cellpadding="0" style="table-layout: fixed; border: 0px; border-collapse: collapse" align="center">
+<tbody><tr><td>
+<a href="https://www.facebook.com/groups/510532623517733" style="text-decoration: none" target="_blank" rel="noopener noreferrer">
+<table cellspacing="0" cellpadding="0" align="center" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial; background-color: rgb(217, 217, 217); color: rgb(0, 0, 0); border-radius: 5px; border-width: 0px; border-style: none; border-color: black">
+<tbody><tr>
+<td align="center" style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 7px 20px; font-size: 13.3333px; font-weight: 400; font-style: normal; text-decoration: none">
+<p style="padding: 0px; margin: 0px">
+<a href="https://www.facebook.com/groups/510532623517733" style="text-decoration: none; color: rgb(0, 0, 0)" target="_blank" rel="noopener noreferrer">Cộng đồng Inspire Trails</a>
+</p>
+
+</td>
+</tr>
+</tbody></table>
+</a>
+</td></tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td valign="top" style="border: 0px">
+<table title="" cellspacing="0" cellpadding="0" style="text-rendering: optimizeLegibility; font-size: 13px; letter-spacing: normal; font-family: Arial, Helvetica, sans-serif; min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgba(0, 0, 0, 0)" width="100%">
 <tbody><tr>
 <td style="word-wrap: break-word; word-break: break-word; border: 0px; padding: 6px 30px; border-top: 0px none rgb(17, 17, 17); border-bottom: 0px none rgb(17, 17, 17); font-family: Arial, Helvetica, sans-serif">
-<p style="text-align: justify; padding: 0px; margin: 0px"><span style="font-family: Verdana, Geneva, sans-serif; background-color: transparent; font-size: 9pt; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font color="#000000">Cảm ơn bạn đã cùng </font><a style="text-decoration: none" rel="noopener noreferrer" title="https://journeyofyouth.vn/page/VOLUNTEERS-OF-FOREST-GARDEN" href="{$link_trang_trong_cay}" target="_blank"><font style="" color="#000000">Joy Forest Garden</font></a></span><span style="font-family: Verdana, Geneva, sans-serif; background-color: transparent; font-size: 9pt; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font color="#000000">&nbsp;và Inspire Trails góp phần vào mục tiêu trồng 10,000 cây trước tháng 12, 2022. Đóng góp của bạn sẽ được cập nhật và thông báo <b><a href="https://journeyofyouth.vn/page/VOLUNTEERS-OF-FOREST-GARDEN" title="http://inspiretrails.life" rel="noopener noreferrer" style="text-decoration:none" target="_blank" >tại đây</a>.</b>&nbsp;</font></span><font></font></p>
+<p style="text-align: justify; padding: 0px; margin: 0px"><font size="2"><span style="font-family: Verdana, Geneva, sans-serif; background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font color="#000000" style="">Cảm ơn bạn đã cùng </font><a href="{$link_trang_trong_cay}" title="{$link_trang_trong_cay}" target="_blank" rel="noopener noreferrer" data_issistrackenabled="false" style="text-decoration: none"><font color="#000000" style="">Joy Forest Garden</font></a></span><span style="font-family: Verdana, Geneva, sans-serif; background-color: transparent; font-variant-numeric: normal; vertical-align: baseline; padding: 0px; margin: 0px"><font color="#000000" style=""> và Inspire Trails góp phần vào mục tiêu trồng 10,000 cây trước tháng 12, 2022. </font></span></font><font></font></p>
+
 <font></font>
 </td>
 </tr>
 </tbody></table>
 </td>
 </tr>
+
 <tr>
 <td style="border: 0px" valign="top">
 <table width="100%" style="min-width: 100%; max-width: 100%; table-layout: fixed; border: 0px; border-collapse: collapse; background-color: rgb(255, 255, 255)" cellpadding="0" cellspacing="0" title="">
